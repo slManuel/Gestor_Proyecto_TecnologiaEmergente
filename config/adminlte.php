@@ -244,7 +244,7 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'cargos',
-            'url'  => 'admin/settings',
+            'url'  => 'cargos',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

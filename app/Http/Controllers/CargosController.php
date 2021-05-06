@@ -22,10 +22,11 @@ class CargosController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     */    
     public function create()
     {
         //
+        return view('cargos.crearCargos');    
     }
 
     /**
@@ -34,10 +35,28 @@ class CargosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         //
+        $dataProducts = $request->except('_token','saveitem','C_guardar');        
+        Cargos::insert($dataProducts);
+        $data['cargos']=Cargos::paginate(15);
+        return view('Cargos.cargos', $data);
     }
+
+    /*public function store(Request $request)
+    {
+        $dataCargos = $request->except('_token','saveitem');
+        //Cargos::insert($request);
+        $cargo=Cargos::create([
+            'car_nombre'=> $request->car_nombre
+        ]);
+        $data['cargos']=Cargos::paginate(15);
+        return view('Cargos.cargos', $data);
+        //return redirect('cargos/');
+
+    }*/
 
     /**
      * Display the specified resource.

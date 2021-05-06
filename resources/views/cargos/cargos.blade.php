@@ -23,35 +23,35 @@
             </div>
             <div class="row">
 
-              <input type="search" placeholder="Escriba lo que desea buscar" name="contenido__busquedaUnidadesMedida" id="bus_unidad">
-                <button type="button" id="btn_nuevoCargo" data-bs-toggle="modal" data-bs-target="#modal-nuevoP" >NUEVO CARGO</button>
-                <button type="button" id="btn_Reporte"  >NUEVO REPORTE</button>
+              <input type="search" placeholder="Escriba lo que desea buscar" name="contenido__busquedaUnidadesMedida" id="bus_unidad"/>
+                <!--button type="button" id="btn_nuevoCargo" data-bs-toggle="modal" data-bs-target="#modal-nuevoP" >NUEVO CARGO</button-->
+                <!--button type="button" id="btn_Reporte"  >NUEVO REPORTE</button-->
                 
-            </div>
-              
-          
-              <div class="modal fade" id="modal-nuevoP" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            </div>              
+            <br>
+            <a href="{{route('cargos.create')}}" id="btn_nuevoCargo">NUEVO CARGO</a>
+              <!--div class="modal fade" id="modal-nuevoP" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">Nuevo cargo</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <form>
-                        <div class="mb-3">                          
-                          <input type="text" id="n-nombreP" placeholder="Nombre del nuevo cargo" class="form-control">
-                        </div>
-                         
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
-                      <button type="button" id="btn-n-guardarP" class="mod-guardar">GUARDAR</button>
-                    </div>
+                    </div>                      
+                    <form id="crearCargo" method="POST" action="{{url('/cargos/store')}}">
+                    @csrf
+                      <div class="modal-body">                      
+                          <div class="mb-3">                          
+                            <input type="text" name="cargo" id="n-nombreP" placeholder="Nombre del nuevo cargo" class="form-control"/>
+                          </div>                                             
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
+                        <input type="submit" name="C_guardar" id="C_guardar" class="mod-guardar" value="GUARDAR"/>                        
+                      </div>
+                    </form>
                   </div>
                 </div>
-              </div>
+              </div-->
                        
           </form>     
         </div>
@@ -111,12 +111,12 @@
     form{
     padding: 1em;
 }
-  input.radio{
-      width: 10px;
-      margin-right: 3px;
-      margin-left: 0px;
-    
-  }
+input.radio{
+    width: 10px;
+    margin-right: 3px;
+    margin-left: 0px;
+  
+}
   
 #bus_unidad{
     width: 60%;
@@ -126,14 +126,15 @@ input#bus_unidad{
     width: 45%;
 }
 #btn_nuevoCargo{
-    width: 150px;
-    height: 30px;
+    text-align:center;
+    width: 170px;
+    height: 50px;
     font: bold;
     color: white;
     background: #3b3c54;
     border-radius: 4px;    
-    margin-left: 3PX;
-    margin-right: 3PX;
+    padding:5PX;
+    text-decoration:none;
 }
 #btn_Reporte{
     width: 180px;
@@ -170,23 +171,6 @@ input#bus_unidad{
     background: #fa743d;
     border-radius: 4px;   
     border: none; 
-}
-.mod-cancelar{
-    width: 100px;
-    height: 30px;
-    font: bold;
-    background: #c2d4bb;
-    border-radius: 3px;  
-    border: none;
-}
-.mod-guardar{
-    width: 100px;
-    height: 30px;
-    font: bold;
-    color: white;
-    background: #3b3c54;
-    border-radius: 3px;  
-    border: none;
 }
 </style>
 

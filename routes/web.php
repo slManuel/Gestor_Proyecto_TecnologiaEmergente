@@ -24,3 +24,5 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/cargos', [CargosController::class, 'index'])->name('cargos');
 Route::get('/cargos/update/{id}', [CargosController::class, 'update'])->name('updateCargos');
+//Route::post('/cargos/store/{nombre}',[CargosController::class,'store'])->name('cargosStore');
+Route::resource('cargos', CargosController::class);
