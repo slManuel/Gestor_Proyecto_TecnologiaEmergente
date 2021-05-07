@@ -243,10 +243,16 @@ return [
         ],
         ['header' => 'account_settings'],
         [
-            'text' => 'cargos',
-            'url'  => 'cargos',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Categorías',
+            'url'  => 'categorias',
+            'icon' => 'fas fa-tag',
         ],
+        [
+            'text' => 'Cargos',
+            'url'  => 'cargos',
+            'icon' => 'fas fa-user-tag',
+        ],
+        
         [
             'text' => 'change_password',
             'url'  => 'admin/settings',

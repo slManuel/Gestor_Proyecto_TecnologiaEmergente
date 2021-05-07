@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CargosController;
+use App\Http\Controllers\CategoriasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,6 @@ Route::get('/cargos', [CargosController::class, 'index'])->name('cargos');
 Route::get('/cargos/update/{id}', [CargosController::class, 'update'])->name('updateCargos');
 //Route::post('/cargos/store/{nombre}',[CargosController::class,'store'])->name('cargosStore');
 Route::resource('cargos', CargosController::class);
+Route::get('/categorias', [CategoriasController::class, 'index'])->name('categorias');
+Route::get('/categorias/update/{id}', [CategoriasController::class, 'update'])->name('updateCategorias');
+Route::resource('categorias', CategoriasController::class);
