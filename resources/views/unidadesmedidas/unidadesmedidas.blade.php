@@ -112,24 +112,7 @@
     border: none; 
 }
 
-.mod-cancelar{
-    width: 100px;
-    height: 30px;
-    font: bold;
-    background: #c2d4bb;
-    border-radius: 3px;  
-    border: none;
-}
 
-.mod-guardar{
-    width: 100px;
-    height: 30px;
-    font: bold;
-    color: white;
-    background: #3b3c54;
-    border-radius: 3px;  
-    border: none;
-}
 a{
   text-decoration: none;
   padding: 5px;

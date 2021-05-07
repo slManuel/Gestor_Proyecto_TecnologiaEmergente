@@ -253,8 +253,14 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'text' => 'Categorías',
+            'url'  => 'categorias',
+            'icon' => 'fas fa-tag',
+        ],
+               
+        [
+            'text' => 'Empleados',
+            'url'  => 'empleados',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
