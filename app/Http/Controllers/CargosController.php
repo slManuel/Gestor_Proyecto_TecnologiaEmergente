@@ -38,19 +38,12 @@ class CargosController extends Controller
 
     public function store(Request $request)
     {
-<<<<<<< HEAD
-        $dataProducts = $request->except('_token','saveitem');
-    Cargos::insert($dataProducts);
-        //return response()->json($dataProducts);
-       $data['cargos']=Cargos::paginate(15);
-      return view('Cargos.cargos', $data);
-=======
+    
         //
         $dataProducts = $request->except('_token','saveitem','C_guardar');        
         Cargos::insert($dataProducts);
         $data['cargos']=Cargos::paginate(15);
         return view('Cargos.cargos', $data);
->>>>>>> f3cca7e93f354602ea9cf7f61c3f56137e4c29f9
     }
 
     /*public function store(Request $request)
