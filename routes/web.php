@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CargosController;
+use App\Http\Controllers\EmpleadosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,6 @@ Route::get('/cargos', [CargosController::class, 'index'])->name('cargos');
 Route::get('/cargos/update/{id}', [CargosController::class, 'update'])->name('updateCargos');
 //Route::post('/cargos/store/{nombre}',[CargosController::class,'store'])->name('cargosStore');
 Route::resource('cargos', CargosController::class);
+Route::get('/empleados', [EmpleadosController::class, 'index'])->name('empleados');
+Route::resource('empleados', EmpleadosController::class);
+Route::get('/empleados/update/{id}', [EmpleadosController::class, 'update'])->name('updateEmpleados');

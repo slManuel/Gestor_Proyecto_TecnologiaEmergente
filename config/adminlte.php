@@ -243,13 +243,13 @@ return [
         ],
         ['header' => 'account_settings'],
         [
-            'text' => 'cargos',
+            'text' => 'Cargos',
             'url'  => 'cargos',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'text' => 'Empleados',
+            'url'  => 'empleados',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
