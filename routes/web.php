@@ -7,6 +7,7 @@ use App\Http\Controllers\UnidadesMedidasController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\IngreEgreController;
+use App\Http\Controllers\ProyectosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,19 +29,16 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/cargos', [CargosController::class, 'index'])->name('cargos');
 Route::get('/cargos/update/{id}', [CargosController::class, 'update'])->name('updateCargos');
-//Route::post('/cargos/store', [CargosController::class, 'store'])->name('storeCargos');
 Route::resource('cargos', CargosController::class);
 
 Route::resource('UnidadesMedidas', UnidadesMedidasController::class);//ruta para unidades de medida 
 Route::get('/unidades/create', [UnidadesMedidasController::class, 'create'])->name('createUM');
 Route::get('/unidades/update/{id}', [UnidadesMedidasController::class, 'update'])->name('updateUM');
-//Route::post('/unidades/store', [UnidadesMedidasController::class, 'store'])->name('insertUM');
 
-//Route::post('/cargos/store/{nombre}',[CargosController::class,'store'])->name('cargosStore');
-Route::resource('cargos', CargosController::class);
 Route::get('/categorias', [CategoriasController::class, 'index'])->name('categorias');
 Route::get('/categorias/update/{id}', [CategoriasController::class, 'update'])->name('updateCategorias');
 Route::resource('categorias', CategoriasController::class);
+
 Route::get('/empleados', [EmpleadosController::class, 'index'])->name('empleados');
 Route::resource('empleados', EmpleadosController::class);
 Route::get('/empleados/update/{id}', [EmpleadosController::class, 'update'])->name('updateEmpleados');
@@ -49,3 +47,6 @@ Route::get('/empleados/update/{id}', [EmpleadosController::class, 'update'])->na
 Route::get('/ingregr', [IngreEgreController::class, 'index'])->name('ingresosegresos');
 Route::get('/ingregr/update/{id}', [IngreEgreController::class, 'update'])->name('ingresosegresosUpdate');
 Route::get('/ingregr/store', [IngreEgreController::class, 'store'])->name('ingresosegresosStore');
+Route::get('/proyectos', [ProyectosController::class, 'index'])->name('proyectos');
+Route::get('/proyectos/update/{id}', [ProyectosController::class, 'update'])->name('updateProyectos');
+Route::resource('proyectos', ProyectosController::class);
