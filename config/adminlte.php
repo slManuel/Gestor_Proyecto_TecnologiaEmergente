@@ -243,8 +243,13 @@ return [
         ],
         ['header' => 'account_settings'],
         [
-            'text' => 'cargos',
-            'url'  => 'admin/settings',
+            'text' => 'Cargos',
+            'url'  => 'cargos',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Unidades de medida',
+            'url'  => 'UnidadesMedidas',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

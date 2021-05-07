@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cargos;
+use App\Models\UnidadesMedidas;
 use Illuminate\Http\Request;
 
-class CargosController extends Controller
+class UnidadesMedidasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class CargosController extends Controller
      */
     public function index()
     {
-        $data['cargos']=Cargos::paginate(15);
-        return view('Cargos.cargos', $data);
+        $data['unidadesmeds']=UnidadesMedidas::paginate(15);
+         return view('unidadesmedidas.unidadesmedidas',$data);
     }
 
     /**
@@ -25,7 +25,7 @@ class CargosController extends Controller
      */
     public function create()
     {
-        //
+        return view('unidadesmedidas.createumed');
     }
 
     /**
@@ -37,19 +37,20 @@ class CargosController extends Controller
     public function store(Request $request)
     {
         $dataProducts = $request->except('_token','saveitem');
-    Cargos::insert($dataProducts);
-        //return response()->json($dataProducts);
-       $data['cargos']=Cargos::paginate(15);
-      return view('Cargos.cargos', $data);
+        UnidadesMedidas::insert($dataProducts);
+            //return response()->json($dataProducts);
+        $data['unidadesmeds']=UnidadesMedidas::paginate(15);
+        return view('unidadesmedidas.unidadesmedidas',$data);
+      
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Cargos  $cargos
+     * @param  \App\Models\UnidadesMedidas  $unidadesMedidas
      * @return \Illuminate\Http\Response
      */
-    public function show(Cargos $cargos)
+    public function show(UnidadesMedidas $unidadesMedidas)
     {
         //
     }
@@ -57,10 +58,10 @@ class CargosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Cargos  $cargos
+     * @param  \App\Models\UnidadesMedidas  $unidadesMedidas
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cargos $cargos)
+    public function edit(UnidadesMedidas $unidadesMedidas)
     {
         //
     }
@@ -69,27 +70,27 @@ class CargosController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Cargos  $cargos
+     * @param  \App\Models\UnidadesMedidas  $unidadesMedidas
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $dataProducts = $request->except('_token','saveitem');
-        $cargos = Cargos::findOrFail($id);
+        $unidades = UnidadesMedidas::findOrFail($id);
      // echo json_encode($request);
-        $cargos->update($request->all());
+        $unidades->update($request->all());
 
-        $data['cargos']=Cargos::paginate(15);
-        return view('Cargos.cargos', $data);
+        $data['unidadesmeds']=UnidadesMedidas::paginate(15);
+        return view('unidadesmedidas.unidadesmedidas',$data);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Cargos  $cargos
+     * @param  \App\Models\UnidadesMedidas  $unidadesMedidas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cargos $cargos)
+    public function destroy(UnidadesMedidas $unidadesMedidas)
     {
         //
     }

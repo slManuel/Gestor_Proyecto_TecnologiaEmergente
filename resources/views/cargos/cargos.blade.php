@@ -38,17 +38,20 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form>
-                        <div class="mb-3">                          
-                          <input type="text" id="n-nombreP" placeholder="Nombre del nuevo cargo" class="form-control">
-                        </div>
-                         
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
-                      <button type="button" id="btn-n-guardarP" class="mod-guardar">GUARDAR</button>
-                    </div>
+                    <form method="POST" action="{{route('cargos.store')}}" >
+                              @csrf
+
+                                <div class="modal-body">
+                              <div class="mb-3">                          
+                                <input type="text" name="car_nombre" id="n-nombreP" placeholder="Nombre del cargo" class="form-control">
+                              </div>
+                               
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
+                              <input type="submit" id="btn-e-guardarP" value="GUARDAR" class="mod-guardar"/>
+                            </div>
+                         </form>
                   </div>
                 </div>
               </div>
@@ -108,89 +111,88 @@
 
 @section('css')
 <style>
-    form{
-    padding: 1em;
-}
-  input.radio{
-      width: 10px;
-      margin-right: 3px;
-      margin-left: 0px;
-    
-  }
-  
-#bus_unidad{
-    width: 60%;
-    height: 30px;
-}
-input#bus_unidad{
-    width: 45%;
-}
-#btn_nuevoCargo{
-    width: 150px;
-    height: 30px;
-    font: bold;
-    color: white;
-    background: #3b3c54;
-    border-radius: 4px;    
-    margin-left: 3PX;
-    margin-right: 3PX;
-}
-#btn_Reporte{
-    width: 180px;
-    height: 30px;
-    font: bold;
-    color: white;
-    background: #3b3c54;
-    border-radius: 4px;    
-    margin-left: 3PX;
-    margin-right: 3PX;
-}
-/Modal----------/
-#detalles{
-    width: 80px;
-    height: 30px;
-    font: bold;    
-    background: #9cbbac;
-    border-radius: 4px;
-    border: none;
-}
-#editar, #pagos{
-    width: 80px;
-    height: 30px;
-    font: bold;    
-    background: #c2d4bb;
-    border-radius: 4px;    
-    border: none;
-}
-#eliminar{
-    width: 80px;
-    height: 30px;
-    font: bold;
-    color: white;
-    background: #fa743d;
-    border-radius: 4px;   
-    border: none; 
-}
-.mod-cancelar{
-    width: 100px;
-    height: 30px;
-    font: bold;
-    background: #c2d4bb;
-    border-radius: 3px;  
-    border: none;
-}
-.mod-guardar{
-    width: 100px;
-    height: 30px;
-    font: bold;
-    color: white;
-    background: #3b3c54;
-    border-radius: 3px;  
-    border: none;
-}
-</style>
+        form{
+          padding: 1em;
+      }
+        input.radio{
+            width: 10px;
+            margin-right: 3px;
+            margin-left: 0px;
+          
+        }
+        
+      #bus_unidad{
+          width: 60%;
+          height: 30px;
+      }
+      input#bus_unidad{
+          width: 45%;
+      }
+      #btn_nuevoCargo{
+          width: 150px;
+          height: 30px;
+          font: bold;
+          color: white;
+          background: #3b3c54;
+          border-radius: 4px;    
+          margin-left: 3PX;
+          margin-right: 3PX;
+      }
+      #btn_Reporte{
+          width: 180px;
+          height: 30px;
+          font: bold;
+          color: white;
+          background: #3b3c54;
+          border-radius: 4px;    
+          margin-left: 3PX;
+          margin-right: 3PX;
+      }
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">        
+      #detalles{
+          width: 80px;
+          height: 30px;
+          font: bold;    
+          background: #9cbbac;
+          border-radius: 4px;
+          border: none;
+      }
+      #editar, #pagos{
+          width: 80px;
+          height: 30px;
+          font: bold;    
+          background: #c2d4bb;
+          border-radius: 4px;    
+          border: none;
+      }
+      #eliminar{
+          width: 80px;
+          height: 30px;
+          font: bold;
+          color: white;
+          background: #fa743d;
+          border-radius: 4px;   
+          border: none; 
+      }
+      .mod-cancelar{
+          width: 100px;
+          height: 30px;
+          font: bold;
+          background: #c2d4bb;
+          border-radius: 3px;  
+          border: none;
+      }
+      .mod-guardar{
+          width: 100px;
+          height: 30px;
+          font: bold;
+          color: white;
+          background: #3b3c54;
+          border-radius: 3px;  
+          border: none;
+      }
+</style>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">        
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
 @stop
 
