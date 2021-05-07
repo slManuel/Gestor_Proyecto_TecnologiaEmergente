@@ -72,32 +72,32 @@
                     <th scope="row">{{$countrow++}}</th>
                     <td>{{$cargo->car_nombre}}</td>
                     <td>
-                    <button id="editar" data-bs-toggle="modal" data-bs-target="#modal-editarP{{$cargo->_id}}">Editar</button>
-                    <div class="modal fade" id="modal-editarP{{$cargo->_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Editar cargo</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <form method="PUT" action="{{url('/cargos/update/'.$cargo->_id)}}" >
-                              @csrf
+                      <button id="editar" data-bs-toggle="modal" data-bs-target="#modal-editarP{{$cargo->_id}}">Editar</button>
+                      <div class="modal fade" id="modal-editarP{{$cargo->_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Editar cargo</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form method="PUT" action="{{url('/cargos/update/'.$cargo->_id)}}" >
+                                @csrf
 
-                                <div class="modal-body">
-                              <div class="mb-3">                          
-                                <input type="text" name="car_nombre" id="n-nombreP" placeholder="Nombre del cargo" value="{{$cargo->car_nombre}}" class="form-control">
+                              <div class="modal-body">
+                                <div class="mb-3">                          
+                                  <input type="text" name="car_nombre" id="n-nombreP" placeholder="Nombre del cargo" value="{{$cargo->car_nombre}}" class="form-control">
+                                </div>
+                                
                               </div>
-                               
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
-                              <input type="submit" id="btn-e-guardarP" value="EDITAR" class="mod-guardar"/>
-                            </div>
-                         </form>
+                              <div class="modal-footer">
+                                <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
+                                <input type="submit" id="btn-e-guardarP" value="EDITAR" class="mod-guardar"/>
+                              </div>
+                          </form>
+                          </div>
                         </div>
                       </div>
-                    </td>
-                   
+                    </td>                   
                   </tr> 
                   @endforeach                 
                 </tbody>
@@ -171,6 +171,34 @@ input#bus_unidad{
     background: #fa743d;
     border-radius: 4px;   
     border: none; 
+    .mod-cancelar{
+    width: 100px;
+    height: 30px;
+    font: bold;
+    text-align:center;
+    background: #c2d4bb;
+    border-radius: 3px;  
+    border: none;
+    color:black;
+}
+.mod-cancelar{
+    width: 100px;
+    height: 30px;
+    font: bold;
+    text-align:center;
+    background: #c2d4bb;
+    border-radius: 3px;  
+    border: none;
+    color:black;
+}
+.mod-guardar{
+    width: 100px;
+    height: 30px;
+    font: bold;
+    color: white;
+    background: #3b3c54;
+    border-radius: 3px;  
+    border: none;    
 }
 </style>
 

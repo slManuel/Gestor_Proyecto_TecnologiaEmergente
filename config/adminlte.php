@@ -254,8 +254,8 @@ return [
         ],
         
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'text' => 'Empleados',
+            'url'  => 'empleados',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
