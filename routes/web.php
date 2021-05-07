@@ -6,6 +6,7 @@ use App\Http\Controllers\CargosController;
 use App\Http\Controllers\UnidadesMedidasController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\EmpleadosController;
+use App\Http\Controllers\IngreEgreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +44,8 @@ Route::resource('categorias', CategoriasController::class);
 Route::get('/empleados', [EmpleadosController::class, 'index'])->name('empleados');
 Route::resource('empleados', EmpleadosController::class);
 Route::get('/empleados/update/{id}', [EmpleadosController::class, 'update'])->name('updateEmpleados');
+
+//rutas para ingresos y egresos
+Route::get('/ingregr', [IngreEgreController::class, 'index'])->name('ingresosegresos');
+Route::get('/ingregr/update/{id}', [IngreEgreController::class, 'update'])->name('ingresosegresosUpdate');
+Route::get('/ingregr/store', [IngreEgreController::class, 'store'])->name('ingresosegresosStore');
