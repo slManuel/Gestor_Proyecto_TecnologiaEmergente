@@ -27,16 +27,12 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/cargos', [CargosController::class, 'index'])->name('cargos');
 Route::get('/cargos/update/{id}', [CargosController::class, 'update'])->name('updateCargos');
-//Route::post('/cargos/store', [CargosController::class, 'store'])->name('storeCargos');
 Route::resource('cargos', CargosController::class);
 
 Route::resource('UnidadesMedidas', UnidadesMedidasController::class);//ruta para unidades de medida 
 Route::get('/unidades/create', [UnidadesMedidasController::class, 'create'])->name('createUM');
 Route::get('/unidades/update/{id}', [UnidadesMedidasController::class, 'update'])->name('updateUM');
-//Route::post('/unidades/store', [UnidadesMedidasController::class, 'store'])->name('insertUM');
 
-//Route::post('/cargos/store/{nombre}',[CargosController::class,'store'])->name('cargosStore');
-Route::resource('cargos', CargosController::class);
 Route::get('/categorias', [CategoriasController::class, 'index'])->name('categorias');
 Route::get('/categorias/update/{id}', [CategoriasController::class, 'update'])->name('updateCategorias');
 Route::resource('categorias', CategoriasController::class);
