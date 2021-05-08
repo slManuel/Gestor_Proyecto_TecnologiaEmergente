@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use App\Models\Cargos;
 
-class Ingre_Egre extends Model
+class Ingre_Egre extends Eloquent
 {
     protected $connection = 'mongodb';
 	protected $collection = 'INGRE_EGRE';
@@ -13,11 +14,12 @@ class Ingre_Egre extends Model
 
     protected $fillable = [
         'proy_id',
+        'ie_descripcion',
         'ie_tipo',
         'ie_fecha'
     ];  
     
-    public function DETALLES(){
+    public function detalles(){
         return $this->hasOne(Detalles::class, '_id', 'det_id');
     }
 }

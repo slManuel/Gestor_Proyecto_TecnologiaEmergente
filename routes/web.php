@@ -44,9 +44,14 @@ Route::resource('empleados', EmpleadosController::class);
 Route::get('/empleados/update/{id}', [EmpleadosController::class, 'update'])->name('updateEmpleados');
 
 //rutas para ingresos y egresos
-Route::get('/ingregr', [IngreEgreController::class, 'index'])->name('ingresosegresos');
-Route::get('/ingregr/update/{id}', [IngreEgreController::class, 'update'])->name('ingresosegresosUpdate');
-Route::get('/ingregr/store', [IngreEgreController::class, 'store'])->name('ingresosegresosStore');
+Route::get('/facturas/{id}', [IngreEgreController::class, 'index'])->name('factura');
+Route::get('/facturas/create/{id}', [IngreEgreController::class, 'create'])->name('factura');
+//Route::get('factura','IngreEgreController@index');
+Route::get('/factura/update/{id_factura}/{id_proyecto}', [IngreEgreController::class, 'update'])->name('facturaUpdate');
+Route::post('/factura/store/{id}', [IngreEgreController::class, 'store'])->name('facturaStore');
+
+
 Route::get('/proyectos', [ProyectosController::class, 'index'])->name('proyectos');
 Route::get('/proyectos/update/{id}', [ProyectosController::class, 'update'])->name('updateProyectos');
 Route::resource('proyectos', ProyectosController::class);
+

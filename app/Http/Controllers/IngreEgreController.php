@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ingre_Egre;
+use App\Models\Detalles;
+use App\Models\Categorias;
 use Illuminate\Http\Request;
 
 class IngreEgreController extends Controller
@@ -12,19 +14,22 @@ class IngreEgreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return view('ingegr.ingresoegr');
-    }
+       
+        $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();;       
+        return view('ingegr.ingresoegr', $data)->with('id',$id); 
+
+     }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        return view('ingegr.createIngrEgre')->with('id',$id); 
     }
 
     /**
@@ -33,9 +38,17 @@ class IngreEgreController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
-        //
+        $dataProducts = $request->except('_token','saveitem');
+        //$empleados = Empleados::findOrFail($request->emp_nombre);
+        $dataProducts['proy_id']=$id;
+        $dataProducts['ie_total']=0; 
+        Ingre_Egre::insert($dataProducts);        
+        $data['empleados']= Ingre_Egre::paginate(15);   
+
+        $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();;       
+        return view('ingegr.ingresoegr', $data)->with('id',$id); 
     }
 
     /**
@@ -67,9 +80,16 @@ class IngreEgreController extends Controller
      * @param  \App\Models\Ingre_Egre  $ingre_Egre
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ingre_Egre $ingre_Egre)
+    public function update(Request $request,$factura_id,$proy_id)
     {
-        //
+        $dataProducts = $request->except('_token','saveitem');
+        $factura = Ingre_Egre::findOrFail($factura_id);
+     // echo json_encode($request);
+        $factura->update($request->all());
+
+       
+        $data['facturas']=Ingre_Egre::where("proy_id","=",$proy_id)->get();;       
+        return view('ingegr.ingresoegr', $data)->with('id',$proy_id); 
     }
 
     /**
