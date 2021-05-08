@@ -10,7 +10,7 @@ use App\Models\Empleados;
 class Gasto_personal extends Eloquent
 {
     protected $connection = 'mongodb';
-	protected $collection = 'GASOS_PERSONAL';
+	protected $collection = 'GASTOS_PERSONAL';
     public $timestamps=false;
 
     protected $fillable = [

@@ -43,7 +43,10 @@ Route::get('/empleados', [EmpleadosController::class, 'index'])->name('empleados
 Route::resource('empleados', EmpleadosController::class);
 Route::get('/empleados/update/{id}', [EmpleadosController::class, 'update'])->name('updateEmpleados');
 
-Route::get('/gastospersonal', [GastoPersonalController::class, 'index'])->name('gastospersonal');
+Route::get('/gastospersonal/{id}', [GastoPersonalController::class, 'index'])->name('gastospersonal');
+Route::get('/gastospersonal/{proy}/{emp}', [GastoPersonalController::class, 'create'])->name('pagoGP');
+Route::resource('gastospersonal', GastoPersonalController::class);
+
 Route::get('/proyectos', [ProyectosController::class, 'index'])->name('proyectos');
 Route::get('/proyectos/update/{id}', [ProyectosController::class, 'update'])->name('updateProyectos');
 Route::resource('proyectos', ProyectosController::class);

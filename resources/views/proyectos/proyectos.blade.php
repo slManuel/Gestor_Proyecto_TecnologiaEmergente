@@ -135,8 +135,8 @@
                 </form>
                 </div>
                 </div>
-            </td>
-            <td><input type="button" value="Pagos" id="pagos"></td>
+            </td>            
+            <td><a type="button" href="{{url('/gastospersonal/'.$proyecto->_id)}}" id="pagos">Pagos</a></td>
             </tr>  
             @endforeach                 
         </tbody>
@@ -197,6 +197,9 @@ select, input{
     background: #c2d4bb;
     border-radius: 4px;    
     border: none;
+    color:black;
+    text-decoration:none;
+    text-align:center;
 }
 #eliminar{
     width: 80px;

@@ -21,13 +21,13 @@
                 <option>Deuda</option>
                 <option>En el proyecto actual</option>
             </select>
-        </div>
+        </div>        
         <div class="col-4">
             <input type="text" id="fp-proyecto" placeholder="Nombre de empleado">
             <input type="button" id="btn_buscarpr" value="BUSCAR">
         </div>
         <div class="col-4">
-            <button type="button" id="btn_crear_emp" data-bs-toggle="modal" data-bs-target="#modal-nuevoP" >CREAR NUEVO EMPLEADO</button>
+            <a href="{{route('empleados.create')}}" id="btn_crear_emp">CREAR NUEVO EMPLEADO</a>
             <div class="modal fade" id="modal-nuevoP" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -66,13 +66,15 @@
                 </div>
                 </div>
             </div>
-            </div>
-            <button type="button" id="btn_crear_emp">REPORTE</button>
+            </div>            
         </div>
     </div>
     </div>              
 </div>
 <div class="row">
+<?php
+    echo '<input type="hidden" value="' . htmlspecialchars($proy) . '" />'."\n";
+?>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -86,47 +88,21 @@
         </tr>
     </thead>
     <tbody>
+    @php($countrow=1)
+    @foreach($empleados as $empleado)    
         <tr>
-        <th scope="row">1</th>
-        <td>Francisco Aguilar</td>
-        <td>Sembrador</td>
-        <td>150</td>
-        <td>Activo</td>
-        <td>7171-7788</td>
+        <th scope="row">{{$countrow++}}</th>
+        <td>{{$empleado->emp_nombre}}</td>
+        <td>{{$empleado->cargo->car_nombre}}</td>
+        <td>{{$empleado->emp_estado}}</td>
+        <td>{{$empleado->emp_salario}}</td>
+        <td>{{$empleado->emp_tel}}</td>
         <td>
-            <button id="editar" data-bs-toggle="modal" data-bs-target="#modal-PagarP">Pagar</button>
-            <div class="modal fade" id="modal-PagarP" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Pagar</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                    <input type="text" id="e-nombreP" placeholder="Nombre del empleado" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                    <input type="text" id="e-nombreP" placeholder="Comentario" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <input class="form-check-label" for="flexCheckDefault" type="number" placeholder="Pago">
-                        </label>
-                    </div>
-                    </div>
-                </form>
-                </div>
-                <div class="modal-footer">
-                <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
-                <button type="button" id="btn-e-guardarP" class="mod-guardar">GUARDAR</button>
-                </div>
-            </div>
-            </div>
+        
+        <a href="{{url('/gastospersonal/'.$empleado->_id,$proy)}}" id="pagos">Pagar</a>
         </td>
-        </tr>                  
+        </tr>
+    @endforeach
     </tbody>
     </table>
 </div>
@@ -168,7 +144,10 @@ select, input{
     font: bold;
     color: white;
     background: #3b3c54;
-    border-radius: 4px;    
+    border-radius: 4px;
+    padding: 5px;
+    text-decoration:none;
+    text-align:center;
 }
 #detalles{
     width: 80px;
@@ -177,13 +156,15 @@ select, input{
     background: #9cbbac;
     border-radius: 4px;    
 }
-#editar, #pagos{
-    width: 80px;
-    height: 30px;
+#editar, #pagos{    
     font: bold;    
     background: #c2d4bb;
     border-radius: 4px;    
     border: none;
+    color:black;
+    text-align:center;
+    text-decoration:none;
+    padding:4px;
 }
 #eliminar{
     width: 80px;

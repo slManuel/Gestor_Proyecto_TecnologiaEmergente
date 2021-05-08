@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Gasto_personal;
 use Illuminate\Http\Request;
+use App\Models\Empleados;
+use App\Models\Cargos;
+use App\Models\Proyecto;
 
 class GastoPersonalController extends Controller
 {
@@ -12,10 +15,12 @@ class GastoPersonalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($proy)
     {
         //
-        return view('gastospersonal.gastospersonal');
+        $data['empleados']=Empleados::paginate(15);
+        $data2['cargos']=Cargos::paginate(15);
+        return view('gastospersonal.gastospersonal',$data,$data2)->with('proy',$proy);
     }
 
     /**
@@ -23,11 +28,10 @@ class GastoPersonalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
-
+    public function create($empleado,$proyecto)
+    {        
+        return view('gastospersonal.crearPago')->with('empleado',$empleado)->with('proyecto',$proyecto);
+    }        
     /**
      * Store a newly created resource in storage.
      *
@@ -37,6 +41,12 @@ class GastoPersonalController extends Controller
     public function store(Request $request)
     {
         //
+        $dataProducts = $request->except('_token','saveitem','C_guardar');
+        //return response()->json($dataProducts);        
+        Gasto_personal::insert($dataProducts);        
+        $data['empleados']=Empleados::paginate(15);
+        $data2['cargos']=Cargos::paginate(15);    
+        return view('gastospersonal.gastospersonal',$data,$data2)->with('proy',$request->proyecto);
     }
 
     /**
