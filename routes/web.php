@@ -7,6 +7,7 @@ use App\Http\Controllers\UnidadesMedidasController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\GastoPersonalController;
+use App\Http\Controllers\IngreEgreController;
 use App\Http\Controllers\ProyectosController;
 
 /*
@@ -46,7 +47,15 @@ Route::get('/empleados/update/{id}', [EmpleadosController::class, 'update'])->na
 Route::get('/gastospersonal/{id}', [GastoPersonalController::class, 'index'])->name('gastospersonal');
 Route::get('/gastospersonal/{proy}/{emp}', [GastoPersonalController::class, 'create'])->name('pagoGP');
 Route::resource('gastospersonal', GastoPersonalController::class);
+//rutas para ingresos y egresos
+Route::get('/facturas/{id}', [IngreEgreController::class, 'index'])->name('factura');
+Route::get('/facturas/create/{id}', [IngreEgreController::class, 'create'])->name('factura');
+//Route::get('factura','IngreEgreController@index');
+Route::get('/factura/update/{id_factura}/{id_proyecto}', [IngreEgreController::class, 'update'])->name('facturaUpdate');
+Route::post('/factura/store/{id}', [IngreEgreController::class, 'store'])->name('facturaStore');
+
 
 Route::get('/proyectos', [ProyectosController::class, 'index'])->name('proyectos');
 Route::get('/proyectos/update/{id}', [ProyectosController::class, 'update'])->name('updateProyectos');
 Route::resource('proyectos', ProyectosController::class);
+

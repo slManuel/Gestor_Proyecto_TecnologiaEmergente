@@ -260,6 +260,13 @@ return [
             'url'  => 'empleados',
             'icon' => 'fas fa-fw fa-lock',
         ],
+        [
+            'text' => 'Ingresos y Egresos',
+            'url'  => 'ingregr',
+            'icon' => 'fas fa-fw fa-lock',
+        ],
+      
+       
     ],
 
     /*
