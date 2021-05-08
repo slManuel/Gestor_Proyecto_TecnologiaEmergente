@@ -7,6 +7,7 @@ use App\Http\Controllers\UnidadesMedidasController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\GastoPersonalController;
+use App\Http\Controllers\ProyectosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,8 +38,12 @@ Route::get('/unidades/update/{id}', [UnidadesMedidasController::class, 'update']
 Route::get('/categorias', [CategoriasController::class, 'index'])->name('categorias');
 Route::get('/categorias/update/{id}', [CategoriasController::class, 'update'])->name('updateCategorias');
 Route::resource('categorias', CategoriasController::class);
+
 Route::get('/empleados', [EmpleadosController::class, 'index'])->name('empleados');
 Route::resource('empleados', EmpleadosController::class);
 Route::get('/empleados/update/{id}', [EmpleadosController::class, 'update'])->name('updateEmpleados');
 
 Route::get('/gastospersonal', [GastoPersonalController::class, 'index'])->name('gastospersonal');
+Route::get('/proyectos', [ProyectosController::class, 'index'])->name('proyectos');
+Route::get('/proyectos/update/{id}', [ProyectosController::class, 'update'])->name('updateProyectos');
+Route::resource('proyectos', ProyectosController::class);
