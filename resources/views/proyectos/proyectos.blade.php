@@ -90,13 +90,15 @@
         <tbody>
         @php($countrow=1)
         @foreach($proyectos as $proyecto)
+       
             <tr>
             <th scope="row">{{$countrow++}}</th>
             <td>{{$proyecto->proy_nombre}}</td>
             <td>{{$proyecto->proy_fechaI}}</td>
             <td>{{$proyecto->proy_fechaF}}</td>
             <td>{{$proyecto->proy_estado}}</td>
-            <td><input type="button" value="Detalles" id="detalles"></td>
+            <td>  <a type="button" href="{{url('/facturas/'.$proyecto->_id)}}" value="Detalles" id="detalles">Detalles<a>
+            </td>
             <td>
             <button id="editar" data-bs-toggle="modal" data-bs-target="#modal-editarP{{$proyecto->_id}}">Editar</button>
             <div class="modal fade" id="modal-editarP{{$proyecto->_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -135,8 +137,8 @@
                 </form>
                 </div>
                 </div>
-            </td>
-            <td><input type="button" value="Pagos" id="pagos"></td>
+            </td>            
+            <td><a type="button" href="{{url('/gastospersonal/'.$proyecto->_id)}}" id="pagos">Pagos</a></td>
             </tr>  
             @endforeach                 
         </tbody>
@@ -189,6 +191,10 @@ select, input{
     font: bold;    
     background: #9cbbac;
     border-radius: 4px;    
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
 }
 #editar, #pagos{
     width: 80px;
@@ -197,6 +203,9 @@ select, input{
     background: #c2d4bb;
     border-radius: 4px;    
     border: none;
+    color:black;
+    text-decoration:none;
+    text-align:center;
 }
 #eliminar{
     width: 80px;
@@ -225,6 +234,7 @@ select, input{
     border-radius: 3px;  
     border: none;
 }
+
 </style>
 
 

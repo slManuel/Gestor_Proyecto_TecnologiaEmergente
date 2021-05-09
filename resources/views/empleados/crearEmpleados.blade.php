@@ -64,7 +64,8 @@
     margin-right: 3px;
     margin-left: 0px;
     border-radius: 3PX;
-  
+    border-radius: 3PX;
+    border: 0.2px solid lightgray;
 }
     </style>
 @stop
