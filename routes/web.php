@@ -44,10 +44,13 @@ Route::resource('empleados', EmpleadosController::class);
 Route::get('/empleados/update/{id}', [EmpleadosController::class, 'update'])->name('updateEmpleados');
 
 //rutas para ingresos y egresos
+//Route::resource('facturas', IngreEgreController::class);
 Route::get('/facturas/{id}', [IngreEgreController::class, 'index'])->name('factura');
 Route::get('/facturas/create/{id}', [IngreEgreController::class, 'create'])->name('factura');
 //Route::get('factura','IngreEgreController@index');
-Route::get('/factura/update/{id_factura}/{id_proyecto}', [IngreEgreController::class, 'update'])->name('facturaUpdate');
+//Route::put('/factura/update/{fact_id}/{id_proyecto}', [IngreEgreController::class, 'update'])->name('facturaUpdate');
+Route::get('/factura/update', [IngreEgreController::class, 'update'])->name('facturaUpdate');
+
 Route::post('/factura/store/{id}', [IngreEgreController::class, 'store'])->name('facturaStore');
 
 

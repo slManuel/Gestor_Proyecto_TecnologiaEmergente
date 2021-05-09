@@ -191,6 +191,10 @@ select, input{
     font: bold;    
     background: #9cbbac;
     border-radius: 4px;    
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
 }
 #editar, #pagos{
     width: 80px;
@@ -227,6 +231,7 @@ select, input{
     border-radius: 3px;  
     border: none;
 }
+
 </style>
 
 

@@ -49,9 +49,9 @@
                          $subtotalegreso=0;
 
                         foreach($facturas as $factura){
-                            if($factura->ie_tipo=='egreso'){
+                            if($factura->ie_tipo=='Egreso'){
                                 $subtotalegreso=$subtotalegreso + $factura->ie_total;
-                            }elseif($factura->ie_tipo=='ingreso'){
+                            }elseif($factura->ie_tipo=='Ingreso'){
                                 $subtotalingreso=$subtotalingreso + $factura->ie_total;
                             }
                             {{$total =$subtotalingreso-$subtotalegreso;}}
@@ -64,7 +64,7 @@
         </div>
     </div>
     <div class="col-6">
-    <a type="button" class="botones"  href="{{url('/facturas/create/'.$id)}}" value="NUEVO REGISTRO" id="detalles">NUEVO REGISTRO<a>
+    <a type="button" class="botones"  href="{{url('/facturas/create/'.$proy_id)}}" value="NUEVO REGISTRO" id="detalles">NUEVO REGISTRO<a>
        
       
         <br>
@@ -108,9 +108,16 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="PUT" action="{{url('/factura/update/'.$factura->_id,$id)}}">
+                                    <form method="PUT" action="{{url('/factura/update')}}">
+                                    @csrf
+                                    <div class="mb-3">
+                                            <input type="hidden" name="_id" value="{{$factura->_id}}" id="e-nombreP" placeholder="Descripción" class="form-control">
+                                        </div>
                                         <div class="mb-3">
-                                            <input type="text" value="{{$factura->ie_descripcion}}" id="e-nombreP" placeholder="Descripción" class="form-control">
+                                            <input type="hidden" name="proy_id" value="{{$proy_id}}" id="e-nombreP" placeholder="Descripción" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="text" name="ie_descripcion" value="{{$factura->ie_descripcion}}" id="e-nombreP" placeholder="Descripción" class="form-control">
                                         </div>
                                         <div class="mb-3">
                                             <select id="e-estadoP" name="ie_tipo">
@@ -122,12 +129,13 @@
                                         <div class="mb-3">
                                             <input value="{{$factura->ie_fecha}}" name="ie_fecha" type="date" id="e-fechaF">
                                         </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
+                                        <div class="modal-footer">
                                     <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
                                     <input type="submit" id="btn-e-guardarP" value="EDITAR" class="mod-guardar">
                                 </div>
+                                    </form>
+                                </div>
+                             
                             </div>
                         </div>
                     </div>
@@ -145,25 +153,7 @@
 @section('css')
 <link rel="stylesheet" href="/css/admin_custom.css">
 <style>
-    a {
-        font-family: Arial;
-        color: black;
-        text-decoration: none;
-        box-shadow: 2px 2px 4px gray;
-        border-radius: 7px;
-    }
-
-
-
-    i {
-        padding-right: 6px;
-    }
-
-    #contenido {
-        width: 79%;
-        padding: 30px;
-    }
-
+  
     #cerrar {
         position: absolute;
         bottom: 0;
@@ -232,6 +222,8 @@
     #detalles {
         color: white;
         background: #fa743d;
+        text-decoration: none;
+        text-align: center;
     }
 
     .mod-cancelar {

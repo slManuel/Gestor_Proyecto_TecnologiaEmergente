@@ -18,7 +18,7 @@ class IngreEgreController extends Controller
     {
        
         $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();;       
-        return view('ingegr.ingresoegr', $data)->with('id',$id); 
+        return view('ingegr.ingresoegr', $data)->with('proy_id',$id); 
 
      }
 
@@ -80,16 +80,19 @@ class IngreEgreController extends Controller
      * @param  \App\Models\Ingre_Egre  $ingre_Egre
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$factura_id,$proy_id)
+    public function update(Request $request)
     {
-        $dataProducts = $request->except('_token','saveitem');
-        $factura = Ingre_Egre::findOrFail($factura_id);
-     // echo json_encode($request);
+        //echo response()->json($request);
+         $dataProducts = $request->except('_token','saveitem','method');
+       
+        $factura = Ingre_Egre::findOrFail($request->_id);
+     //echo json_encode($request->_id);
+     //echo json_encode($dataProducts);
         $factura->update($request->all());
 
        
-        $data['facturas']=Ingre_Egre::where("proy_id","=",$proy_id)->get();;       
-        return view('ingegr.ingresoegr', $data)->with('id',$proy_id); 
+       $data['facturas']=Ingre_Egre::where("proy_id","=",$request->proy_id)->get();;       
+       return view('ingegr.ingresoegr', $data)->with('proy_id',$request->proy_id);  
     }
 
     /**
