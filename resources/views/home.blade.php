@@ -3,15 +3,25 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <h1 id="titulo">GESTOR DE PROYECTOS</h1>
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    <style>
+        #titulo{
+            text-align:center;
+            justify-content:center;
+            display:flex;
+            align-items: center;
+            margin-top: 100px;
+            font-family: Courier; 
+            font-size: 100px;
+        }
+    </style>
 @stop
 
 @section('js')
