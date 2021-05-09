@@ -13,11 +13,11 @@ class EmpleadosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($proyecto)
     {           
         $data['empleados']=Empleados::paginate(15);
         $data2['cargos']=Cargos::paginate(15);
-        return view('empleados.empleados', $data, $data2);
+        return view('empleados.empleados', $data, $data2,$proyecto);
     }
 
     /**

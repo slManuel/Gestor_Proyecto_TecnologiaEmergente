@@ -6,6 +6,7 @@ use App\Http\Controllers\CargosController;
 use App\Http\Controllers\UnidadesMedidasController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\EmpleadosController;
+use App\Http\Controllers\GastoPersonalController;
 use App\Http\Controllers\IngreEgreController;
 use App\Http\Controllers\ProyectosController;
 
@@ -43,6 +44,9 @@ Route::get('/empleados', [EmpleadosController::class, 'index'])->name('empleados
 Route::resource('empleados', EmpleadosController::class);
 Route::get('/empleados/update/{id}', [EmpleadosController::class, 'update'])->name('updateEmpleados');
 
+Route::get('/gastospersonal/{id}', [GastoPersonalController::class, 'index'])->name('gastospersonal');
+Route::get('/gastospersonal/{proy}/{emp}', [GastoPersonalController::class, 'create'])->name('pagoGP');
+Route::resource('gastospersonal', GastoPersonalController::class);
 //rutas para ingresos y egresos
 //Route::resource('facturas', IngreEgreController::class);
 Route::get('/facturas/{id}', [IngreEgreController::class, 'index'])->name('factura');
