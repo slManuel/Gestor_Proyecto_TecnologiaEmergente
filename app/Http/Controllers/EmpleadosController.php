@@ -13,10 +13,17 @@ class EmpleadosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {           
-        $data['empleados']=Empleados::paginate(15);
-        $data2['cargos']=Cargos::paginate(15);
+        $nombre= $request->get('nombre');
+        $cargo= $request->get('cargo');
+        if ($nombre==null && $cargo=="Todos") {
+            $data['empleados']=Empleados::get();
+        }else{
+            $data['empleados']=Empleados::emp($nombre,$cargo)->get();
+        }
+        //echo ($request);
+        $data2['cargos']=Cargos::all();
         return view('empleados.empleados', $data, $data2);
     }
 
@@ -28,7 +35,7 @@ class EmpleadosController extends Controller
     public function create()
     {
         //
-        $data['cargos']=Cargos::paginate(15);
+        $data['cargos']=Cargos::all();
         return view('empleados.crearEmpleados',$data);
     }
 
@@ -44,8 +51,8 @@ class EmpleadosController extends Controller
         $dataProducts = $request->except('_token','saveitem','C_guardar');
         //$empleados = Empleados::findOrFail($request->emp_nombre);
         Empleados::insert($dataProducts);        
-        $data['empleados']=Empleados::paginate(15);        
-        $data2['cargos']=Cargos::paginate(15);
+        $data['empleados']=Empleados::all();        
+        $data2['cargos']=Cargos::all();
         return view('empleados.empleados', $data, $data2);                
     }
 
@@ -85,8 +92,8 @@ class EmpleadosController extends Controller
      // echo json_encode($request);
         $empleados->update($request->all());
 
-        $data['empleados']=Empleados::paginate(15);
-        $data2['cargos']=Cargos::paginate(15);
+        $data['empleados']=Empleados::all();
+        $data2['cargos']=Cargos::all();
         return view('empleados.empleados', $data,$data2);
     }
 

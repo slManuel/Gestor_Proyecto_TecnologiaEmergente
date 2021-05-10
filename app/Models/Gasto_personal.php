@@ -24,7 +24,7 @@ class Gasto_personal extends Eloquent
     public function proyecto(){
         return $this->hasOne(Proyectos::class, '_id', 'proyecto');
     }
-    public function empleado(){
+    public function _empleado(){
         return $this->hasOne(Empleados::class, '_id', 'empleado');
-    }
+    }    
 }

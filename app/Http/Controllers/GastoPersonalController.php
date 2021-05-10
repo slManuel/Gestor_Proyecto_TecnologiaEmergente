@@ -18,10 +18,28 @@ class GastoPersonalController extends Controller
     public function index($proy)
     {
         //
-        $data['empleados']=Empleados::paginate(15);
-        $data2['cargos']=Cargos::paginate(15);
+        $data['empleados']=Empleados::all();
+        $data2['cargos']=Cargos::all();
         return view('gastospersonal.gastospersonal',$data,$data2)->with('proy',$proy);
     }
+    public function indexHP($proy,Request $request)
+    {
+        //dd($request);        
+        $gastos=Gasto_personal::where('proyecto', '=', $proy)->get();
+        $data['gps']=$gastos;        
+        $data['cargos']=Cargos::all();
+        //dd($data);
+        return view('gastospersonal.historialPagos',$data)->with('proy',$proy);
+    }
+    /*public function obtener(Request $request)
+    {
+        $data['gps']=Gasto_personal::where('proyecto', '=', $request->proy)->get();
+
+        $data2['empleados']=Empleados::where('emp_nombre','=',$request->nombre)->where('car_id','=',$request->cargo)->all();
+        $data['cargos']=Cargos::all();
+        
+        return view('gastospersonal.historialPagos',$data,$data2)->with('proy',$request->proy);
+    }*/
 
     /**
      * Show the form for creating a new resource.

@@ -65,11 +65,8 @@
     </div>
     <div class="col-6">
         <a type="button" class="botones" href="{{url('/facturas/create/'.$proy_id)}}" value="NUEVO REGISTRO" id="detalles">NUEVO REGISTRO<a>
-
-
                 <br>
-                <button type="button" id="btn-historialP" class="botones">HISTORIAL DE PAGOS A PERSONAL<i class="bi bi-clock-history"></i></button>
-                <br>
+                <a type="button" class="botones"  href="{{url('/gastospersonal/indexHP/'.$proy_id)}}" value="NUEVO REGISTRO" id="btn-historialP">HISTORIAL DE PAGOS A PERSONAL<i class="bi bi-clock-history"></i><a>   <br>
                 <button type="button" id="btn-nuevoPago" class="botones">REALIZAR NUEVO PAGO<i class="bi bi-cash-stack"></i></button>
     </div>
 </div>
@@ -199,10 +196,13 @@
         border: none;
     }
 
-    #btn-rep-facturas {
+    #btn-rep-facturas,#btn-historialP {
         font: bold;
         background: #9cbbac;
         border: none;
+        color:black;
+        text-align:center;
+        text-decoration:none;
     }
 
     #balance {

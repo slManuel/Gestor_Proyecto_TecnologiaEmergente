@@ -7,36 +7,31 @@
 @stop
 
 @section('content')
-          <div class="row">
+          <div class="row">            
               <div class="col" id="filtro-proy">
                 <div class="row">
                     <legend>Filtros</legend>
-                </div>
-                <div class="row">
-                  <div class="col-3">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                      <label class="form-check-label" for="inlineRadio1">Nombre de empleado</label>
+                </div>                
+                <form>
+                  <div class="row">
+                    <div class="col-4">
+                      <select class="inp" name="cargo">
+                        <option>Todos</option>
+                        @foreach($cargos as $car)
+                            <option value="{{$car->_id}}">{{$car->car_nombre}}</option>
+                        @endforeach                    
+                      </select>
+                    </div>
+                    <div class="col-4">
+                      <input class="inp" name="nombre" type="text" placeholder="Nombre del empleado">
+                    </div>
+                    <div class="col-3">
+                      <input type="submit" id="btn_buscarpr" value="BUSCAR">
                     </div>
                   </div>
-                  <div class="col-1">
-                    <div class="form-check form-check-inline" id="radio2">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                      <label class="form-check-label" for="inlineRadio2">Cargo</label>
-                    </div>
-                  </div>
-                  <div class="col-1">
-                    <div class="form-check form-check-inline" id="radio3">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option2">
-                      <label class="form-check-label" for="inlineRadio2">Proyecto</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="row" >
-                    <div class="col-6">
-                        <input type="text" id="fp-proyecto" placeholder="Nombre">
-                        <input type="button" id="btn_buscarpr" value="BUSCAR">
-                    </div>
+                </form>         
+                <br>       
+                <div class="row" >                    
                     <div class="col-6" id="botones">                    
                       <a href="{{route('empleados.create')}}" id="btn_crear_emp">CREAR NUEVO EMPLEADO</a>
                       <!--div class="modal fade" id="modal-nuevoP" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
