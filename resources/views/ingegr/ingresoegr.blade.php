@@ -43,20 +43,20 @@
                         <h4>Balance:</h4>
                     </div>
                     <div class="col">
-                    @php
-                         $total=0;
-                         $subtotalingreso=0;
-                         $subtotalegreso=0;
+                        @php
+                        $total=0;
+                        $subtotalingreso=0;
+                        $subtotalegreso=0;
 
                         foreach($facturas as $factura){
-                            if($factura->ie_tipo=='Egreso'){
-                                $subtotalegreso=$subtotalegreso + $factura->ie_total;
-                            }elseif($factura->ie_tipo=='Ingreso'){
-                                $subtotalingreso=$subtotalingreso + $factura->ie_total;
-                            }
-                            {{$total =$subtotalingreso-$subtotalegreso;}}
+                        if($factura->ie_tipo=='Egreso'){
+                        $subtotalegreso=$subtotalegreso + $factura->ie_total;
+                        }elseif($factura->ie_tipo=='Ingreso'){
+                        $subtotalingreso=$subtotalingreso + $factura->ie_total;
                         }
-                    @endphp
+                        {{$total =$subtotalingreso-$subtotalegreso;}}
+                        }
+                        @endphp
                         <legend id="balance">$ {{$total}}</legend>
                     </div>
                 </div>
@@ -64,13 +64,13 @@
         </div>
     </div>
     <div class="col-6">
-    <a type="button" class="botones"  href="{{url('/facturas/create/'.$proy_id)}}" value="NUEVO REGISTRO" id="detalles">NUEVO REGISTRO<a>
-       
-      
-        <br>
-        <button type="button" id="btn-historialP" class="botones">HISTORIAL DE PAGOS A PERSONAL<i class="bi bi-clock-history"></i></button>
-        <br>
-        <button type="button" id="btn-nuevoPago" class="botones">REALIZAR NUEVO PAGO<i class="bi bi-cash-stack"></i></button>
+        <a type="button" class="botones" href="{{url('/facturas/create/'.$proy_id)}}" value="NUEVO REGISTRO" id="detalles">NUEVO REGISTRO<a>
+
+
+                <br>
+                <button type="button" id="btn-historialP" class="botones">HISTORIAL DE PAGOS A PERSONAL<i class="bi bi-clock-history"></i></button>
+                <br>
+                <button type="button" id="btn-nuevoPago" class="botones">REALIZAR NUEVO PAGO<i class="bi bi-cash-stack"></i></button>
     </div>
 </div>
 <div class="row">
@@ -96,8 +96,6 @@
                 <td>{{$factura->ie_tipo}}</td>
                 <td>{{$factura->ie_fecha}}</td>
                 <td>{{$factura->ie_total}}</td>
-
-
                 <td>
                     <button class="boton" id="editar" data-bs-toggle="modal" data-bs-target="#modalUpd{{$factura->_id}}">Editar</button>
                     <div class="modal fade" id="modalUpd{{$factura->_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -109,8 +107,8 @@
                                 </div>
                                 <div class="modal-body">
                                     <form method="PUT" action="{{url('/factura/update')}}">
-                                    @csrf
-                                    <div class="mb-3">
+                                        @csrf
+                                        <div class="mb-3">
                                             <input type="hidden" name="_id" value="{{$factura->_id}}" id="e-nombreP" placeholder="Descripción" class="form-control">
                                         </div>
                                         <div class="mb-3">
@@ -121,7 +119,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <select id="e-estadoP" name="ie_tipo">
-                                                <option hidden value="{{$factura->ie_tipo}}" >{{$factura->ie_tipo}}</option>
+                                                <option hidden value="{{$factura->ie_tipo}}">{{$factura->ie_tipo}}</option>
                                                 <option>Egreso</option>
                                                 <option>Ingreso</option>
                                             </select>
@@ -130,37 +128,52 @@
                                             <input value="{{$factura->ie_fecha}}" name="ie_fecha" type="date" id="e-fechaF">
                                         </div>
                                         <div class="modal-footer">
-                                    <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
-                                    <input type="submit" id="btn-e-guardarP" value="EDITAR" class="mod-guardar">
-                                </div>
+                                            <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
+                                            <input type="submit" id="btn-e-guardarP" value="EDITAR" class="mod-guardar">
+                                        </div>
                                     </form>
                                 </div>
-                             
+
                             </div>
                         </div>
                     </div>
                 </td>
-                <td><input type="button" value="Detalles" id="detalles" class="boton"></td>
+                <td><a type="button" href="{{url('/detalles/'.$factura->_id)}}" id="detalles" class=" contenidoDet">Ver contenido</a>
+                </td>
+                <td> <a class="eliminar" id="eliminar" href="{{url('factura/destroy/'.$factura->_id)}}">Eliminar</a>
+                </td>
             </tr>
             @endforeach
 
         </tbody>
     </table>
-   
+
 </div>
 @stop
 
 @section('css')
 <link rel="stylesheet" href="/css/admin_custom.css">
 <style>
-  
     #cerrar {
         position: absolute;
         bottom: 0;
     }
+    .eliminar {
+        background-color: crimson;
+        padding: 3px;
+        width: 180px;
+        margin-left: 0px;
+        border-radius: 3px;
+        text-decoration: none;
+        color: white;
+    }
 
-
-
+    .contenidoDet {
+        padding: 1px;
+        width: 180px;
+        margin-left: 2px;
+        border-radius: 3px;
+    }
 
     #filtro-proy {
         border: lightgray 1px solid;

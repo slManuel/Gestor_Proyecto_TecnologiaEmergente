@@ -17,7 +17,7 @@ class IngreEgreController extends Controller
     public function index($id)
     {
        
-        $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();;       
+        $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();      
         return view('ingegr.ingresoegr', $data)->with('proy_id',$id); 
 
      }
@@ -48,7 +48,7 @@ class IngreEgreController extends Controller
         $data['empleados']= Ingre_Egre::paginate(15);   
 
         $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();;       
-        return view('ingegr.ingresoegr', $data)->with('id',$id); 
+        return view('ingegr.ingresoegr', $data)->with('proy_id',$id); 
     }
 
     /**
@@ -83,7 +83,7 @@ class IngreEgreController extends Controller
     public function update(Request $request)
     {
         //echo response()->json($request);
-         $dataProducts = $request->except('_token','saveitem','method');
+        $dataProducts = $request->except('_token','saveitem','method');
        
         $factura = Ingre_Egre::findOrFail($request->_id);
      //echo json_encode($request->_id);
@@ -101,8 +101,19 @@ class IngreEgreController extends Controller
      * @param  \App\Models\Ingre_Egre  $ingre_Egre
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ingre_Egre $ingre_Egre)
+    public function destroy($idfactura)
     {
-        //
+         //buscamos la factura y lo eliminamos
+         $factura = Ingre_Egre::find($idfactura);
+         $idproyecto=$factura->proy_id;
+         $factura->delete();
+ 
+         //eliminamos los detalles de la factura
+         $data['detalles']=Detalles::where("ie_id","=",$idfactura)->delete();
+         $total=0;
+        
+          //llamamos todo lo necesario para la vista
+         $data['facturas']=Ingre_Egre::where("proy_id","=",$idproyecto)->get();      
+        return view('ingegr.ingresoegr', $data)->with('proy_id',$idproyecto); 
     }
 }
