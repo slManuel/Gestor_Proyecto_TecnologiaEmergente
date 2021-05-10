@@ -48,7 +48,7 @@ class IngreEgreController extends Controller
         $data['empleados']= Ingre_Egre::paginate(15);   
 
         $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();;       
-        return view('ingegr.ingresoegr', $data)->with('id',$id); 
+        return view('ingegr.ingresoegr', $data)->with('proy_id',$id); 
     }
 
     /**

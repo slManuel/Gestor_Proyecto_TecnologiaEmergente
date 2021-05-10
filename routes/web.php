@@ -45,6 +45,8 @@ Route::resource('empleados', EmpleadosController::class);
 Route::get('/empleados/update/{id}', [EmpleadosController::class, 'update'])->name('updateEmpleados');
 
 Route::get('/gastospersonal/{id}', [GastoPersonalController::class, 'index'])->name('gastospersonal');
+Route::get('/gastospersonal/indexHP/{id}', [GastoPersonalController::class, 'indexHP'])->name('gastospersonalhp');
+//Route::get('/gastospersonal/obtener', [GastoPersonalController::class, 'obtener'])->name('obtener');
 Route::get('/gastospersonal/{proy}/{emp}', [GastoPersonalController::class, 'create'])->name('pagoGP');
 Route::resource('gastospersonal', GastoPersonalController::class);
 //rutas para ingresos y egresos
