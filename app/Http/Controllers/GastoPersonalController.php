@@ -18,7 +18,7 @@ class GastoPersonalController extends Controller
     public function index($proy)
     {
         //
-        $data['empleados']=Empleados::all();
+        $data['empleados']=Empleados::where('emp_estado', 'like', 'Activo')->get();
         $data2['cargos']=Cargos::all();
         return view('gastospersonal.gastospersonal',$data,$data2)->with('proy',$proy);
     }
