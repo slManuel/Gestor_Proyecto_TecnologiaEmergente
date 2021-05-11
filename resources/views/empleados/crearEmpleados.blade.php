@@ -9,27 +9,32 @@
 @section('content')
 <form method="POST" action="{{url('empleados')}}">
 @csrf
-    <div class="mb-3">                          
-        <input type="text" name="emp_nombre" id="n-nombreP" placeholder="Nombre del empleado" class="inp">
+    <div class="form-group">
+        <label for="n-nombreP">Nombre:</label>                       
+        <input type="text" name="emp_nombre" id="n-nombreP" placeholder="Nombre del empleado" class="form-control" required>
     </div>
-    <div class="mb-3">
-        <select name="car_id" id="n-cargoP" class="inp">
+    <div class="form-group">
+        <label for="n-cargoP">Cargo:</label> 
+        <select name="car_id" id="n-cargoP" class="form-control">
         @foreach($cargos as $cargo)
             <option value="{{$cargo->_id}}">{{$cargo->car_nombre}}</option>
         @endforeach
         </select>
     </div>    
-    <div class="mb-3">
-        <select id="n-estadoP" name="emp_estado" class="inp">
+    <div class="form-group">
+        <label for="n-estadoP">Estado:</label> 
+        <select id="n-estadoP" name="emp_estado" class="form-control">
             <option value="Activo">Activo</option>
             <option Value="Inactivo">Inactivo</option>
         </select>
     </div>
-    <div class="mb-3">
-        <input type="number" name="emp_salario" id="n-salarioP" placeholder="Salario base mensual" class="inp">
+    <div class="form-group">
+        <label for="n-salarioP">Salario:</label> 
+        <input type="number" name="emp_salario" id="n-salarioP" placeholder="Salario base mensual" class="form-control" required>
     </div>
-    <div class="mb-3">
-        <input type="text" name="emp_tel" id="n-telefonoP" placeholder="Teléfono" class="inp">
+    <div class="form-group">
+        <label for="n-telefonoP">Telefono:</label> 
+        <input type="text" name="emp_tel" id="n-telefonoP" placeholder="Teléfono" class="form-control" required>
     </div>
     <div class="modal-footer">    
         <a href="{{route('empleados.index')}}" class="mod-cancelar">CANCELAR</a>
@@ -66,6 +71,9 @@
     border-radius: 3PX;
     border-radius: 3PX;
     border: 0.2px solid lightgray;
+}
+form{
+    width: 50%;
 }
     </style>
 @stop
