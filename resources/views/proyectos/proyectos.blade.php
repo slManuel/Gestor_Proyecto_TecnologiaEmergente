@@ -111,21 +111,25 @@
                     <form method="PUT" action="{{url('/proyectos/update/'.$proyecto->_id)}}">
                     @csrf  
                         <div class="modal-body">
-                            <div class="mb-3">
-                            <input type="text" id="e-nombreP" name="proy_nombre" value="{{$proyecto->proy_nombre}}" placeholder="Nombre del proyecto" class="form-control">
+                            <div class="form-group">
+                                <label for="e-nombreP">Nombre:</label>
+                                <input type="text" id="e-nombreP" name="proy_nombre" value="{{$proyecto->proy_nombre}}" placeholder="Nombre del proyecto" class="form-control" required>
                             </div>
-                            <div class="mb-3">
-                            <select id="e-estadoP" class="form-control" name="proy_estado" >
-                                <option hidden value="{{$proyecto->proy_estado}}">{{$proyecto->proy_estado}}</option>
-                                <option value="Activo">Activo</option>
-                                <option value="Inactivo">Inactivo</option>
-                            </select>
+                            <div class="form-group">
+                                <label for="e-estadoP">Estado:</label>
+                                <select id="e-estadoP" class="form-control" name="proy_estado" >
+                                    <option hidden value="{{$proyecto->proy_estado}}">{{$proyecto->proy_estado}}</option>
+                                    <option value="Activo">Activo</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                </select>
                             </div>
-                            <div class="mb-3">
-                            <input type="date" id="e-fechaP" name="proy_fechaI" value="{{$proyecto->proy_fechaI}}">
+                            <div class="form-group">
+                                <label for="e-fechaP">Fecha de inicio:</label>
+                                <input type="date" id="e-fechaP" name="proy_fechaI" value="{{$proyecto->proy_fechaI}}" class="form-control" required>
                             </div>
-                            <div class="mb-3">
-                            <input type="date" id="e-fechaP" name="proy_fechaF" value="{{$proyecto->proy_fechaF}}">
+                            <div class="form-group">
+                                <label for="e-fechaP">Fecha final:</label>
+                                <input type="date" id="e-fechaP" name="proy_fechaF" value="{{$proyecto->proy_fechaF}}" class="form-control" required>
                             </div>
                         </div>
                     </div>
@@ -241,6 +245,7 @@ select, input{
     border: none;
     text-decoration: none;
 }
+
 
 </style>
 
