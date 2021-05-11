@@ -63,15 +63,16 @@
                                 </div>
                                 <div class="modal-body">
                                     <form method="GET" action="{{url('detalle/actualizar')}}">
-                                    @csrf
-                                         <div class="mb-3">
+                                        @csrf
+                                        <div class="mb-3">
                                             <input name="factura_id" value="{{$idfactura}}" hidden>
                                         </div>
-                                         <div class="mb-3">
+                                        <div class="mb-3">
                                             <input name="_id" value="{{$detalle->_id}}" hidden>
                                         </div>
+                                        <label for="det_descripcion">Descripción:</label>
                                         <div class="mb-3">
-                                            <input name="det_descripcion" value="{{$detalle->det_descripcion}}" type="text" id="e-des" placeholder="Descripción" class="form-control">
+                                            <input name="det_descripcion" value="{{$detalle->det_descripcion}}" type="text" id="e-des" placeholder="Descripción" class="form-control" required>
                                         </div>
 
                                         <label for="cat_id">Categoría:</label>
@@ -94,15 +95,15 @@
                                         </div>
                                         <label for="det_cantidad">Cantidad:</label>
                                         <div class="mb-3">
-                                            <input name="det_cantidad" value="{{$detalle->det_cantidad}}" type="number" id="n-canidad">
+                                            <input name="det_cantidad" value="{{$detalle->det_cantidad}}" type="number" id="n-canidad" required>
                                         </div>
                                         <label for="det_preciounitario">Precio unitario:</label>
                                         <div class="mb-3">
-                                            <input name="det_preciounitario" value="{{$detalle->det_preciounitario}}" type="number" id="n-canidad">
+                                            <input name="det_preciounitario" value="{{$detalle->det_preciounitario}}" type="number" id="n-canidad" required>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
-                                            <input type="submit" value="EDITAR"  class="mod-guardar"/>
+                                            <input type="submit" value="EDITAR" class="mod-guardar" />
                                         </div>
                                     </form>
                                 </div>
@@ -112,7 +113,28 @@
                     </div>
                 </td>
                 <td>
-                <a class="eliminar" id="eliminar" href="{{url('detalle/delete/'.$detalle->_id,$idfactura)}}" >Eliminar</a>
+                    <button id="eliminar" class="eliminar" data-bs-toggle="modal" data-bs-target="#modal-detalles{{$detalle->_id}}">Eliminar</button>
+                    <div class="modal fade" id="modal-detalles{{$detalle->_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Eliminar pago</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form method="PUT" action="{{url('detalle/delete/'.$detalle->_id,$idfactura)}}">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <h5>Este elemento se eliminará de manera permanente</h5>
+                                        <p>¿Está seguro de eliminar este elemento?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" data-bs-dismiss="modal" class="mod-cancelar">No</button>
+                                        <input type="submit" id="btn-e-guardarP" value="Si" class="mod-guardar" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
             @endforeach
@@ -123,7 +145,7 @@
 
 @section('css')
 <style>
-    .nuevoregistro{
+    .nuevoregistro {
         background-color: gainsboro;
         padding: 5px;
         width: 180px;
@@ -132,7 +154,8 @@
         text-decoration: none;
         color: white;
     }
- .eliminar {
+
+    .eliminar {
         background-color: crimson;
         padding: 3px;
         width: 180px;
@@ -141,7 +164,7 @@
         text-decoration: none;
         color: white;
     }
-   
+
     select,
     input {
         width: 200px;

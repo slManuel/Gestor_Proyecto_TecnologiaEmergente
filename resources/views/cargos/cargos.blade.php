@@ -44,10 +44,10 @@
                             </div>
                             <form method="PUT" action="{{url('/cargos/update/'.$cargo->_id)}}" >
                                 @csrf
-
+                                <label for="car_nombre">Nombre del cargo:</label>
                               <div class="modal-body">
                                 <div class="mb-3">                          
-                                  <input type="text" name="car_nombre" id="n-nombreP" placeholder="Nombre del cargo" value="{{$cargo->car_nombre}}" class="form-control">
+                                  <input type="text" name="car_nombre" id="n-nombreP" placeholder="Nombre del cargo" value="{{$cargo->car_nombre}}" class="form-control" required>
                                 </div>
                                 
                               </div>

@@ -9,9 +9,10 @@
 @section('content')
 <form id="crearCargo" method="POST" action="{{url('cargos')}}">
 @csrf
-    <div class="modal-body">                      
+    <div class="modal-body">       
+    <label for="car_nombre">Nombre del cargo:</label>               
         <div class="mb-3">                          
-        <input type="text" name="car_nombre" id="n-nombreP" placeholder="Nombre del nuevo cargo" class="form-control"/>
+        <input type="text" name="car_nombre" id="n-nombreP" placeholder="Nombre del nuevo cargo" class="form-control" required/>
         </div>                                             
     </div>
     <div class="modal-footer">    
@@ -47,6 +48,9 @@ input.radio{
     margin-right: 3px;
     margin-left: 0px;
   
+}
+form{
+    width:50%;
 }
     </style>
 @stop

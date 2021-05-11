@@ -26,7 +26,6 @@ class IngreEgreController extends Controller
         }
         $data['proyecto']=Proyectos::where("_id","=",$id)->first();
         return view('ingegr.ingresoegr', $data)->with('proy_id',$id); 
-
      }
 
     /**
@@ -113,16 +112,19 @@ class IngreEgreController extends Controller
     public function destroy($idfactura)
     {
          //buscamos la factura y lo eliminamos
-         $factura = Ingre_Egre::find($idfactura);
-         $idproyecto=$factura->proy_id;
+         $factura = Ingre_Egre::find($idfactura);      
+         $idproyecto=$factura->proy_id;        
          $factura->delete();
  
          //eliminamos los detalles de la factura
          $data['detalles']=Detalles::where("ie_id","=",$idfactura)->delete();
          $total=0;
         
+         //buscamos el nombre del proyecto
+         $data['proyecto']=Proyectos::where("_id","=",$idproyecto)->first();
+                 
           //llamamos todo lo necesario para la vista
          $data['facturas']=Ingre_Egre::where("proy_id","=",$idproyecto)->get();      
-        return view('ingegr.ingresoegr', $data)->with('proy_id',$idproyecto); 
+        return view('ingegr.ingresoegr', $data)->with('proy_id',$idproyecto);  
     }
 }

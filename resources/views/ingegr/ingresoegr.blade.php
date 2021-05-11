@@ -114,9 +114,11 @@
                                         <div class="mb-3">
                                             <input type="hidden" name="proy_id" value="{{$proy_id}}" id="e-nombreP" placeholder="Descripción" class="form-control">
                                         </div>
+                                        <label for="ir_descripcion">Descripción:</label>
                                         <div class="mb-3">
-                                            <input type="text" name="ie_descripcion" value="{{$factura->ie_descripcion}}" id="e-nombreP" placeholder="Descripción" class="form-control">
+                                            <input type="text" name="ie_descripcion" value="{{$factura->ie_descripcion}}" id="e-nombreP" placeholder="Descripción" class="form-control" required>
                                         </div>
+                                        <label for="ie_tipo">Tipo de factura:</label>
                                         <div class="mb-3">
                                             <select id="e-estadoP" name="ie_tipo">
                                                 <option hidden value="{{$factura->ie_tipo}}">{{$factura->ie_tipo}}</option>
@@ -124,8 +126,9 @@
                                                 <option>Ingreso</option>
                                             </select>
                                         </div>
+                                        <label for="ie_fecha">Fecha:</label>
                                         <div class="mb-3">
-                                            <input value="{{$factura->ie_fecha}}" name="ie_fecha" type="date" id="e-fechaF">
+                                            <input value="{{$factura->ie_fecha}}" name="ie_fecha" type="date" id="e-fechaF" required>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
@@ -140,7 +143,29 @@
                 </td>
                 <td><a type="button" href="{{url('/detalles/'.$factura->_id)}}" id="detalles" class=" contenidoDet">Ver contenido</a>
                 </td>
-                <td> <a class="eliminar" id="eliminar" href="{{url('factura/destroy/'.$factura->_id)}}">Eliminar</a>
+                <td> 
+                <button id="eliminar" class="eliminar" data-bs-toggle="modal" data-bs-target="#modal-factura{{$factura->_id}}">Eliminar</button>
+                    <div class="modal fade" id="modal-factura{{$factura->_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Eliminar pago</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form method="PUT" action="{{url('factura/destroy/'.$factura->_id)}}">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <h5>Esta factura se eliminará de manera permanente</h5>
+                                        <p>¿Está seguro de eliminar esta factura?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" data-bs-dismiss="modal" class="mod-cancelar">No</button>
+                                        <input type="submit" id="btn-e-guardarP" value="Si" class="mod-guardar" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
             @endforeach
@@ -268,15 +293,11 @@
         margin-left: 10px;
     }
 </style>
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
 @stop
 
 @section('js')
-
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-
 @stop
