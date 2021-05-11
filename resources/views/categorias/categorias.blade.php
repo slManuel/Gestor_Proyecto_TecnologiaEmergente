@@ -8,70 +8,24 @@
 
 @section('content')
 <div class="row">
-    <form>
-        <div class="row">
-        <div class="col-3">
-            <label class="lfiltro"><input type="radio" class="radio" name="form__filtro" id="nombreCargo"
-                value="cargo" />Categoría</label>
-        </div>
-        <div class="col-2">
-            <label class="lfiltro"><input type="radio" class="radio" name="form__filtro" id="nombreProyecto"
-                value="proyecto" />Proyecto</label>
-
-        </div>
-        <div class="col-3">
-        
-            <select id="fp-tipocate" class="form-control">
-            <option>Seleccione el tipo de categoría</option>
-            <option>Ingreso</option>
-            <option>Egreso</option>
-            </select>
-        </div>
-        </div>
-<br>
-        <div class="row bus" id="div2">
-
-        <input type="search" placeholder="Escriba lo que desea buscar" name="contenido__busquedaUnidadesMedida"
-            id="bus_unidad">
-        <a href="{{route('categorias.create')}}" id="btn_nuevoCargo">NUEVA CATEGORIA</a>
-        <button type="button" id="btn_Reporte">NUEVO REPORTE</button>
-
-        </div>
-
-
-        <!--<div class="modal fade" id="modal-nuevoP" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nueva categoría</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                <div class="mb-3">
-                    <input type="text" id="n-nombreP" placeholder="Nombre de la nueva categoría" class="form-control">
-                </div>
-
-                <div class="mb-3">
-
-                    <select id="fp-tipocate" class="form-control">
-                    <option> Tipo de categoría</option>
+    <form action="{{route('categorias.index')}}">
+        <div class="row" >
+            <div class="col-4">
+                Estado: 
+                <select id="fp-tipocate" name="estadoBusqueda">
+                    <option>Todos</option>
                     <option>Ingreso</option>
                     <option>Egreso</option>
-                    </select>
-                </div>
-                </form>
+                </select>
             </div>
-            <div class="modal-footer">
-                <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
-                <button type="button" id="btn-n-guardarP" class="mod-guardar">GUARDAR</button>
+            <div class="col-4">
+                <input type="text" id="fp-proyecto" id="bus_unidad" name="contenido__busquedaUnidadesMedida" placeholder="Categoría">
+                <input type="submit" id="btn_buscarpr" value="BUSCAR">
             </div>
-            </div>
-        </div-->
+            <a href="{{route('categorias.create')}}" id="btn_nuevoCargo">NUEVA CATEGORIA</a>
         </div>
-
     </form>
+
     </div>
     <div class="row">
     <div class="row">
@@ -147,11 +101,11 @@ form{
 
   
 #bus_unidad{
-    width: 60%;
+    width: 40%;
     height: 30px;
 }
 input#bus_unidad{
-    width: 45%;
+    width: 30%;
 }
 select{
     width: 250px;
@@ -162,6 +116,15 @@ select{
 #div2{
     margin-top: -40px;
     padding-top: 50px;
+}
+#btn_buscarpr{
+    width: 75px;
+    height: 30px;
+    font: bold;
+    color: white;
+    background: #3b3c54;
+    border-radius: 4px;  
+    text-decoration: none;   
 }
 #btn_nuevoCargo{
     width: 190px;

@@ -14,7 +14,22 @@ class Proyectos extends Eloquent
     protected $fillable = [
         'proy_nombre',
         'proy_fechaI',
-        'proy:fechaF',
+        'proy_fechaF',
         'proy_estado'
     ];
+
+    public function scopeProy($query, $nombre,$estado) {        
+        if(($nombre) || ($estado)){
+            if ($nombre!=null && $estado!="Todos"){
+                return $query->where('proy_nombre', 'like', "%$nombre%")
+                             ->where('proy_estado', '=', "$estado");
+            }
+            elseif ($nombre!=null && $estado=="Todos"){
+                return $query->where('proy_nombre', 'like', "%$nombre%");
+            }
+            elseif ($nombre==null && $estado!="Todos"){
+                return $query->where('proy_estado', '=', "$estado");
+            }
+        }        
+    }
 }

@@ -22,4 +22,9 @@ class Ingre_Egre extends Eloquent
     public function detalles(){
         return $this->hasOne(Detalles::class, '_id', 'det_id');
     }
+    public function scopeIngre($query, $nombre) {        
+        if(($nombre)){
+            return $query->where('ie_tipo', 'like', "%$nombre%"); 
+        }    
+    }
 }

@@ -12,9 +12,17 @@ class ProyectosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['proyectos']=Proyectos::paginate(15);
+        /*$data['proyectos']=Proyectos::paginate(15);
+        return view('proyectos.proyectos', $data);*/
+        $nombre= $request->get('nombreBusqueda');
+        $estado= $request->get('estadoBusqueda');
+        if ($nombre==null && $estado=="Todos") {
+            $data['proyectos']=Proyectos::get();
+        }else{
+            $data['proyectos']=Proyectos::proy($nombre,$estado)->get();
+        }
         return view('proyectos.proyectos', $data);
     }
 

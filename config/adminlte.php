@@ -225,11 +225,6 @@ return [
 
     'menu' => [
         [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-        ],
-        [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
@@ -238,12 +233,12 @@ return [
         [
             'text' => 'Administración Proyectos',
             'url'  => 'proyectos',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-book',
         ],
         [
             'text' => 'Unidades de medida',
             'url'  => 'UnidadesMedidas',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-ruler-combined',
         ],
         [
             'text' => 'Categorías',
@@ -253,17 +248,12 @@ return [
         [
             'text' => 'Cargos',
             'url'  => 'cargos',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-user-tag',
         ],    
         [
             'text' => 'Empleados',
             'url'  => 'empleados',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'Ingresos y Egresos',
-            'url'  => 'ingregr',
-            'icon' => 'fas fa-fw fa-lock',
+            'icon' => 'fas fa-user',
         ],
       
        

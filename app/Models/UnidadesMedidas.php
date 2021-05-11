@@ -15,4 +15,10 @@ class UnidadesMedidas extends Eloquent
     protected $fillable = [
         'um_nombre'
     ];   
+
+    public function scopeUni($query, $nombre) {        
+        if(($nombre)){
+            return $query->where('um_nombre', 'like', "%$nombre%"); 
+        }    
+    }
 }

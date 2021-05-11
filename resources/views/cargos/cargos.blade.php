@@ -11,49 +11,11 @@
 
  
 <div class="row">
-          <form >
-               <div class="row">
-              <div class="col-3">     
-                       <label class="lfiltro"><input type="radio" class="radio"  name="form__filtro" id="nombreCargo" value="cargo"/>Cargo</label>
-              </div>
-              <div class="col-3">
-                <label  class="lfiltro"><input type="radio" class="radio" name="form__filtro" id="nombreProyecto" value="proyecto" />Proyecto</label>
-
-              </div>
-            </div>
-            <div class="row">
-
-              <input type="search" placeholder="Escriba lo que desea buscar" name="contenido__busquedaUnidadesMedida" id="bus_unidad"/>
-                <!--button type="button" id="btn_nuevoCargo" data-bs-toggle="modal" data-bs-target="#modal-nuevoP" >NUEVO CARGO</button-->
-                <!--button type="button" id="btn_Reporte"  >NUEVO REPORTE</button-->
-                
-            </div>              
-            <br>
-            <a href="{{route('cargos.create')}}" id="btn_nuevoCargo">NUEVO CARGO</a>
-              <!--div class="modal fade" id="modal-nuevoP" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Nuevo cargo</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>                      
-                    <form id="crearCargo" method="POST" action="{{url('/cargos/store')}}">
-                    @csrf
-                      <div class="modal-body">                      
-                          <div class="mb-3">                          
-                            <input type="text" name="cargo" id="n-nombreP" placeholder="Nombre del nuevo cargo" class="form-control"/>
-                          </div>                                             
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
-                        <input type="submit" name="C_guardar" id="C_guardar" class="mod-guardar" value="GUARDAR"/>                        
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div-->
-                       
-          </form>     
+          <form action="{{url('/cargos')}}">
+                <input type="search" placeholder="Cargos" name="contenido__busquedaUnidadesMedida" id="bus_unidad">
+                <input type="submit" id="btn_buscarpr" value="BUSCAR">
+                <a href="{{route('cargos.create')}}" id="btn_nuevoCargo">NUEVO CARGO</a>
+          </form>    
         </div>
         <div class="row">
           <div class="row">
@@ -146,7 +108,15 @@ input#bus_unidad{
     margin-left: 3PX;
     margin-right: 3PX;
 }
-
+#btn_buscarpr{
+    width: 75px;
+    height: 30px;
+    font: bold;
+    color: white;
+    background: #3b3c54;
+    border-radius: 4px;  
+    text-decoration: none;   
+}
 #detalles{
     width: 80px;
     height: 30px;
