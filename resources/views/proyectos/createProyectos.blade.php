@@ -27,7 +27,7 @@
     </div>
     <div class="form-group">
         <label for="e-fechaP">Fecha final:</label>
-        <input type="date" id="e-fechaP" name="proy_fechaF" class="form-control" required>
+        <input type="date" id="e-fechaP" name="proy_fechaF" class="form-control">
     </div> 
     <div class="modal-footer" id="botones">    
         <a href="{{route('proyectos.index')}}" class="mod-cancelar">CANCELAR</a>
