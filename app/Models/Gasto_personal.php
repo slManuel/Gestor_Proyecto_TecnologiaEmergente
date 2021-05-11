@@ -21,7 +21,7 @@ class Gasto_personal extends Eloquent
         'gp_pago',
     ];   
 
-    public function proyecto(){
+    public function _proyecto(){
         return $this->hasOne(Proyectos::class, '_id', 'proyecto');
     }
     public function _empleado(){

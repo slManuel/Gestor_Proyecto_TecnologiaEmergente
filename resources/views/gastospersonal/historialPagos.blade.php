@@ -59,41 +59,79 @@
                 <td>{{$g->_empleado->cargo->car_nombre}}</td>
                 <td>{{$g->gp_fecha}}</td>
                 <td>{{$g->gp_comentario}}</td>
-                <td>{{$g->pg_pago}}</td>
+                <td>{{$g->gp_pago}}</td>
                 <td>
-                    <button id="editar" data-bs-toggle="modal" data-bs-target="#modal-PagarP">Editar</button>
-                    <div class="modal fade" id="modal-PagarP" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <button id="editar" data-bs-toggle="modal" data-bs-target="#modal-editarGasto{{$g->_id}}">Editar pago</button>
+                    <div class="modal fade" id="modal-editarGasto{{$g->_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Pagar</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Editar pagos</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">
-                                <form>
+                            <form method="PUT" action="{{url('/gastospersonal/update/'.$g->_id)}}">
+                            @csrf
+                                <div class="modal-body">                                
                                     <div class="mb-3">
-                                    <input type="text" id="e-nombreP" placeholder="Nombre del empleado" class="form-control">
+                                        <label for="nombre">Empleado</label>
+                                        <input type="text"value="{{$g->_empleado->emp_nombre}}" class="form-control" readonly id="nombre">
                                     </div>
                                     <div class="mb-3">
-                                    <input type="text" id="e-nombreP" placeholder="Comentario" class="form-control">
+                                        <label for="cargo">Cargo</label>
+                                        <input type="text"value="{{$g->_empleado->cargo->car_nombre}}" class="form-control" readonly id="cargo">
                                     </div>
                                     <div class="mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <input class="form-check-label" for="flexCheckDefault" type="number" placeholder="Pago">
-                                        </label>
+                                    <input type="hidden" value="{{$g->proyecto}}" name="proyecto" readonly>
                                     </div>
+                                    <div class="mb-3">
+                                    <input type="hidden" value="{{$g->empleado}}" name="empleado" readonly>
                                     </div>
-                                </form>
+                                    <div class="mb-3">
+                                        <label for="fecha">Fecha del pago:</label>
+                                        <input type="date" value="{{$g->gp_fecha}}" name="gp_fecha" class="inp" id="fecha">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="cm">Comentaro</label>
+                                        <input type="text" value="{{$g->gp_comentario}}" name="gp_comentario" placeholder="Comentario" class="form-control" id="cm">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="pago">Pago:</label>
+                                        <input value="{{$g->gp_pago}}" type="number" name="gp_pago" id="pago">
+                                    </div>
+                                
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
+                                    <input type="submit" id="btn-e-guardarP" value="EDITAR" class="mod-guardar"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </td>                
+                <td>
+                    <button id="eliminar" data-bs-toggle="modal" data-bs-target="#modal-delGasto{{$g->_id}}">Eliminar</button>                                                     
+                    <div class="modal fade" id="modal-delGasto{{$g->_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Eliminar pago</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
-                                <button type="button" id="btn-e-guardarP" class="mod-guardar">GUARDAR</button>
-                            </div>
+                            <form method="PUT" action="{{url('gastopersonal/destroy/'.$g->_id)}}">
+                            @csrf
+                                <div class="modal-body">                                
+                                    <h5>Este pago a personal se eliminará de manera permanente</h5>
+                                    <p>Estás seguro de eliminar este pago?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-bs-dismiss="modal" class="mod-cancelar">No</button>
+                                    <input type="submit" id="btn-e-guardarP" value="Si" class="mod-guardar"/>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </td>
-                <td><input type="button" value="Eliminar" id="eliminar"></td>
+
             </tr>
         @endforeach                        
         </tbody>
@@ -148,7 +186,7 @@ select, input{
     border-radius: 4px;    
 }
 #editar, #pagos{
-    width: 80px;
+    width: 120px;
     height: 30px;
     font: bold;    
     background: #c2d4bb;
@@ -160,7 +198,8 @@ select, input{
     height: 30px;
     font: bold;
     color: white;
-    background: #fa743d;
+    border:none;
+    background: red;
     border-radius: 4px;    
 }
 

@@ -62,8 +62,8 @@ class GastoPersonalController extends Controller
         $dataProducts = $request->except('_token','saveitem','C_guardar');
         //return response()->json($dataProducts);        
         Gasto_personal::insert($dataProducts);        
-        $data['empleados']=Empleados::paginate(15);
-        $data2['cargos']=Cargos::paginate(15);    
+        $data['empleados']=Empleados::all();
+        $data2['cargos']=Cargos::all();    
         return view('gastospersonal.gastospersonal',$data,$data2)->with('proy',$request->proyecto);
     }
 
@@ -96,9 +96,16 @@ class GastoPersonalController extends Controller
      * @param  \App\Models\Gasto_personal  $gasto_personal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Gasto_personal $gasto_personal)
-    {
-        //
+    public function update(Request $request, $id)
+    {        
+        $dataGastos = $request->except('_token');
+        $gasto = Gasto_personal::findOrFail($id);
+        $gasto->update($request->all());
+
+        $lgastos=Gasto_personal::where('proyecto', '=', $request->proyecto)->get();
+        $data['gps']=$lgastos;        
+        $data['cargos']=Cargos::all();
+        return view('gastospersonal.historialPagos',$data)->with('proy',$request->proyecto);
     }
 
     /**
@@ -107,8 +114,16 @@ class GastoPersonalController extends Controller
      * @param  \App\Models\Gasto_personal  $gasto_personal
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Gasto_personal $gasto_personal)
+    public function destroy($id)
     {
         //
+        $pago = Gasto_personal::find($id);
+        $proy=$pago->proyecto;
+        $pago->delete();
+
+        $gastos=Gasto_personal::where('proyecto', '=', $proy)->get();
+        $data['gps']=$gastos;
+        $data['cargos']=Cargos::all();        
+        return view('gastospersonal.historialPagos',$data)->with('proy',$proy);
     }
 }

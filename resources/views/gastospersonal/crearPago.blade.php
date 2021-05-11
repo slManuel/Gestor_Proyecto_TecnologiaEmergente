@@ -19,10 +19,10 @@
         <input type="text" name="gp_comentario" placeholder="Comentario" class="form-control">
     </div>
     <div class="mb-3">                    
-        <input name="pg_pago" class="form-check-label inp" for="flexCheckDefault" type="number" placeholder="Pago">                        
+        <input name="gp_pago" class="form-check-label inp" for="flexCheckDefault" type="number" placeholder="Pago">                        
     </div>
     <a href="{{url('/gastospersonal/'.$proyecto)}}" class="mod-cancelar">CANCELAR</a>
-    <input type="submit" name="C_guardar" id="C_guardar" class="mod-guardar" value="GUARDAR"/>                            
+    <input type="submit" id="C_guardar" class="mod-guardar" value="GUARDAR"/>
 </form>            
 @stop
 
