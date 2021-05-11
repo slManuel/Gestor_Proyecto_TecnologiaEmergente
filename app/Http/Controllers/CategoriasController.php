@@ -12,9 +12,15 @@ class CategoriasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['categorias']=Categorias::paginate(15);
+        $nombre= $request->get('contenido__busquedaUnidadesMedida');
+        $estado= $request->get('estadoBusqueda');
+        if ($nombre==null && $estado=="Todos") {
+            $data['categorias']=Categorias::get();
+        }else{
+            $data['categorias']=Categorias::cate($nombre,$estado)->get();
+        }
         return view('categorias.categorias', $data);
     }
 

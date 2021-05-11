@@ -35,64 +35,7 @@
 
 @section('css')
 <style>
-    a{
-    font-family: Arial;
-    color: black;
-    text-decoration: none; 
-    box-shadow: 2px 2px 4px gray;   
-    border-radius: 7px;    
-}
-#dash .menu a:hover{    
-    background:#84a193;
-}
-#dash{
-    background: #9cbbac;
-    min-height: 100vh; 
-    width: 21%;
-    box-shadow: 4px 4px 7px gray;    
-}
-.menu{    
-    padding-top: 50px;    
-}
-i{        
-    padding-right: 6px;    
-}
-#contenido{
-    width: 79%;  
-    padding: 30px;     
-}
-#cerrar{
-    position: absolute;
-    bottom: 0;
-}
-.menu_bar{
-    display: none;    
-}
 
-@media screen and (max-width:800px){
-    #dash{
-        background: #9cbbac;
-        left: -100%;
-        width: 80%;
-        height: 100%;
-        margin: 0;
-        position: fixed;
-    }
-    .menu_bar{
-        display: block;
-        width: 100%;        
-    }
-    .menu_bar .bt_menu{
-        display: block;
-        padding: 20px;
-        background: #9cbbac;
-        font-size: 25px;        
-    }
-    .menu_bar i{
-      float: right;
-      font-size: 30px;
-    }
-}
 
 
 #filtro-proy{

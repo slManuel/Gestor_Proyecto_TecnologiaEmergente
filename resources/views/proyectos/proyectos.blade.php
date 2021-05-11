@@ -12,24 +12,24 @@
             <div class="row">
                 <legend>Filtros</legend>
             </div>
-        <div class="row" >
-            <div class="col-4">
-                Estado: 
-                <select id="fp-estado">
-                    <option>Seleccionar</option>
-                    <option>Activo</option>
-                    <option>Finalizado</option>
-                </select>
-            </div>
-            <div class="col-4">
-                Año: 
-                <input type="number">
-            </div>
-            <div class="col-4">
-                <input type="text" id="fp-proyecto" placeholder="Proyecto">
-                <input type="button" id="btn_buscarpr" value="BUSCAR">
-            </div>
-        </div>
+            <form action="{{url('/proyectos')}}">
+                <div class="row" >
+                    <div class="col-4">
+                        Estado: 
+                        <select id="fp-estado" name="estadoBusqueda">
+                            <option>Todos</option>
+                            <option value="Activo">Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" id="fp-proyecto" name="nombreBusqueda" placeholder="Proyecto">
+                        <input type="submit" id="btn_buscarpr" value="BUSCAR">
+                    </div>
+                    <div>
+                </div>
+            </form>
+        
     </div>              
     </div>
     <div class="row">
@@ -81,7 +81,6 @@
             <th scope="col">Fecha inicio</th>
             <th scope="col">Fecha final</th>
             <th scope="col">Estado</th>
-            <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
@@ -155,12 +154,14 @@
     margin-top: 10px;
     padding: 10px;
     margin-bottom: 10px;
+    
 }
 select, input{
     width: 200px;
     height: 30px;
     border: lightgray 1px solid;
-    border-radius: 4px;    
+    border-radius: 4px;  
+     
 }
 #btn_buscarpr{
     width: 75px;
@@ -168,7 +169,8 @@ select, input{
     font: bold;
     color: white;
     background: #3b3c54;
-    border-radius: 4px;    
+    border-radius: 4px;  
+    text-decoration: none;   
 }
 #btn_nuevoCargo{
     position: relative;
@@ -184,6 +186,7 @@ select, input{
     text-align: center;
     text-decoration: none;
     padding: 5px;
+    
 }
 #detalles{
     width: 80px;
@@ -206,6 +209,7 @@ select, input{
     color:black;
     text-decoration:none;
     text-align:center;
+    text-decoration: none;
 }
 #eliminar{
     width: 80px;
@@ -213,7 +217,8 @@ select, input{
     font: bold;
     color: white;
     background: #fa743d;
-    border-radius: 4px;    
+    border-radius: 4px;
+    text-decoration: none;    
 }
 
 .mod-cancelar{
@@ -223,6 +228,7 @@ select, input{
     background: #c2d4bb;
     border-radius: 3px;  
     border: none;
+    text-decoration: none;
 }
 
 .mod-guardar{
@@ -233,6 +239,7 @@ select, input{
     background: #3b3c54;
     border-radius: 3px;  
     border: none;
+    text-decoration: none;
 }
 
 </style>

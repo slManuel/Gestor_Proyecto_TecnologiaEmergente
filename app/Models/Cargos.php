@@ -15,5 +15,11 @@ class Cargos extends Eloquent
 
     protected $fillable = [
         'car_nombre'
-    ];   
+    ];  
+
+    public function scopeCar($query, $nombre) {        
+        if(($nombre)){
+            return $query->where('car_nombre', 'like', "%$nombre%"); 
+        }    
+    } 
 }

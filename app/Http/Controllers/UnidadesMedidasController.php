@@ -12,10 +12,15 @@ class UnidadesMedidasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['unidadesmeds']=UnidadesMedidas::paginate(15);
-         return view('unidadesmedidas.unidadesmedidas',$data);
+        $nombre= $request->get('contenido__busquedaUnidadesMedida');
+        if ($nombre==null) {
+            $data['unidadesmeds']=UnidadesMedidas::get();
+        }else{
+            $data['unidadesmeds']=UnidadesMedidas::uni($nombre)->get();
+        }
+        return view('unidadesmedidas.unidadesmedidas', $data); 
     }
 
     /**

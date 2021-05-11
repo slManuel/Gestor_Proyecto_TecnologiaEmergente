@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ingre_Egre;
 use App\Models\Detalles;
 use App\Models\Categorias;
+use App\Models\Proyectos;
 use Illuminate\Http\Request;
 
 class IngreEgreController extends Controller
@@ -14,10 +15,16 @@ class IngreEgreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index($id, Request $request)
     {
-       
-        $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();      
+        $nombre= $request->get('nombreBusqueda');
+        if ($nombre=="Todos") {
+            $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();
+        }
+        else{
+            $data['facturas']=Ingre_Egre::ingre($nombre)->get(); 
+        }
+        $data['proyecto']=Proyectos::where("_id","=",$id)->first();
         return view('ingegr.ingresoegr', $data)->with('proy_id',$id); 
 
      }
@@ -47,7 +54,8 @@ class IngreEgreController extends Controller
         Ingre_Egre::insert($dataProducts);        
         $data['empleados']= Ingre_Egre::paginate(15);   
 
-        $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();;       
+        $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();
+        $data['proyecto']=Proyectos::where("_id","=",$id)->first();       
         return view('ingegr.ingresoegr', $data)->with('proy_id',$id); 
     }
 
@@ -91,7 +99,8 @@ class IngreEgreController extends Controller
         $factura->update($request->all());
 
        
-       $data['facturas']=Ingre_Egre::where("proy_id","=",$request->proy_id)->get();;       
+       $data['facturas']=Ingre_Egre::where("proy_id","=",$request->proy_id)->get();  
+       $data['proyecto']=Proyectos::where("_id","=",$request->proy_id)->first();     
        return view('ingegr.ingresoegr', $data)->with('proy_id',$request->proy_id);  
     }
 

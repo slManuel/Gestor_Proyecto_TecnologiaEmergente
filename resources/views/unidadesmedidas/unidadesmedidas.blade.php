@@ -8,11 +8,12 @@
 
 @section('content')
 <div class="row">
-          <form >
+          <form action="{{route('UnidadesMedidas.index')}}">
                 <input type="search" placeholder="Escriba el nombre que desea buscar" name="contenido__busquedaUnidadesMedida" id="bus_unidad">
-              <a  href="{{url('/unidades/create')}}" style="text-decoration: none;"  id="btn_nuevoUM" >NUEVA UNIDAD DE MEDIDA</a>
-                               
-          </form>     
+                <input type="submit" id="btn_buscarpr" value="BUSCAR">
+                <a  href="{{url('/unidades/create')}}" style="text-decoration: none;"  id="btn_nuevoUM" >NUEVA UNIDAD DE MEDIDA</a>             
+          </form>  
+          
         </div>
         <div class="row">
           <div class="row">
@@ -82,6 +83,15 @@
     color: white;
     background: #3b3c54;
     border-radius: 4px;    
+}
+#btn_buscarpr{
+    width: 75px;
+    height: 30px;
+    font: bold;
+    color: white;
+    background: #3b3c54;
+    border-radius: 4px;  
+    text-decoration: none;   
 }
 
 /*Modal----------*/

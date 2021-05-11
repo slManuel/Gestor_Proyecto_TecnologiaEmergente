@@ -12,26 +12,28 @@
     <div class="col-2">
         <h3>Proyecto:</h3>
     </div>
-    <div class="col-1">
-        <legend id="nombre-proy">Nombre</legend>
+    <div class="col-2">
+        <legend id="nombre-proy">{{$proyecto->proy_nombre}}</legend>
     </div>
 </div>
 <div class="row">
     <div class="col-6">
         <div class="row" id="filtro-proy">
-            <div class="col-2">
-                <legend>Filtro</legend>
-            </div>
-            <div class="col-6">
-                <select id="fp-estado">
-                    <option>Tipo</option>
-                    <option>Ingreso</option>
-                    <option>Egreso</option>
-                </select>
-            </div>
-            <div class="col-3">
-                <input type="button" value="BUSCAR" id="btn-buscar">
-            </div>
+            <form action="{{url('/facturas/'.$proyecto->_id)}}">
+                <div class="col-2">
+                    <legend>Filtro</legend>
+                </div>
+                <div class="col-6">
+                    <select id="fp-estado" name="nombreBusqueda">
+                        <option>Todos</option>
+                        <option>Ingreso</option>
+                        <option>Egreso</option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <input type="submit" value="BUSCAR" id="btn-buscar">
+                </div>
+            </form>
         </div>
         <div class="row">
             <div class="col-6">
@@ -67,7 +69,7 @@
         <a type="button" class="botones" href="{{url('/facturas/create/'.$proy_id)}}" value="NUEVO REGISTRO" id="detalles">NUEVO REGISTRO<a>
                 <br>
                 <a type="button" class="botones"  href="{{url('/gastospersonal/indexHP/'.$proy_id)}}" value="NUEVO REGISTRO" id="btn-historialP">HISTORIAL DE PAGOS A PERSONAL<i class="bi bi-clock-history"></i><a>   <br>
-                <button type="button" id="btn-nuevoPago" class="botones">REALIZAR NUEVO PAGO<i class="bi bi-cash-stack"></i></button>
+                <a type="button" id="btn-nuevoPago" href="{{url('/gastospersonal/'.$proy_id)}}" class="botones">REALIZAR NUEVO PAGO<i class="bi bi-cash-stack"></i></a>
     </div>
 </div>
 <div class="row">
@@ -79,6 +81,7 @@
                 <th scope="col">Tipo</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">Monto total</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
@@ -216,10 +219,13 @@
         border: none;
         background: #c2d4bb;
         border-radius: 3px;
+        text-align:center;
+        text-decoration:none;
+        color:black;
     }
 
     #btn-btn-nuevoPago {
-        margin-bottom: 0px;
+        margin-bottom: 0px;        
     }
 
     .boton {

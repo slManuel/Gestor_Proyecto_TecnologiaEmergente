@@ -15,4 +15,19 @@ class Categorias extends Eloquent
         'cat_nombre',
         'cat_tipo'
     ];
+
+    public function scopeCate($query, $nombre,$estado) {        
+        if(($nombre) || ($estado)){
+            if ($nombre!=null && $estado!="Todos"){
+                return $query->where('cat_nombre', 'like', "%$nombre%")
+                             ->where('cat_tipo', '=', "$estado");
+            }
+            elseif ($nombre!=null && $estado=="Todos"){
+                return $query->where('cat_nombre', 'like', "%$nombre%");
+            }
+            elseif ($nombre==null && $estado!="Todos"){
+                return $query->where('cat_tipo', '=', "$estado");
+            }
+        }        
+    }
 }

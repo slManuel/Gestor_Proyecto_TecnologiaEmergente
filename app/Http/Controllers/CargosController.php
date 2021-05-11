@@ -12,10 +12,15 @@ class CargosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['cargos']=Cargos::paginate(15);
-        return view('Cargos.cargos', $data);
+        $nombre= $request->get('contenido__busquedaUnidadesMedida');
+        if ($nombre==null) {
+            $data['cargos']=Cargos::get();
+        }else{
+            $data['cargos']=Cargos::car($nombre)->get();
+        }
+        return view('Cargos.cargos', $data); 
     }
 
     /**
