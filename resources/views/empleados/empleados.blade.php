@@ -34,23 +34,6 @@
                 <div class="row" >                    
                     <div class="col-6" id="botones">                    
                       <a href="{{route('empleados.create')}}" id="btn_crear_emp">CREAR NUEVO EMPLEADO</a>
-                      <!--div class="modal fade" id="modal-nuevoP" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Nuevo empleado</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
-                              <button type="button" id="btn-n-guardarP" class="mod-guardar">GUARDAR</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div-->
                       <button type="button" id="btn_rep">REPORTE</button>
                     </div>
                 </div>
@@ -93,29 +76,34 @@
                             <form method="PUT" action="{{url('/empleados/update/'.$empleado->_id)}}">                              
                               @csrf                              
                               <div class="modal-body">
-                                <div class="mb-3">                              
-                                  <input type="text" name="emp_nombre" placeholder="Nombre del empleado" value="{{$empleado->emp_nombre}}" class="inp">
+                                <div class="form-group"> 
+                                  <label for="e-nombreP">Nombre:</label>                             
+                                  <input type="text" name="emp_nombre" placeholder="Nombre del empleado" value="{{$empleado->emp_nombre}}" class="form-control" required>
                                 </div>
-                                <div class="mb-3">
-                                <select name="car_id" id="n-cargoP" class="inp">
-                                  <option hidden value="{{$empleado->car_id}}" selected>{{$empleado->cargo->car_nombre}}</option>
-                                @foreach($cargos as $cargo)                                  
-                                  <option value="{{$cargo->_id}}">{{$cargo->car_nombre}}</option>
-                                @endforeach
-                                </select>
+                                <div class="form-group">
+                                  <label for="n-cargoP">Cargo:</label>
+                                  <select name="car_id" id="n-cargoP" class="form-control">
+                                    <option hidden value="{{$empleado->car_id}}" selected>{{$empleado->cargo->car_nombre}}</option>
+                                  @foreach($cargos as $cargo)                                  
+                                    <option value="{{$cargo->_id}}">{{$cargo->car_nombre}}</option>
+                                  @endforeach
+                                  </select>
                                 </div>
-                                <div class="mb-3">
-                                  <select id="n-estadoP" name="emp_estado" class="inp">
+                                <div class="form-group">
+                                  <label for="n-estadoP">Estado:</label>
+                                  <select id="n-estadoP" name="emp_estado" class="form-control">
                                     <option hidden value="{{$empleado->emp_estado}}">{{$empleado->emp_estado}}</option>
                                     <option value="Activo">Activo</option>
                                     <option Value="Inactivo">Inactivo</option>
                                   </select>
                                 </div>
-                                <div class="mb-3">
-                                  <input type="number" name="emp_salario" id="n-salarioP" placeholder="Salario base mensual" value="{{$empleado->emp_salario}}"class="inp">
+                                <div class="form-group">
+                                  <label for="n-salarioP">Salario:</label>
+                                  <input type="number" name="emp_salario" id="n-salarioP" placeholder="Salario base mensual" value="{{$empleado->emp_salario}}" class="form-control" required>
                                 </div>
-                                <div class="mb-3">
-                                  <input type="text" name="emp_tel" id="n-telefonoP" placeholder="Teléfono" value="{{$empleado->emp_tel}}"class="inp">
+                                <div class="form-group">
+                                  <label for="n-telefonoP">Teléfono:</label>
+                                  <input type="text" name="emp_tel" id="n-telefonoP" placeholder="Teléfono" value="{{$empleado->emp_tel}}" class="form-control" required>
                                 </div>
                               </div>                              
                               <div class="modal-footer">    
