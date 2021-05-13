@@ -118,7 +118,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Eliminar pago</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Eliminar elemento de factura</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <form method="PUT" action="{{url('detalle/delete/'.$detalle->_id,$idfactura)}}">
@@ -157,12 +157,13 @@
 
     .eliminar {
         background-color: crimson;
-        padding: 3px;
+        padding: 1px;
         width: 180px;
         margin-left: 0px;
         border-radius: 3px;
         text-decoration: none;
         color: white;
+        border:0px;
     }
 
     select,

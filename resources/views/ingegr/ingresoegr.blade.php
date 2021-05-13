@@ -23,6 +23,7 @@
                 <div class="col-2">
                     <legend>Filtro</legend>
                 </div>
+                <div class="row">
                 <div class="col-6">
                     <select id="fp-estado" name="nombreBusqueda">
                         <option>Todos</option>
@@ -32,6 +33,7 @@
                 </div>
                 <div class="col-3">
                     <input type="submit" value="BUSCAR" id="btn-buscar">
+                </div>
                 </div>
             </form>
         </div>
@@ -149,7 +151,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Eliminar pago</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Eliminar factura</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <form method="PUT" action="{{url('factura/destroy/'.$factura->_id)}}">
@@ -185,12 +187,13 @@
     }
     .eliminar {
         background-color: crimson;
-        padding: 3px;
+        padding: 1px;
         width: 180px;
         margin-left: 0px;
         border-radius: 3px;
         text-decoration: none;
         color: white;
+        border:0px;
     }
 
     .contenidoDet {
