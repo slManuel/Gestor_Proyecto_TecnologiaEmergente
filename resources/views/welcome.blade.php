@@ -21,12 +21,12 @@
             h1{
                 justify-content: center;
                 text-align: center;
-                color: white;;
+                color: black;;
             }
             h2{
                 justify-content: center;
                 text-align: center;
-                color: white;;
+                color: black;
             }
             img{
                 width: 20%;
@@ -51,7 +51,7 @@
                     @endauth
                 </div>
             @endif
-            <div class="row" style="display: block; place-item: center;" >
+            <div class="row" style="display: block; " >
                 <h1>Universidad Católica de El Salvador</h1>
                 <center>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/UNICAES_Logo.png" alt="Logo" >
