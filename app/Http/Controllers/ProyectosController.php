@@ -14,8 +14,6 @@ class ProyectosController extends Controller
      */
     public function index(Request $request)
     {
-        /*$data['proyectos']=Proyectos::paginate(15);
-        return view('proyectos.proyectos', $data);*/
         $nombre= $request->get('nombreBusqueda');
         $estado= $request->get('estadoBusqueda');
         if ($nombre==null && $estado=="Todos") {
@@ -33,7 +31,6 @@ class ProyectosController extends Controller
      */
     public function create()
     {
-        //
         return view('proyectos.createProyectos');
     }
 
@@ -45,7 +42,6 @@ class ProyectosController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $dataProducts = $request->except('_token','saveitem','C_guardar');        
         Proyectos::insert($dataProducts);
         $data['proyectos']=Proyectos::paginate(15);
@@ -83,12 +79,9 @@ class ProyectosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $dataProducts = $request->except('_token','saveitem');
         $proyectos = Proyectos::findOrFail($id);
-     // echo json_encode($request);
         $proyectos->update($request->all());
-
         $data['proyectos']=Proyectos::paginate(15);
         return view('proyectos.proyectos', $data);
     }
