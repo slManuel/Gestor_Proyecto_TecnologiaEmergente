@@ -44,10 +44,26 @@ class CategoriasController extends Controller
     public function store(Request $request)
     {
         //
-        $dataProducts = $request->except('_token','saveitem','C_guardar');        
-        Categorias::insert($dataProducts);
-        $data['categorias']=Categorias::paginate(15);
-        return view('categorias.categorias', $data);
+        $nombre= $request->get('cat_nombre');
+        if ($nombre!=null) {
+            $data['categorias']=Categorias::CateNombre($nombre)->get();
+        }
+        if ($data['categorias']=="[]"){
+            $dataProducts = $request->except('_token','saveitem','C_guardar');        
+            Categorias::insert($dataProducts);
+            $data['categorias']=Categorias::paginate(15);
+            return view('categorias.categorias', $data);
+        }
+        else{
+            echo '<script language="javascript">alert("No puedes agregar categorías con el mismo nombre");</script>';
+            $data['categorias']=Categorias::get();
+            return view('categorias.categorias', $data);
+        }
+        //$dataProducts = $request->except('_token','saveitem','C_guardar');        
+        //Categorias::insert($dataProducts);
+        //$data['categorias']=Categorias::paginate(15);
+        //return view('categorias.categorias', $data); 
+        
     }
 
     /**
@@ -82,13 +98,33 @@ class CategoriasController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $dataProducts = $request->except('_token','saveitem');
-        $categorias = Categorias::findOrFail($id);
-     // echo json_encode($request);
-        $categorias->update($request->all());
+        $nombre = $request->get('cat_nombre');
+        $nombreBase = $request->get('cat');
 
-        $data['categorias']=Categorias::paginate(15);
-        return view('categorias.categorias', $data);
+        if ($nombre == $nombreBase){
+            $dataProducts = $request->except('_token','saveitem');
+            $categorias = Categorias::findOrFail($id);
+            $categorias->update($request->all());
+            $data['categorias']=Categorias::paginate(15);
+            return view('categorias.categorias', $data);
+        }
+        else{
+            if ($nombre!=null){
+                $data['categorias']=Categorias::CateNombre($nombre)->get();
+            }
+            if ($data['categorias']=="[]"){
+                $dataProducts = $request->except('_token','saveitem');
+                $categorias = Categorias::findOrFail($id);
+                $categorias->update($request->all());
+                $data['categorias']=Categorias::paginate(15);
+                return view('categorias.categorias', $data);
+            }
+            else{
+                echo '<script language="javascript">alert("No puedes agregar categorías con el mismo nombre");</script>';
+                $data['categorias']=Categorias::get();
+                return view('categorias.categorias', $data);
+            }
+        }
     }
 
     /**

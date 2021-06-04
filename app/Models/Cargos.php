@@ -22,4 +22,10 @@ class Cargos extends Eloquent
             return $query->where('car_nombre', 'like', "%$nombre%"); 
         }    
     } 
+
+    public function scopeCarNombre($query, $nombre) {        
+        if(($nombre)){
+            return $query->where('car_nombre', '=', "$nombre"); 
+        }          
+    }
 }
