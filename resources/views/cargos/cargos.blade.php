@@ -49,7 +49,10 @@
                                 <div class="mb-3">                          
                                   <input type="text" name="car_nombre" id="n-nombreP" placeholder="Nombre del cargo" value="{{$cargo->car_nombre}}" class="form-control" required>
                                 </div>
-                                
+                                <label hidden for="cat">Categoría:</label>
+                                <div class="mb-3">
+                                  <input hidden type="text" id="n-nombreP" name="car" placeholder="Nombre de categoría" class="form-control" value="{{$cargo->car_nombre}}" required>
+                                </div>
                               </div>
                               <div class="modal-footer">
                                 <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>

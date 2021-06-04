@@ -43,12 +43,27 @@ class CargosController extends Controller
 
     public function store(Request $request)
     {
-    
         //
-        $dataProducts = $request->except('_token','saveitem','C_guardar');        
+        $nombre= $request->get('car_nombre');
+        if ($nombre!=null) {
+            $data['cargos']=Cargos::CarNombre($nombre)->get();
+        }
+        if ($data['cargos']=="[]"){
+            $dataProducts = $request->except('_token','saveitem','C_guardar');        
+            Cargos::insert($dataProducts);
+            $data['cargos']=Cargos::paginate(15);
+            return view('cargos.cargos', $data);
+        }
+        else{
+            echo '<script language="javascript">alert("No puedes agregar cargos con el mismo nombre");</script>';
+            $data['cargos']=Cargos::get();
+            return view('cargos.cargos', $data);
+        }
+
+        /* $dataProducts = $request->except('_token','saveitem','C_guardar');        
         Cargos::insert($dataProducts);
         $data['cargos']=Cargos::paginate(15);
-        return view('Cargos.cargos', $data);
+        return view('Cargos.cargos', $data); */
     }
 
     /*public function store(Request $request)
@@ -95,13 +110,40 @@ class CargosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dataProducts = $request->except('_token','saveitem');
+        $nombre = $request->get('car_nombre');
+        $nombreBase = $request->get('car');
+
+        if ($nombre == $nombreBase){
+            $dataProducts = $request->except('_token','saveitem');
+            $cargos = Cargos::findOrFail($id);
+            $cargos->update($request->all());
+            $data['cargos']=Cargos::paginate(15);
+            return view('cargos.cargos', $data);
+        }
+        else{
+            if ($nombre!=null){
+                $data['cargos']=Cargos::CarNombre($nombre)->get();
+            }
+            if ($data['cargos']=="[]"){
+                $dataProducts = $request->except('_token','saveitem');
+                $cargos = Cargos::findOrFail($id);
+                $cargos->update($request->all());
+                $data['cargos']=Cargos::paginate(15);
+                return view('cargos.cargos', $data);
+            }
+            else{
+                echo '<script language="javascript">alert("No puedes agregar cargos con el mismo nombre");</script>';
+                $data['cargos']=Cargos::get();
+                return view('cargos.cargos', $data);
+            }
+        }
+        /* $dataProducts = $request->except('_token','saveitem');
         $cargos = Cargos::findOrFail($id);
      // echo json_encode($request);
         $cargos->update($request->all());
 
         $data['cargos']=Cargos::paginate(15);
-        return view('Cargos.cargos', $data);
+        return view('Cargos.cargos', $data); */
     }
 
     /**
