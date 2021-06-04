@@ -27,7 +27,6 @@ class IngreEgreController extends Controller
         $data['proyecto']=Proyectos::where("_id","=",$id)->first();
         return view('ingegr.ingresoegr', $data)->with('proy_id',$id); 
      }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -37,7 +36,6 @@ class IngreEgreController extends Controller
     {
         return view('ingegr.createIngrEgre')->with('id',$id); 
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -47,17 +45,14 @@ class IngreEgreController extends Controller
     public function store(Request $request,$id)
     {
         $dataProducts = $request->except('_token','saveitem');
-        //$empleados = Empleados::findOrFail($request->emp_nombre);
         $dataProducts['proy_id']=$id;
         $dataProducts['ie_total']=0; 
         Ingre_Egre::insert($dataProducts);        
         $data['empleados']= Ingre_Egre::paginate(15);   
-
         $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();
         $data['proyecto']=Proyectos::where("_id","=",$id)->first();       
         return view('ingegr.ingresoegr', $data)->with('proy_id',$id); 
     }
-
     /**
      * Display the specified resource.
      *
@@ -68,7 +63,6 @@ class IngreEgreController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -79,7 +73,6 @@ class IngreEgreController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -89,20 +82,13 @@ class IngreEgreController extends Controller
      */
     public function update(Request $request)
     {
-        //echo response()->json($request);
         $dataProducts = $request->except('_token','saveitem','method');
-       
         $factura = Ingre_Egre::findOrFail($request->_id);
-     //echo json_encode($request->_id);
-     //echo json_encode($dataProducts);
         $factura->update($request->all());
-
-       
        $data['facturas']=Ingre_Egre::where("proy_id","=",$request->proy_id)->get();  
        $data['proyecto']=Proyectos::where("_id","=",$request->proy_id)->first();     
        return view('ingegr.ingresoegr', $data)->with('proy_id',$request->proy_id);  
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -115,14 +101,11 @@ class IngreEgreController extends Controller
          $factura = Ingre_Egre::find($idfactura);      
          $idproyecto=$factura->proy_id;        
          $factura->delete();
- 
          //eliminamos los detalles de la factura
          $data['detalles']=Detalles::where("ie_id","=",$idfactura)->delete();
          $total=0;
-        
          //buscamos el nombre del proyecto
-         $data['proyecto']=Proyectos::where("_id","=",$idproyecto)->first();
-                 
+         $data['proyecto']=Proyectos::where("_id","=",$idproyecto)->first();      
           //llamamos todo lo necesario para la vista
          $data['facturas']=Ingre_Egre::where("proy_id","=",$idproyecto)->get();      
         return view('ingegr.ingresoegr', $data)->with('proy_id',$idproyecto);  

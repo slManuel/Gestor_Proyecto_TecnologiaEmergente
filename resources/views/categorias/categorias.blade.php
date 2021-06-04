@@ -13,6 +13,7 @@
             <div class="col-4">
                 Estado:
                 <select id="fp-tipocate" name="estadoBusqueda">
+                    <option>Todos</option>
                     <option>Ingreso</option>
                     <option>Egreso</option>
                 </select>
@@ -67,6 +68,10 @@
                                                     <option value="Ingreso">Ingreso</option>
                                                     <option value="Egreso">Egreso</option>
                                                 </select>
+                                            </div>
+                                            <label hidden for="cat">Categoría:</label>
+                                            <div class="mb-3">
+                                                <input hidden type="text" id="n-nombreP" name="cat" placeholder="Nombre de categoría" class="form-control" value="{{$categoria->cat_nombre}}" required>
                                             </div>
                                         </div>
                                         <div class="modal-footer">

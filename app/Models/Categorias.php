@@ -30,4 +30,10 @@ class Categorias extends Eloquent
             }
         }        
     }
+
+    public function scopeCateNombre($query, $nombre) {        
+        if(($nombre)){
+            return $query->where('cat_nombre', '=', "$nombre"); 
+        }          
+    }
 }
