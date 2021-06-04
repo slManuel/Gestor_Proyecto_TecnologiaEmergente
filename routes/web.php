@@ -10,7 +10,7 @@ use App\Http\Controllers\GastoPersonalController;
 use App\Http\Controllers\IngreEgreController;
 use App\Http\Controllers\ProyectosController;
 use App\Http\Controllers\DetallesController;
-
+use App\Http\Controllers\UsuariosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -68,3 +68,5 @@ Route::post('/detalles/store', [DetallesController::class, 'store'])->name('deta
 Route::get('/detalle/actualizar', [DetallesController::class, 'update'])->name('detactualizar');
 Route::get('/detalle/delete/{iddetalle}/{idfactura}', [DetallesController::class, 'destroy'])->name('detdelete');
 
+//usuarios
+Route::get('/personal', [UsuariosController::class, 'index'])->name('personal');

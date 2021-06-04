@@ -45,6 +45,7 @@
                       <label for="n-nombreP">Nombre:</label>
                       <input type="text" name="um_nombre" value="{{$unidad->um_nombre}}" id="n-nombreP" placeholder="Nombre de la unidad de medida" class="form-control" required>
                     </div>
+                    <input type="text" name="original" value="{{$unidad->um_nombre}}" hidden>
                   </div>
                   <div class="modal-footer">
                     <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>

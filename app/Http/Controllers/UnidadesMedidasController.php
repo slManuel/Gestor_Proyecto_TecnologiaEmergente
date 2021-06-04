@@ -42,11 +42,23 @@ class UnidadesMedidasController extends Controller
     public function store(Request $request)
     {
         $dataProducts = $request->except('_token','saveitem');
-        UnidadesMedidas::insert($dataProducts);
-            //return response()->json($dataProducts);
-        $data['unidadesmeds']=UnidadesMedidas::paginate(15);
-        return view('unidadesmedidas.unidadesmedidas',$data);
-      
+        $nomb = trim($request->um_nombre);
+        
+        if ($nomb != "") {
+            $existe=UnidadesMedidas::uni($nomb)->get();
+
+            if ($existe == "[]") {
+                UnidadesMedidas::insert($dataProducts);
+                $data['unidadesmeds']=UnidadesMedidas::all();
+                return view('unidadesmedidas.unidadesmedidas',$data);
+            }else{
+                echo '<script language="javascript">alert("No puedes agregar unidades de medida con el mismo nombre");</script>';
+                $data['unidadesmeds']=UnidadesMedidas::all();
+                return view('unidadesmedidas.unidadesmedidas',$data);
+            }
+        }else{
+            return view('unidadesmedidas.createumed');
+        } 
     }
 
     /**
@@ -80,13 +92,32 @@ class UnidadesMedidasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dataProducts = $request->except('_token','saveitem');
-        $unidades = UnidadesMedidas::findOrFail($id);
-     // echo json_encode($request);
-        $unidades->update($request->all());
-
-        $data['unidadesmeds']=UnidadesMedidas::paginate(15);
-        return view('unidadesmedidas.unidadesmedidas',$data);
+        $nomb = trim($request->um_nombre);
+        $original = $request->original;
+        if ($nomb != "") {
+            if ($nomb==$original) {
+                    $unidades = UnidadesMedidas::findOrFail($id);
+                    $unidades->update($request->all());
+                    $data['unidadesmeds']=UnidadesMedidas::all();
+                    return view('unidadesmedidas.unidadesmedidas',$data); 
+            }else{
+                $existe=UnidadesMedidas::uni($nomb)->get();
+                if ($existe == "[]") {
+                    $unidades = UnidadesMedidas::findOrFail($id);
+                    $unidades->update($request->all());
+                    $data['unidadesmeds']=UnidadesMedidas::all();
+                    return view('unidadesmedidas.unidadesmedidas',$data); 
+                }else{
+                    echo '<script language="javascript">alert("Esta unidad de medida ya habia sido agregada");</script>';
+                    $data['unidadesmeds']=UnidadesMedidas::all();
+                    return view('unidadesmedidas.unidadesmedidas',$data);
+                }
+            }
+        }else{
+            echo '<script language="javascript">alert("No se admiten espacios en blanco.
+            Intentelo de nuevo");</script>';
+            return view('unidadesmedidas.unidadesmedidas');
+        }
     }
 
     /**

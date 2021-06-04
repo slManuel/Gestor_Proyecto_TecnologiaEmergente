@@ -14,6 +14,9 @@ class CargosController extends Controller
      */
     public function index(Request $request)
     {
+        //$sesion = $request->vsesion()->get('idCarrito');
+        //session_start();
+        //echo $_SESSION["correo"];
         $nombre= $request->get('contenido__busquedaUnidadesMedida');
         if ($nombre==null) {
             $data['cargos']=Cargos::get();
