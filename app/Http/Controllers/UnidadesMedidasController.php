@@ -57,7 +57,9 @@ class UnidadesMedidasController extends Controller
                 return view('unidadesmedidas.unidadesmedidas',$data);
             }
         }else{
-            return view('unidadesmedidas.createumed');
+            echo '<script language="javascript">alert("No se admiten espacios en blanco. Intentelo de nuevo");</script>';
+            $data['unidadesmeds']=UnidadesMedidas::all();
+            return view('unidadesmedidas.unidadesmedidas',$data);
         } 
     }
 

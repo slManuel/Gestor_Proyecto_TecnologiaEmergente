@@ -49,11 +49,21 @@ class EmpleadosController extends Controller
     {
         //                
         $dataProducts = $request->except('_token','saveitem','C_guardar');
+        $nomb = trim($request->emp_nombre);
+        $cel = trim($request->emp_tel);
         //$empleados = Empleados::findOrFail($request->emp_nombre);
-        Empleados::insert($dataProducts);        
-        $data['empleados']=Empleados::all();        
-        $data2['cargos']=Cargos::all();
-        return view('empleados.empleados', $data, $data2);                
+        if ($nomb != "" || $cel != ""){
+            Empleados::insert($dataProducts);        
+            $data['empleados']=Empleados::all();        
+            $data2['cargos']=Cargos::all();
+            return view('empleados.empleados', $data, $data2);
+        }
+        else{
+            echo '<script language="javascript">alert("No se admiten espacios en blanco. Intentelo de nuevo");</script>';
+            $data['empleados']=Empleados::all();        
+            $data2['cargos']=Cargos::all();
+            return view('empleados.empleados', $data, $data2);
+        }                
     }
 
     /**
@@ -88,13 +98,23 @@ class EmpleadosController extends Controller
     public function update(Request $request, $id)
     {        
         $dataProducts = $request->except('_token','saveitem');
-        $empleados = Empleados::findOrFail($id);
+        $nomb = trim($request->emp_nombre);
+        $cel = trim($request->emp_tel);
+        if($nomb != "" && $cel != ""){
+            $empleados = Empleados::findOrFail($id);
      // echo json_encode($request);
-        $empleados->update($request->all());
+            $empleados->update($request->all());
 
-        $data['empleados']=Empleados::all();
-        $data2['cargos']=Cargos::all();
-        return view('empleados.empleados', $data,$data2);
+            $data['empleados']=Empleados::all();
+            $data2['cargos']=Cargos::all();
+            return view('empleados.empleados', $data,$data2);
+        }
+        else {
+            echo '<script language="javascript">alert("No se admiten espacios en blanco. Intentelo de nuevo");</script>';
+            $data['empleados']=Empleados::all();        
+            $data2['cargos']=Cargos::all();
+            return view('empleados.empleados', $data, $data2);
+        }
     }
 
     /**

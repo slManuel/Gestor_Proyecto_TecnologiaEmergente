@@ -39,9 +39,6 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <input type="button" value="REPORTE" id="btn-rep-facturas">
-            </div>
-            <div class="col-6">
                 <div class="row">
                     <div class="col">
                         <h4>Balance:</h4>

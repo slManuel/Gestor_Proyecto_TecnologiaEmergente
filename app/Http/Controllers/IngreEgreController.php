@@ -47,11 +47,21 @@ class IngreEgreController extends Controller
         $dataProducts = $request->except('_token','saveitem');
         $dataProducts['proy_id']=$id;
         $dataProducts['ie_total']=0; 
-        Ingre_Egre::insert($dataProducts);        
-        $data['empleados']= Ingre_Egre::paginate(15);   
-        $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();
-        $data['proyecto']=Proyectos::where("_id","=",$id)->first();       
-        return view('ingegr.ingresoegr', $data)->with('proy_id',$id); 
+        $des = trim($request->ie_descripcion);
+        if($des != ""){
+            Ingre_Egre::insert($dataProducts);        
+            $data['empleados']= Ingre_Egre::paginate(15);   
+            $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();
+            $data['proyecto']=Proyectos::where("_id","=",$id)->first();       
+            return view('ingegr.ingresoegr', $data)->with('proy_id',$id);
+        }
+        else{
+            echo '<script language="javascript">alert("No se admiten espacios en blanco. Intentelo de nuevo");</script>';
+            //$data['empleados']= Ingre_Egre::all();   
+            $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();
+            $data['proyecto']=Proyectos::where("_id","=",$id)->first();       
+            return view('ingegr.ingresoegr', $data)->with('proy_id',$id);
+        }
     }
     /**
      * Display the specified resource.
@@ -83,11 +93,20 @@ class IngreEgreController extends Controller
     public function update(Request $request)
     {
         $dataProducts = $request->except('_token','saveitem','method');
-        $factura = Ingre_Egre::findOrFail($request->_id);
-        $factura->update($request->all());
-       $data['facturas']=Ingre_Egre::where("proy_id","=",$request->proy_id)->get();  
-       $data['proyecto']=Proyectos::where("_id","=",$request->proy_id)->first();     
-       return view('ingegr.ingresoegr', $data)->with('proy_id',$request->proy_id);  
+        $des = trim($request->ie_descripcion);
+        if($des != ""){
+            $factura = Ingre_Egre::findOrFail($request->_id);
+            $factura->update($request->all());
+            $data['facturas']=Ingre_Egre::where("proy_id","=",$request->proy_id)->get();  
+            $data['proyecto']=Proyectos::where("_id","=",$request->proy_id)->first();     
+            return view('ingegr.ingresoegr', $data)->with('proy_id',$request->proy_id);
+        }
+        else{
+            echo '<script language="javascript">alert("No se admiten espacios en blanco. Intentelo de nuevo");</script>';
+            $data['facturas']=Ingre_Egre::where("proy_id","=",$request->proy_id)->get();  
+            $data['proyecto']=Proyectos::where("_id","=",$request->proy_id)->first();     
+            return view('ingegr.ingresoegr', $data)->with('proy_id',$request->proy_id);
+        }  
     }
     /**
      * Remove the specified resource from storage.

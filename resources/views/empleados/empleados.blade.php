@@ -34,7 +34,6 @@
                 <div class="row" >                    
                     <div class="col-6" id="botones">                    
                       <a href="{{route('empleados.create')}}" id="btn_crear_emp">CREAR NUEVO EMPLEADO</a>
-                      <button type="button" id="btn_rep">REPORTE</button>
                     </div>
                 </div>
               </div>              
