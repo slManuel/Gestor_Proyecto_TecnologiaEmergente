@@ -114,6 +114,7 @@
                             <div class="form-group">
                                 <label for="e-nombreP">Nombre:</label>
                                 <input type="text" id="e-nombreP" name="proy_nombre" value="{{$proyecto->proy_nombre}}" placeholder="Nombre del proyecto" class="form-control" required>
+                                <input text="text" name="original" value="{{$proyecto->proy_nombre}}" hidden>
                             </div>
                             <div class="form-group">
                                 <label for="e-estadoP">Estado:</label>

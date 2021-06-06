@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Gestor de proyectos',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -400,7 +400,7 @@ return [
 |
 */
 
-'title' => 'AdminLTE 3',
+'title' => 'Gestor de proyectos',
 'title_prefix' => '',
 'title_postfix' => '',
 

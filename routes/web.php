@@ -70,3 +70,5 @@ Route::get('/detalle/delete/{iddetalle}/{idfactura}', [DetallesController::class
 
 //usuarios
 Route::get('/personal', [UsuariosController::class, 'index'])->name('personal');
+Route::get('/personal/update/{id}', [UsuariosController::class, 'update'])->name('updatePersonal');
+Route::resource('personal', UsuariosController::class);

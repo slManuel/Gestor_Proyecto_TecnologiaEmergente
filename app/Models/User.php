@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'rol',
+        'estado',
     ];
 
     /**
@@ -43,4 +44,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeExiste($query, $correo) {        
+        if(($correo) ){
+            if ($correo!=null){
+                return $query->where('email', 'like', "$correo");
+            }
+        }        
+    }
+
 }
