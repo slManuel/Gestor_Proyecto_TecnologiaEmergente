@@ -95,11 +95,11 @@
                                         </div>
                                         <label for="det_cantidad">Cantidad:</label>
                                         <div class="mb-3">
-                                            <input name="det_cantidad" value="{{$detalle->det_cantidad}}" type="number" id="n-canidad" required>
+                                            <input name="det_cantidad" value="{{$detalle->det_cantidad}}" min="1" type="number" id="n-canidad" required>
                                         </div>
                                         <label for="det_preciounitario">Precio unitario:</label>
                                         <div class="mb-3">
-                                            <input name="det_preciounitario" value="{{$detalle->det_preciounitario}}" type="number" id="n-canidad" required>
+                                            <input name="det_preciounitario" value="{{$detalle->det_preciounitario}}" type="number" step="0.01" id="n-canidad" required>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>

@@ -98,7 +98,7 @@
                                         <div class="mb-3">
                                             <label for="pago">Pago:</label>
                                             <br>
-                                            <input value="{{$g->gp_pago}}" type="number" name="gp_pago" id="pago" required>
+                                            <input value="{{$g->gp_pago}}" type="number" step="0.01" min="0" name="gp_pago" id="pago" required>
                                         </div>
 
                                     </div>

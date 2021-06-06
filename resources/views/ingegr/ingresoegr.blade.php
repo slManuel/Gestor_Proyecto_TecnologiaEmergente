@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<h1>Ingresos y Egresos</h1>
+<h1>Facturas</h1>
 @stop
 
 @section('content')
@@ -12,7 +12,7 @@
     <div class="col-2">
         <h3>Proyecto:</h3>
     </div>
-    <div class="col-2">
+    <div class="col-10">
         <legend id="nombre-proy">{{$proyecto->proy_nombre}}</legend>
     </div>
 </div>

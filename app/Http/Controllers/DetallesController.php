@@ -17,22 +17,21 @@ class DetallesController extends Controller
      */
     public function index($idfactura)
     {
-      //  $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();    
-      //$data['detalles']=Detalles::paginate(15);  
-        $data['detalles']=Detalles::where("ie_id","=",$idfactura)->get();
-        $total=0;
-        foreach($data['detalles'] as $detalle)
-        {
-            $total=$total + $detalle->det_subtotal;
+        //  $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();    
+        //$data['detalles']=Detalles::paginate(15);  
+        $data['detalles'] = Detalles::where("ie_id", "=", $idfactura)->get();
+        $total = 0;
+        foreach ($data['detalles'] as $detalle) {
+            $total = $total + $detalle->det_subtotal;
         }
         $factura = Ingre_Egre::find($idfactura);
-        $factura->ie_total=$total;  
+        $factura->ie_total = $total;
         $factura->save();
-        $data['categorias']=Categorias::where("cat_tipo","=",$factura->ie_tipo)->get();
-        $data['unidades']=UnidadesMedidas::all();
-       // echo $idfactura;   
+        $data['categorias'] = Categorias::where("cat_tipo", "=", $factura->ie_tipo)->get();
+        $data['unidades'] = UnidadesMedidas::all();
+        // echo $idfactura;   
         //echo json_encode($data);  
-        return view('detalles.detalles', $data)->with('idfactura',$idfactura); 
+        return view('detalles.detalles', $data)->with('idfactura', $idfactura);
     }
 
     /**
@@ -43,9 +42,9 @@ class DetallesController extends Controller
     public function create($idfactura)
     {
         $factura = Ingre_Egre::findOrFail($idfactura);
-        $data['categorias']=Categorias::where("cat_tipo","=",$factura->ie_tipo)->get();
-        $data2['unidades']=UnidadesMedidas::all();
-        return view('detalles.createdetalles',$data,$data2)->with('idfactura',$idfactura);
+        $data['categorias'] = Categorias::where("cat_tipo", "=", $factura->ie_tipo)->get();
+        $data2['unidades'] = UnidadesMedidas::all();
+        return view('detalles.createdetalles', $data, $data2)->with('idfactura', $idfactura);
     }
 
     /**
@@ -56,22 +55,60 @@ class DetallesController extends Controller
      */
     public function store(Request $request)
     {
-        $dataProducts = $request->except('_token','saveitem');
-        $dataProducts['det_subtotal']=$request->det_cantidad * $request->det_preciounitario;
-        Detalles::insert($dataProducts);   
-        $data['detalles']=Detalles::where("ie_id","=",$request->ie_id)->get();
-       
-        $total=0;
-        foreach($data['detalles'] as $detalle)
-        {
-            $total=$total + $detalle->det_subtotal;
+        //validacion de campos
+        $descripcion = $request->det_descripcion;
+        $cantidad = $request->det_cantidad;
+        $precioUnitario = $request->det_preciounitario;
+
+        if (trim($descripcion) != "" && trim($cantidad) != "" && trim($precioUnitario) != "") {
+            if (trim($cantidad) > 0) {
+                //Validamos el precio
+                if (preg_match("/^[0-9]{1,25}([.][0-9]{1,2})?$/", $precioUnitario)) {
+                    //obtenemos los valores del request y calculamos el subtotal en el objeto
+                    $dataProducts = $request->except('_token', 'saveitem');
+                    $dataProducts['det_subtotal'] = $request->det_cantidad * $request->det_preciounitario;
+                    Detalles::insert($dataProducts); //insertamos el nuevo detalle de factura a la base   
+                    //buscamos la factura con el detalle que acabamos de guardar
+                    $data['detalles'] = Detalles::where("ie_id", "=", $request->ie_id)->get();
+
+                    $total = 0; //variable donde almacenamos el total
+                    //Cambiamos el valor total de la factura con el nuevo total
+                    foreach ($data['detalles'] as $detalle) {
+                        $total = $total + $detalle->det_subtotal;
+                    }
+                    $factura = Ingre_Egre::find($request->ie_id);
+                    $factura->ie_total = $total;
+                    $factura->save();
+                    //buscaos las categorias que pertenecen a la factura
+                    $data['categorias'] = Categorias::where("cat_tipo", "=", $factura->ie_tipo)->get();
+                    //traemos las unidades de medida
+                    $data['unidades'] = UnidadesMedidas::all();
+                    //retornamos la vista
+                    return view('detalles.detalles', $data)->with('idfactura', $request->ie_id);
+                } else {
+                    $factura = Ingre_Egre::find($request->ie_id);
+                    $data['categorias'] = Categorias::where("cat_tipo", "=", $factura->ie_tipo)->get();
+                    //traemos las unidades de medida
+                    $data['unidades'] = UnidadesMedidas::all();
+                    echo '<script language="javascript">alert("El valor de precio unitario no es válido.Intentelo de nuevo.");</script>';
+                    return view('detalles.createdetalles', $data)->with('idfactura', $request->ie_id);
+                }
+            } else { //Si no se valida la expresion, retorna un mensaje y vuelve al formulario
+                $factura = Ingre_Egre::find($request->ie_id);
+                $data['categorias'] = Categorias::where("cat_tipo", "=", $factura->ie_tipo)->get();
+                //traemos las unidades de medida
+                $data['unidades'] = UnidadesMedidas::all();
+                echo '<script language="javascript">alert("La cantidad debe ser mayor a 0. Intentelo de nuevo.");</script>';
+                return view('detalles.createdetalles', $data)->with('idfactura', $request->ie_id);
+            }
+        } else { //Si los campos estan vacios
+            $factura = Ingre_Egre::find($request->ie_id);
+            $data['categorias'] = Categorias::where("cat_tipo", "=", $factura->ie_tipo)->get();
+            //traemos las unidades de medida
+            $data['unidades'] = UnidadesMedidas::all();
+            echo '<script language="javascript">alert("Los campos no pueden quedar vacíos. Intentelo de nuevo");</script>';
+            return view('detalles.createdetalles', $data)->with('idfactura', $request->ie_id);
         }
-        $factura = Ingre_Egre::find($request->ie_id);
-        $factura->ie_total=$total;  
-        $factura->save();
-        $data['categorias']=Categorias::where("cat_tipo","=",$factura->ie_tipo)->get();
-        $data['unidades']=UnidadesMedidas::all();
-        return view('detalles.detalles', $data)->with('idfactura',$request->ie_id);   
     }
 
     /**
@@ -107,26 +144,25 @@ class DetallesController extends Controller
     {
         //echo json_encode($request);
         //busco y actualizo el detalle
-        $dataProducts = $request->except('_token','saveitem');
+        $dataProducts = $request->except('_token', 'saveitem');
         $detalle = Detalles::findOrFail($request->_id);
-        $detalle['det_subtotal']=$request->det_cantidad * $request->det_preciounitario;
+        $detalle['det_subtotal'] = $request->det_cantidad * $request->det_preciounitario;
         $detalle->update($request->all());
 
         //recalculamos el valor total de la factura
-        $data['detalles']=Detalles::where("ie_id","=",$request->factura_id)->get();
-        $total=0;
-        foreach($data['detalles'] as $detalle)
-        {
-            $total=$total + $detalle->det_subtotal;
+        $data['detalles'] = Detalles::where("ie_id", "=", $request->factura_id)->get();
+        $total = 0;
+        foreach ($data['detalles'] as $detalle) {
+            $total = $total + $detalle->det_subtotal;
         }
         $factura = Ingre_Egre::find($request->factura_id);
-        $factura->ie_total=$total;  
+        $factura->ie_total = $total;
         $factura->save();
 
         //llamamos todo lo necesario para la vista
-        $data['categorias']=Categorias::where("cat_tipo","=",$factura->ie_tipo)->get();
-        $data['unidades']=UnidadesMedidas::all();
-       return view('detalles.detalles', $data)->with('idfactura',$request->factura_id);
+        $data['categorias'] = Categorias::where("cat_tipo", "=", $factura->ie_tipo)->get();
+        $data['unidades'] = UnidadesMedidas::all();
+        return view('detalles.detalles', $data)->with('idfactura', $request->factura_id);
     }
 
     /**
@@ -135,26 +171,25 @@ class DetallesController extends Controller
      * @param  \App\Models\Detalles  $detalles
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_detalle,$idfactura)
+    public function destroy($id_detalle, $idfactura)
     {
         //buscamos el detalle y lo eliminamos
         $detalle = Detalles::find($id_detalle);
         $detalle->delete();
 
         //recalculamos el valor total de la factura
-        $data['detalles']=Detalles::where("ie_id","=",$idfactura)->get();
-        $total=0;
-        foreach($data['detalles'] as $detalle)
-        {
-            $total=$total + $detalle->det_subtotal;
+        $data['detalles'] = Detalles::where("ie_id", "=", $idfactura)->get();
+        $total = 0;
+        foreach ($data['detalles'] as $detalle) {
+            $total = $total + $detalle->det_subtotal;
         }
         $factura = Ingre_Egre::find($idfactura);
-        $factura->ie_total=$total;  
+        $factura->ie_total = $total;
         $factura->save();
 
-         //llamamos todo lo necesario para la vista
-         $data['categorias']=Categorias::where("cat_tipo","=",$factura->ie_tipo)->get();
-         $data['unidades']=UnidadesMedidas::all();
-        return view('detalles.detalles', $data)->with('idfactura',$idfactura);
+        //llamamos todo lo necesario para la vista
+        $data['categorias'] = Categorias::where("cat_tipo", "=", $factura->ie_tipo)->get();
+        $data['unidades'] = UnidadesMedidas::all();
+        return view('detalles.detalles', $data)->with('idfactura', $idfactura);
     }
 }

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Empleados;
 use App\Models\Cargos;
 use App\Models\Proyecto;
+use phpDocumentor\Reflection\Types\Boolean;
+
 
 class GastoPersonalController extends Controller
 {
@@ -18,18 +20,18 @@ class GastoPersonalController extends Controller
     public function index($proy)
     {
         //
-        $data['empleados']=Empleados::where('emp_estado', 'like', 'Activo')->get();
-        $data2['cargos']=Cargos::all();
-        return view('gastospersonal.gastospersonal',$data,$data2)->with('proy',$proy);
+        $data['empleados'] = Empleados::where('emp_estado', 'like', 'Activo')->get();
+        $data2['cargos'] = Cargos::all();
+        return view('gastospersonal.gastospersonal', $data, $data2)->with('proy', $proy);
     }
-    public function indexHP($proy,Request $request)
+    public function indexHP($proy, Request $request)
     {
         //dd($request);        
-        $gastos=Gasto_personal::where('proyecto', '=', $proy)->get();
-        $data['gps']=$gastos;        
-        $data['cargos']=Cargos::all();
+        $gastos = Gasto_personal::where('proyecto', '=', $proy)->get();
+        $data['gps'] = $gastos;
+        $data['cargos'] = Cargos::all();
         //dd($data);
-        return view('gastospersonal.historialPagos',$data)->with('proy',$proy);
+        return view('gastospersonal.historialPagos', $data)->with('proy', $proy);
     }
     /*public function obtener(Request $request)
     {
@@ -46,25 +48,39 @@ class GastoPersonalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($empleado,$proyecto)
-    {        
-        return view('gastospersonal.crearPago')->with('empleado',$empleado)->with('proyecto',$proyecto);
-    }        
+    public function create($empleado, $proyecto)
+    {
+        return view('gastospersonal.crearPago')->with('empleado', $empleado)->with('proyecto', $proyecto);
+    }
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
     public function store(Request $request)
     {
-        //
-        $dataProducts = $request->except('_token','saveitem','C_guardar');
-        //return response()->json($dataProducts);        
-        Gasto_personal::insert($dataProducts);        
-        $data['empleados']=Empleados::all();
-        $data2['cargos']=Cargos::all();    
-        return view('gastospersonal.gastospersonal',$data,$data2)->with('proy',$request->proyecto);
+        $fecha = $request->get('gp_fecha');
+        $comentario = $request->get('gp_comentario');
+        $pago = $request->get('gp_pago');
+        if (trim($fecha) != "" && trim($comentario) != "" && trim($pago) != "") {
+            //expresion regular para numero double, campo de pago           
+            if (preg_match("/^[0-9]{1,25}([.][0-9]{1,2})?$/", $pago)){
+                $dataProducts = $request->except('_token', 'saveitem', 'C_guardar');
+                //Insertamos el pago del empleado seleccionado       
+                Gasto_personal::insert($dataProducts);
+                $data['empleados'] = Empleados::all();
+                $data2['cargos'] = Cargos::all();
+                return view('gastospersonal.gastospersonal', $data, $data2)->with('proy', $request->proyecto);
+            }else{
+                echo '<script language="javascript">alert("El valor del pago no es válido. Intentelo de nuevo");</script>';
+                return view('gastospersonal.crearPago')->with('empleado', $request->empleado)->with('proyecto', $request->proyecto);
+            }
+        } else {
+            echo '<script language="javascript">alert("No se admiten espacios en blanco. Intentelo de nuevo");</script>';
+            return view('gastospersonal.crearPago')->with('empleado', $request->empleado)->with('proyecto', $request->proyecto);
+        }
     }
 
     /**
@@ -97,15 +113,15 @@ class GastoPersonalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {        
+    {
         $dataGastos = $request->except('_token');
         $gasto = Gasto_personal::findOrFail($id);
         $gasto->update($request->all());
 
-        $lgastos=Gasto_personal::where('proyecto', '=', $request->proyecto)->get();
-        $data['gps']=$lgastos;        
-        $data['cargos']=Cargos::all();
-        return view('gastospersonal.historialPagos',$data)->with('proy',$request->proyecto);
+        $lgastos = Gasto_personal::where('proyecto', '=', $request->proyecto)->get();
+        $data['gps'] = $lgastos;
+        $data['cargos'] = Cargos::all();
+        return view('gastospersonal.historialPagos', $data)->with('proy', $request->proyecto);
     }
 
     /**
@@ -118,12 +134,12 @@ class GastoPersonalController extends Controller
     {
         //
         $pago = Gasto_personal::find($id);
-        $proy=$pago->proyecto;
+        $proy = $pago->proyecto;
         $pago->delete();
 
-        $gastos=Gasto_personal::where('proyecto', '=', $proy)->get();
-        $data['gps']=$gastos;
-        $data['cargos']=Cargos::all();        
-        return view('gastospersonal.historialPagos',$data)->with('proy',$proy);
+        $gastos = Gasto_personal::where('proyecto', '=', $proy)->get();
+        $data['gps'] = $gastos;
+        $data['cargos'] = Cargos::all();
+        return view('gastospersonal.historialPagos', $data)->with('proy', $proy);
     }
 }
