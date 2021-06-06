@@ -35,11 +35,11 @@
                             </div>
                            <label for="det_cantidad">Cantidad:</label>
                             <div class="mb-3">
-                                <input name="det_cantidad" type="number" id="n-canidad" class="form-control" required>
+                                <input name="det_cantidad" min="1"  type="number" id="n-canidad" class="form-control" required>
                             </div>
                             <label for="det_preciounitario">Precio unitario:</label>
                             <div class="mb-3">
-                                <input name="det_preciounitario" type="number" id="n-canidad" class="form-control" required>
+                                <input name="det_preciounitario" step="0.01" min="0" type="number" id="n-canidad" class="form-control" required>
                             </div>
                             <div class="modal-footer">
                                  <a href="{{route('detalles',$idfactura)}}" class="mod-cancelar">CANCELAR</a>

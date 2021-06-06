@@ -59,7 +59,7 @@
                 <td>{{$g->_empleado->cargo->car_nombre}}</td>
                 <td>{{$g->gp_fecha}}</td>
                 <td>{{$g->gp_comentario}}</td>
-                <td>{{$g->gp_pago}}</td>
+                <td>${{$g->gp_pago}}</td>
                 <td>
                     <button id="editar" data-bs-toggle="modal" data-bs-target="#modal-editarGasto{{$g->_id}}">Editar pago</button>
                     <div class="modal fade" id="modal-editarGasto{{$g->_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -98,7 +98,7 @@
                                         <div class="mb-3">
                                             <label for="pago">Pago:</label>
                                             <br>
-                                            <input value="{{$g->gp_pago}}" type="number" name="gp_pago" id="pago" required>
+                                            <input value="{{$g->gp_pago}}" type="number" step="0.01" min="0" name="gp_pago" id="pago" required>
                                         </div>
 
                                     </div>

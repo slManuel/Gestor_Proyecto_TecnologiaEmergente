@@ -17,16 +17,15 @@ class IngreEgreController extends Controller
      */
     public function index($id, Request $request)
     {
-        $nombre= $request->get('nombreBusqueda');
-        if ($nombre=="Todos") {
-            $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();
+        $nombre = $request->get('nombreBusqueda');
+        if ($nombre == "Todos") {
+            $data['facturas'] = Ingre_Egre::where("proy_id", "=", $id)->get();
+        } else {
+            $data['facturas'] = Ingre_Egre::ingre($nombre)->get();
         }
-        else{
-            $data['facturas']=Ingre_Egre::ingre($nombre)->get(); 
-        }
-        $data['proyecto']=Proyectos::where("_id","=",$id)->first();
-        return view('ingegr.ingresoegr', $data)->with('proy_id',$id); 
-     }
+        $data['proyecto'] = Proyectos::where("_id", "=", $id)->first();
+        return view('ingegr.ingresoegr', $data)->with('proy_id', $id);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -34,7 +33,7 @@ class IngreEgreController extends Controller
      */
     public function create($id)
     {
-        return view('ingegr.createIngrEgre')->with('id',$id); 
+        return view('ingegr.createIngrEgre')->with('id', $id);
     }
     /**
      * Store a newly created resource in storage.
@@ -42,16 +41,22 @@ class IngreEgreController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$id)
+    public function store(Request $request, $id)
     {
-        $dataProducts = $request->except('_token','saveitem');
-        $dataProducts['proy_id']=$id;
-        $dataProducts['ie_total']=0; 
-        Ingre_Egre::insert($dataProducts);        
-        $data['empleados']= Ingre_Egre::paginate(15);   
-        $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();
-        $data['proyecto']=Proyectos::where("_id","=",$id)->first();       
-        return view('ingegr.ingresoegr', $data)->with('proy_id',$id); 
+        $descripcion = $request->ie_descripcion;
+        if (trim($descripcion) != "") {
+            $dataProducts = $request->except('_token', 'saveitem');
+            $dataProducts['proy_id'] = $id;
+            $dataProducts['ie_total'] = 0;
+            Ingre_Egre::insert($dataProducts);
+            $data['empleados'] = Ingre_Egre::paginate(15);
+            $data['facturas'] = Ingre_Egre::where("proy_id", "=", $id)->get();
+            $data['proyecto'] = Proyectos::where("_id", "=", $id)->first();
+            return view('ingegr.ingresoegr', $data)->with('proy_id', $id);
+        }else{
+            echo '<script language="javascript">alert("No pueden haber campos vacíos.Intentelo de nuevo.");</script>';
+            return view('ingegr.createIngrEgre')->with('proy_id', $id);
+        }
     }
     /**
      * Display the specified resource.
@@ -82,12 +87,12 @@ class IngreEgreController extends Controller
      */
     public function update(Request $request)
     {
-        $dataProducts = $request->except('_token','saveitem','method');
+        $dataProducts = $request->except('_token', 'saveitem', 'method');
         $factura = Ingre_Egre::findOrFail($request->_id);
         $factura->update($request->all());
-       $data['facturas']=Ingre_Egre::where("proy_id","=",$request->proy_id)->get();  
-       $data['proyecto']=Proyectos::where("_id","=",$request->proy_id)->first();     
-       return view('ingegr.ingresoegr', $data)->with('proy_id',$request->proy_id);  
+        $data['facturas'] = Ingre_Egre::where("proy_id", "=", $request->proy_id)->get();
+        $data['proyecto'] = Proyectos::where("_id", "=", $request->proy_id)->first();
+        return view('ingegr.ingresoegr', $data)->with('proy_id', $request->proy_id);
     }
     /**
      * Remove the specified resource from storage.
@@ -97,17 +102,17 @@ class IngreEgreController extends Controller
      */
     public function destroy($idfactura)
     {
-         //buscamos la factura y lo eliminamos
-         $factura = Ingre_Egre::find($idfactura);      
-         $idproyecto=$factura->proy_id;        
-         $factura->delete();
-         //eliminamos los detalles de la factura
-         $data['detalles']=Detalles::where("ie_id","=",$idfactura)->delete();
-         $total=0;
-         //buscamos el nombre del proyecto
-         $data['proyecto']=Proyectos::where("_id","=",$idproyecto)->first();      
-          //llamamos todo lo necesario para la vista
-         $data['facturas']=Ingre_Egre::where("proy_id","=",$idproyecto)->get();      
-        return view('ingegr.ingresoegr', $data)->with('proy_id',$idproyecto);  
+        //buscamos la factura y lo eliminamos
+        $factura = Ingre_Egre::find($idfactura);
+        $idproyecto = $factura->proy_id;
+        $factura->delete();
+        //eliminamos los detalles de la factura
+        $data['detalles'] = Detalles::where("ie_id", "=", $idfactura)->delete();
+        $total = 0;
+        //buscamos el nombre del proyecto
+        $data['proyecto'] = Proyectos::where("_id", "=", $idproyecto)->first();
+        //llamamos todo lo necesario para la vista
+        $data['facturas'] = Ingre_Egre::where("proy_id", "=", $idproyecto)->get();
+        return view('ingegr.ingresoegr', $data)->with('proy_id', $idproyecto);
     }
 }

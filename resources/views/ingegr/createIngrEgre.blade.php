@@ -10,12 +10,12 @@
 <div class="modal-body">
     <form method="POST" action="{{url('/factura/store/'.$id)}}">
         @csrf
-        <div class="mb-3">
+        <div class="col-6">
             <label for="n-nombref">Descripción:</label>
             <br>
             <input type="text" id="n-nombref" name="ie_descripcion" placeholder="Descripción" class="form-control" required>
         </div>
-        <div class="mb-3">
+        <div class="col-7">
             <label for="n-estadoF">Tipo:</label>
             <br>
             <select id="n-estadoF" name="ie_tipo">                
@@ -23,7 +23,7 @@
                 <option>Ingreso</option>
             </select>
         </div>
-        <div class="mb-3">
+        <div class="col-6">
             <label for="N-fechaF">Fecha:</label>
             <br>
             <input type="date" name="ie_fecha" id="N-fechaF"required>

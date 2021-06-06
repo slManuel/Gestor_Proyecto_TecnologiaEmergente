@@ -11,15 +11,12 @@
     <div class="col-2">
         <h4>Balance:</h4>
     </div>
-    <div class="col-2">
+    <div class="col-2" id="balance">
         @php
         $total=0;
         foreach($detalles as $detalle){$total=$total + $detalle->det_subtotal;}
         @endphp
         $ {{$total}}
-    </div>
-    <div class="col">
-        <input type="button" value="REPORTE" id="btn-rep-detF">
     </div>
     <div class="col">
         <a id="nuevo-reg-detF" class="nuevoregistro" href="{{url('/detalles/create/'.$idfactura)}}">NUEVO REGISTRO</a>
@@ -37,6 +34,7 @@
                 <th scope="col">Medida</th>
                 <th scope="col">Precio unitario</th>
                 <th scope="col">Subtotal</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -95,11 +93,11 @@
                                         </div>
                                         <label for="det_cantidad">Cantidad:</label>
                                         <div class="mb-3">
-                                            <input name="det_cantidad" value="{{$detalle->det_cantidad}}" type="number" id="n-canidad" required>
+                                            <input name="det_cantidad" value="{{$detalle->det_cantidad}}" min="1" type="number" id="n-canidad" required>
                                         </div>
                                         <label for="det_preciounitario">Precio unitario:</label>
                                         <div class="mb-3">
-                                            <input name="det_preciounitario" value="{{$detalle->det_preciounitario}}" type="number" id="n-canidad" required>
+                                            <input name="det_preciounitario" value="{{$detalle->det_preciounitario}}" type="number" step="0.01" id="n-canidad" required>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
@@ -152,7 +150,7 @@
         margin-left: 0px;
         border-radius: 3px;
         text-decoration: none;
-        color: white;
+        color: black;
     }
 
     .eliminar {
@@ -176,6 +174,7 @@
 
     #balance {
         color: green;
+        font-style: bold;
     }
 
     #btn-rep-detF {
@@ -192,6 +191,7 @@
 
     #editar {
         background: #9cbbac;
+        border-radius:  3px;
     }
 
     .mod-cancelar {

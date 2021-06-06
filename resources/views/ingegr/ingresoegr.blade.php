@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<h1>Ingresos y Egresos</h1>
+<h1>Facturas</h1>
 @stop
 
 @section('content')
@@ -12,7 +12,7 @@
     <div class="col-2">
         <h3>Proyecto:</h3>
     </div>
-    <div class="col-2">
+    <div class="col-10">
         <legend id="nombre-proy">{{$proyecto->proy_nombre}}</legend>
     </div>
 </div>
@@ -38,9 +38,6 @@
             </form>
         </div>
         <div class="row">
-            <div class="col-6">
-                <input type="button" value="REPORTE" id="btn-rep-facturas">
-            </div>
             <div class="col-6">
                 <div class="row">
                     <div class="col">
@@ -97,7 +94,7 @@
                 <td>{{$factura->ie_descripcion}}</td>
                 <td>{{$factura->ie_tipo}}</td>
                 <td>{{$factura->ie_fecha}}</td>
-                <td>{{$factura->ie_total}}</td>
+                <td>${{$factura->ie_total}}</td>
                 <td>
                     <button class="boton" id="editar" data-bs-toggle="modal" data-bs-target="#modalUpd{{$factura->_id}}">Editar</button>
                     <div class="modal fade" id="modalUpd{{$factura->_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -264,6 +261,7 @@
 
     #editar {
         background: #9cbbac;
+        border-radius: 3px;
     }
 
     #detalles {
