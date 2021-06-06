@@ -11,7 +11,7 @@
     <div class="col-2">
         <h4>Balance:</h4>
     </div>
-    <div class="col-2">
+    <div class="col-2" id="balance">
         @php
         $total=0;
         foreach($detalles as $detalle){$total=$total + $detalle->det_subtotal;}
@@ -150,7 +150,7 @@
         margin-left: 0px;
         border-radius: 3px;
         text-decoration: none;
-        color: white;
+        color: black;
     }
 
     .eliminar {
@@ -174,6 +174,7 @@
 
     #balance {
         color: green;
+        font-style: bold;
     }
 
     #btn-rep-detF {
@@ -190,6 +191,7 @@
 
     #editar {
         background: #9cbbac;
+        border-radius:  3px;
     }
 
     .mod-cancelar {

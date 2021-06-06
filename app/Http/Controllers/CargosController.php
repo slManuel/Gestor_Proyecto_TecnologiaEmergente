@@ -48,7 +48,7 @@ class CargosController extends Controller
     {
         //
         $nombre= $request->get('car_nombre');
-        if ($nombre!=null) {
+        if (trim($nombre)!=null && trim($nombre)!="") {
             $data['cargos']=Cargos::CarNombre($nombre)->get();
         }else{
             echo '<script language="javascript">alert("No se admiten espacios en blanco. Intentelo de nuevo");</script>';

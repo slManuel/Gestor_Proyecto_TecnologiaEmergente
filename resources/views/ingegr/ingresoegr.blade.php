@@ -94,7 +94,7 @@
                 <td>{{$factura->ie_descripcion}}</td>
                 <td>{{$factura->ie_tipo}}</td>
                 <td>{{$factura->ie_fecha}}</td>
-                <td>{{$factura->ie_total}}</td>
+                <td>${{$factura->ie_total}}</td>
                 <td>
                     <button class="boton" id="editar" data-bs-toggle="modal" data-bs-target="#modalUpd{{$factura->_id}}">Editar</button>
                     <div class="modal fade" id="modalUpd{{$factura->_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -261,6 +261,7 @@
 
     #editar {
         background: #9cbbac;
+        border-radius: 3px;
     }
 
     #detalles {
