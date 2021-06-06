@@ -32,4 +32,12 @@ class Proyectos extends Eloquent
             }
         }        
     }
+
+    public function scopeExiste($query, $nombre) {        
+        if(($nombre) ){
+            if ($nombre!=null){
+                return $query->where('proy_nombre', 'like', "$nombre");
+            }
+        }        
+    }
 }

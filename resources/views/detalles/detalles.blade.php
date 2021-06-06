@@ -19,9 +19,6 @@
         $ {{$total}}
     </div>
     <div class="col">
-        <input type="button" value="REPORTE" id="btn-rep-detF">
-    </div>
-    <div class="col">
         <a id="nuevo-reg-detF" class="nuevoregistro" href="{{url('/detalles/create/'.$idfactura)}}">NUEVO REGISTRO</a>
     </div>
 </div>
@@ -37,6 +34,7 @@
                 <th scope="col">Medida</th>
                 <th scope="col">Precio unitario</th>
                 <th scope="col">Subtotal</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
         </thead>
