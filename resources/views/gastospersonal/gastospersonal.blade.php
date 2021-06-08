@@ -13,8 +13,7 @@
             <legend>Filtros</legend>
         </div>
         <div class="row">
-            <div class="col-4">
-                Filtro:
+            <div class="col-sm">
                 <select id="fp-estado">
                     <option>Todos</option>
                     <option>Pagados</option>
@@ -22,11 +21,13 @@
                     <option>En el proyecto actual</option>
                 </select>
             </div>
-            <div class="col-4">
+            <div class="col-sm">
                 <input type="text" id="fp-proyecto" placeholder="Nombre de empleado">
+            </div>
+            <div class="col-sm">
                 <input type="button" id="btn_buscarpr" value="BUSCAR">
             </div>
-            <div class="col-4">
+            <div class="col-sm">
                 <a href="{{route('empleados.create')}}" id="btn_crear_emp">CREAR NUEVO EMPLEADO</a>
             </div>
         </div>

@@ -3,16 +3,29 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<h1>Unidades de medidas</h1>
+  <h1>Unidades de medidas</h1>
 @stop
 
 @section('content')
-<div class="row">
-  <form action="{{route('UnidadesMedidas.index')}}">
-    <input type="search" placeholder="Escriba el nombre que desea buscar" name="contenido__busquedaUnidadesMedida" id="bus_unidad">
-    <input type="submit" id="btn_buscarpr" value="BUSCAR">
-    <a href="{{url('/unidades/create')}}" style="text-decoration: none;" id="btn_nuevoUM">NUEVA UNIDAD DE MEDIDA</a>
-  </form>
+<div class="container">
+  <div class="row">
+    <div class="col" id="filtro-proy">
+      <div class="row">
+        <legend>Filtros</legend>
+      </div>
+      <form action="{{route('UnidadesMedidas.index')}}">
+        <div class="row">
+          <div class="col-sm">
+            <input type="search" placeholder="Escriba el nombre que desea buscar" name="contenido__busquedaUnidadesMedida" id="bus_unidad">
+            <input type="submit" id="btn_buscarpr" value="BUSCAR">
+          </div>
+          <div class="col-sm">
+            <a href="{{url('/unidades/create')}}" style="text-decoration: none;" id="btn_nuevoUM">NUEVA UNIDAD DE MEDIDA</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 <div class="row">
   <table class="table table-striped">
@@ -65,9 +78,16 @@
 @section('css')
 <style>
   form {
-    padding: 1em;
+    /* padding: 1em; */
   }
-
+  #filtro-proy{
+    border: lightgray 1px solid;
+    border-radius: 2px;
+    margin-top: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    
+}
   #bus_unidad {
     width: 60%;
     height: 30px;
@@ -76,8 +96,8 @@
   }
 
   #btn_nuevoUM {
-    width: 300px;
-    height: 30px;
+    /* width: 300px;
+    height: 30px; */
     font: bold;
     color: white;
     background: #3b3c54;

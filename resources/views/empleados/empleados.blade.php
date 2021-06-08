@@ -14,7 +14,7 @@
                 </div>                
                 <form>
                   <div class="row">
-                    <div class="col-4">
+                    <div class="col-sm">
                       <select class="inp" name="cargo">
                         <option>Todos</option>
                         @foreach($cargos as $car)
@@ -22,25 +22,22 @@
                         @endforeach                    
                       </select>
                     </div>
-                    <div class="col-4">
+                    <div class="col-sm">
                       <input class="inp" name="nombre" type="text" placeholder="Nombre del empleado">
                     </div>
-                    <div class="col-3">
+                    <div class="col-sm">
                       <input type="submit" id="btn_buscarpr" value="BUSCAR">
                     </div>
-                  </div>
-                </form>         
-                <br>       
-                <div class="row" >                    
-                    <div class="col-6" id="botones">                    
-                      <a href="{{route('empleados.create')}}" id="btn_crear_emp">CREAR NUEVO EMPLEADO</a>
+                    <div class="col-sm">
+                      <a href="{{route('empleados.create')}}" id="btn_crear_emp" class="btn btn-default">CREAR NUEVO EMPLEADO</a>
                     </div>
-                </div>
+                  </div>
+                </form> 
               </div>              
           </div>
           
           <div class="row">
-            <table class="table table-striped">
+            <table class="table-responsive-md table-striped">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -49,7 +46,6 @@
                     <th scope="col">Estado</th>
                     <th scope="col">Pago</th>
                     <th scope="col">Teléfono</th>
-                    <th scope="col"></th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -165,13 +161,17 @@ select{
     border-radius: 4px;     
 }
 #btn_crear_emp{
+  position: relative;
+    width: 250px;
     font: bold;
     color: white;
     background: #3b3c54;
-    border-radius: 4px;
-    padding:5px;
-    text-align:center;
-    text-decoration:none;
+    border-radius: 4px;     
+    /* margin-left: 3PX;
+    margin-right: 3PX; */
+    text-align: center;
+    text-decoration: none;
+    /* padding: 5px; */
 }
 #detalles{
     width: 80px;

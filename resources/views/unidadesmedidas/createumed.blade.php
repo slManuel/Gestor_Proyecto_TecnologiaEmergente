@@ -8,16 +8,15 @@
 
 @section('content')
 
-<form method="POST" action="{{route('UnidadesMedidas.store')}}">
+<form method="POST" enctype="multipart/form-data" action="{{route('UnidadesMedidas.store')}}">
     @csrf
-    <div class="mb-3">
+    <div class="form-group">
         <label for="um_nom">Nombre:</label>
         <input id="um_nom" type="text" name="um_nombre" placeholder="Nombre de la nueva unidad de medida" class="form-control" required>
     </div>
-    <div class="mb-3">
-
-        <a href="{{route('UnidadesMedidas.index')}}" class="mod-cancelar">CANCELAR</a>
-        <input type="submit" id="btnGuardar" class="mod-guardar" value="GUARDAR" />
+    <div class="modal-footer" id="botones">    
+    <a href="{{route('UnidadesMedidas.index')}}" class="mod-cancelar">CANCELAR</a>
+        <input type="submit" id="btnGuardar" class="mod-guardar" value="GUARDAR" />                        
     </div>
 </form>
 @stop
@@ -47,7 +46,7 @@
         border: none;
     }
     form {
-        width: 50%;
+        width: 75%;
     }
 </style>
 

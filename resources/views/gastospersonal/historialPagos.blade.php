@@ -8,36 +8,7 @@
 
 @section('content')
 <div class="row">
-    <!--form class="form-inline" >
-    @csrf
-        <div class="col" id="filtro-proy">
-            <div class="row">
-                <legend>Filtros</legend>
-                <input type="hidden" value="{{$proy}}" name="proyecto">
-            </div>
-            <div class="row" >
-                <div class="col-4">
-                    Cargo: 
-                    <select id="fp-estado" name="cargo">
-                        <option>Todos</option>
-                        @foreach($cargos as $car)
-                            <option value="{{$car->_id}}">{{$car->car_nombre}}</option>
-                        @endforeach                    
-                    </select>
-                </div>
-                <div class="col-4">
-                    <input type="text" id="fp-proyecto" placeholder="Nombre de empleado" name="nombre">
-                    <input type="submit" id="btn_buscarpr" value="BUSCAR">
-                </div>
-                <div class="col-4">
-                    <button type="button" id="btn_crear_emp">REPORTE</button>
-                </div>
-            </div>
-        </div>              
-    </form-->
-</div>
-<div class="row">
-    <table class="table table-striped">
+    <table class="table-responsive-md table-striped">
         <thead>
             <tr>
                 <th scope="col">#</th>

@@ -8,34 +8,34 @@
 
 @section('content')
 
-<form method="POST" action="{{url('gastospersonal')}} " >
+<form method="POST" enctype="multipart/form-data" action="{{url('gastospersonal')}} " >
     @csrf
     <input type="hidden" value="{{$proyecto}}" name="proyecto">
     <input type="hidden" value="{{$empleado}}" name="empleado">
-    <div class="col-10" >
+    <div class="form-group">
         <label for="e-fechaP">Fecha de pago:</label>
-        <br>
-        <input type="date" id="e-fechaP" name="gp_fecha" class="inp form-control" required>
+        <input type="date" id="e-fechaP" name="gp_fecha" class="form-control" required>
     </div>
-    <div class="col-7">
+    <div class="form-group">
         <label for="com">Comentario:</label>
         <input id="com" type="text" name="gp_comentario" placeholder="Comentario" class="form-control" required>
     </div>
-    <div class="col-10">
+    <div class="form-group">
         <label for="pago">Pago:</label>
         <br>
-        <input id="pago" min="0" step="0.01" type="number" name="gp_pago" class="inp form-control" placeholder="Pago" required>
+        <input id="pago" min="0" step="0.01" type="number" name="gp_pago" class="form-control" placeholder="Pago" required>
     </div>
-    <br>
-    <a href="{{url('/gastospersonal/'.$proyecto)}}" class="mod-cancelar">CANCELAR</a>
-    <input type="submit" id="C_guardar" class="mod-guardar" value="GUARDAR" />
+    <div class="modal-footer" id="botones">    
+        <a href="{{url('/gastospersonal/'.$proyecto)}}" class="mod-cancelar">CANCELAR</a>
+        <input type="submit" id="C_guardar" class="mod-guardar" value="GUARDAR" />                        
+    </div>
 </form>
 @stop
 
 @section('css')
 <style>
     form {
-        width: 50%;
+        width: 75%;
     }
 
     .mod-cancelar {
