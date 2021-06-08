@@ -94,6 +94,31 @@
                 </form>
               </div>
             </div>
+          </div>
+          <button id="cambiarcontrasena" class="cambiarcontrasena" data-bs-toggle="modal" data-bs-target="#modal-cambio{{$usr->_id}}">Cambiar contraseña</button>
+          <div class="modal fade" id="modal-cambio{{$usr->_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Cambiar contraseña</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="PUT" action="{{url('/pwdupdate/'.$usr->_id)}}">
+                  @csrf
+                  <div class="modal-body">
+                  <label for="password">Escriba la nueva contraseña: </label>
+                    <input type="password" class="form-control" name="password">
+                    <br>
+                    <p>¿Está seguro que desea cambiar esta contraseña?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" data-bs-dismiss="modal" class="mod-cancelar">No</button>
+                    <input type="submit" id="btn-e-guardarP" value="Si" class="mod-guardar" />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </td>
       </tr>
       @endforeach
@@ -172,13 +197,14 @@
     border: none;
   }
 
-  #eliminar {
-    width: 80px;
+  #cambiarcontrasena {
+    width: 180px;
     height: 30px;
-    font: bold;
-    color: white;
-    background: #fa743d;
-    border-radius: 4px;
+    border: 0px;
+    color:white;
+    border-radius: 3px;
+    background: #B75844;
+    
   }
 
   .mod-cancelar {

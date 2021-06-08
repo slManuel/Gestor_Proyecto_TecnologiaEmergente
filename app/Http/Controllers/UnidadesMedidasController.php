@@ -17,6 +17,9 @@ class UnidadesMedidasController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }
         $nombre= $request->get('contenido__busquedaUnidadesMedida');
         if ($nombre==null) {
             $data['unidadesmeds']=UnidadesMedidas::get();
@@ -36,6 +39,9 @@ class UnidadesMedidasController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }
         return view('unidadesmedidas.createumed');
     }
 
@@ -49,6 +55,9 @@ class UnidadesMedidasController extends Controller
     {
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
         }
         $dataProducts = $request->except('_token','saveitem');
         $nomb = trim($request->um_nombre);
@@ -105,6 +114,9 @@ class UnidadesMedidasController extends Controller
     {
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
         }
         $nomb = trim($request->um_nombre);
         $original = $request->original;

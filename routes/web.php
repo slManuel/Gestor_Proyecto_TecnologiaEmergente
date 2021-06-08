@@ -68,7 +68,13 @@ Route::post('/detalles/store', [DetallesController::class, 'store'])->name('deta
 Route::get('/detalle/actualizar', [DetallesController::class, 'update'])->name('detactualizar');
 Route::get('/detalle/delete/{iddetalle}/{idfactura}', [DetallesController::class, 'destroy'])->name('detdelete');
 
+//Inactivo
+Route::get('/personal/inactivo', [UsuariosController::class, 'inactivo'])->name('inactivo');
+
 //usuarios
 Route::get('/personal', [UsuariosController::class, 'index'])->name('personal');
 Route::get('/personal/update/{id}', [UsuariosController::class, 'update'])->name('updatePersonal');
 Route::resource('personal', UsuariosController::class);
+
+//contraseña
+Route::get('/pwdupdate/{id}',[UsuariosController::class,'cambiarcontrasena'])->name('passupdate');

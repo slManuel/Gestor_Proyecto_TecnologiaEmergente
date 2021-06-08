@@ -22,6 +22,9 @@ class DetallesController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }
         $data['detalles'] = Detalles::where("ie_id", "=", $idfactura)->get();
         $total = 0;
         foreach ($data['detalles'] as $detalle) {
@@ -47,6 +50,9 @@ class DetallesController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }
         $factura = Ingre_Egre::findOrFail($idfactura);
         $data['categorias'] = Categorias::where("cat_tipo", "=", $factura->ie_tipo)->get();
         $data2['unidades'] = UnidadesMedidas::all();
@@ -64,6 +70,9 @@ class DetallesController extends Controller
         //validacion de campos
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
         }
         $descripcion = $request->det_descripcion;
         $cantidad = $request->det_cantidad;
@@ -156,6 +165,9 @@ class DetallesController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }
         $dataProducts = $request->except('_token', 'saveitem');
         $detalle = Detalles::findOrFail($request->_id);
         $detalle['det_subtotal'] = $request->det_cantidad * $request->det_preciounitario;
@@ -188,6 +200,9 @@ class DetallesController extends Controller
         //buscamos el detalle y lo eliminamos
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
         }
         $detalle = Detalles::find($id_detalle);
         $detalle->delete();
