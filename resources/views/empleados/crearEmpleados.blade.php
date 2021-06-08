@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-<form method="POST" action="{{url('empleados')}}">
+<form method="POST" enctype="multipart/form-data" action="{{url('empleados')}}">
 @csrf
     <div class="form-group">
         <label for="n-nombreP">Nombre:</label>                       
@@ -73,7 +73,7 @@
     border: 0.2px solid lightgray;
 }
 form{
-    width: 50%;
+    width: 75%;
 }
     </style>
 @stop

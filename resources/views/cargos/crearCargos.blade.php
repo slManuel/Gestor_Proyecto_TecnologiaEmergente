@@ -50,7 +50,7 @@ input.radio{
   
 }
 form{
-    width:50%;
+    width:75%;
 }
     </style>
 @stop

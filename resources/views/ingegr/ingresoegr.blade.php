@@ -62,9 +62,9 @@
         </div>
     </div>
     <div class="col-6">
-        <a type="button" class="botones btn-lg btn-block" href="{{url('/facturas/create/'.$proy_id)}}" value="NUEVO REGISTRO" id="detalles">NUEVO REGISTRO<a>
-        <a type="button" class="botones btn-lg btn-block"  href="{{url('/gastospersonal/indexHP/'.$proy_id)}}" value="NUEVO REGISTRO" id="btn-historialP">HISTORIAL DE PAGOS A PERSONAL<i class="bi bi-clock-history"></i><a>
-        <a type="button" id="btn-nuevoPago " href="{{url('/gastospersonal/'.$proy_id)}}" class="botones btn-lg btn-block">REALIZAR NUEVO PAGO<i class="bi bi-cash-stack"></i></a>
+        <a type="button" class="botones btn-sm btn-block" href="{{url('/facturas/create/'.$proy_id)}}" value="NUEVO REGISTRO" id="detalles">NUEVO REGISTRO<a>
+        <a type="button" class="botones btn-sm btn-block"  href="{{url('/gastospersonal/indexHP/'.$proy_id)}}" value="NUEVO REGISTRO" id="btn-historialP">HISTORIAL DE PAGOS A PERSONAL<i class="bi bi-clock-history"></i><a>
+        <a type="button" id="btn-nuevoPago " href="{{url('/gastospersonal/'.$proy_id)}}" class="botones btn-sm btn-block">REALIZAR NUEVO PAGO<i class="bi bi-cash-stack"></i></a>
     </div>
 </div>
 <div class="row">

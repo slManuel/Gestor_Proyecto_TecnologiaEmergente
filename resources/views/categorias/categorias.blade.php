@@ -10,19 +10,23 @@
 <div class="row">
     <form action="{{route('categorias.index')}}">
         <div class="row">
-            <div class="col-4">
-                Estado:
+            <div class="col-sm">
                 <select id="fp-tipocate" name="estadoBusqueda">
                     <option>Todos</option>
                     <option>Ingreso</option>
                     <option>Egreso</option>
                 </select>
             </div>
-            <div class="col-4">
-                <input type="text" id="fp-proyecto" id="bus_unidad" name="contenido__busquedaUnidadesMedida" placeholder="Categoría">
+            <div class="col-sm">
+                <input type="text" id="bus_unidad" name="contenido__busquedaUnidadesMedida" placeholder="Categoría">
+            </div>
+            <div class="col-sm">
                 <input type="submit" id="btn_buscarpr" value="BUSCAR">
             </div>
-            <a href="{{route('categorias.create')}}" id="btn_nuevoCargo">NUEVA CATEGORIA</a>
+            <div class="col-sm">
+                <a href="{{route('categorias.create')}}" id="btn_nuevoCargo" class="btn btn-default">NUEVA CATEGORIA</a>
+            </div>
+            
         </div>
     </form>
 
@@ -103,15 +107,14 @@
         margin-left: 0px;
 
     }
-
-
-    #bus_unidad {
-        width: 40%;
-        height: 30px;
-    }
+    select, input{
+    width: 200px;
+    height: 30px;
+    border: lightgray 1px solid;
+    border-radius: 4px;  }
 
     input#bus_unidad {
-        width: 30%;
+        width: 80%;
     }
 
     select {
@@ -137,27 +140,18 @@
     }
 
     #btn_nuevoCargo {
-        width: 190px;
-        height: 30px;
+        position: relative;
+        /* width: 250px;
+        height: 90px; */
         font: bold;
         color: white;
         background: #3b3c54;
-        border-radius: 4px;
-        margin-left: 3PX;
-        margin-right: 3PX;
+        border-radius: 4px;     
+        /* margin-left: 3PX;
+        margin-right: 3PX; */
         text-align: center;
         text-decoration: none;
-    }
-
-    #btn_Reporte {
-        width: 180px;
-        height: 30px;
-        font: bold;
-        color: white;
-        background: #3b3c54;
-        border-radius: 4px;
-        margin-left: 3PX;
-        margin-right: 3PX;
+        /* padding: 5px; */
     }
 
 

@@ -7,15 +7,15 @@
 @stop
 
 @section('content')
-<form id="crearCategoria" method="POST" action="{{url('categorias')}}">
+<form id="crearCategoria" method="POST" enctype="multipart/form-data" action="{{url('categorias')}}">
     @csrf
     <div class="modal-body">
-    <label for="cat_nombre">Nombre de la categoría:</label>
-        <div class="mb-3">
+        <div class="form-group">
+            <label for="n-nombreP">Nombre de la categoría:</label>
             <input type="text" name="cat_nombre" id="n-nombreP" placeholder="Nombre de la nueva categoria" class="form-control" required/>
         </div>
-        <label for="cat_tipo">Seleccione el tipo de categoría:</label>
-        <div class="mb-3">
+        <div class="form-group">
+            <label for="fp-tipocate">Seleccione el tipo de categoría:</label>
             <select id="fp-tipocate" class="form-control" name="cat_tipo">
                 <option value="Ingreso">Ingreso</option>
                 <option value="Egreso">Egreso</option>
@@ -59,7 +59,7 @@
 
     }
     form{
-        width: 50%;
+        width: 75%;
     }
 </style>
 @stop
