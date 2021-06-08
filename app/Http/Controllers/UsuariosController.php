@@ -13,6 +13,9 @@ class UsuariosController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }
         $rol = $_SESSION["rol"];
         if ($rol == "Administrador") {
             $data['usuarios'] = User::get();
@@ -22,11 +25,18 @@ class UsuariosController extends Controller
             return view('home');
         }
     }
+    public function inactivo()
+    {
+        return view('usuarios.inactivo');
+    }
 
     public function create()
     {
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
         }
         return view('usuarios.createUsuarios');
     }
@@ -35,6 +45,9 @@ class UsuariosController extends Controller
     {
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
         }
         $nombre = trim($request->name);
         $correo = trim($request->email);
@@ -86,6 +99,9 @@ class UsuariosController extends Controller
     {
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
         }
         $contra = trim($request->password);
         $contra2 = trim($request->confirmar);

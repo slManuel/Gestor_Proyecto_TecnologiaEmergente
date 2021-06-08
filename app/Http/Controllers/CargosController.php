@@ -21,6 +21,9 @@ class CargosController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }
         $nombre = $request->get('contenido__busquedaUnidadesMedida');
         if ($nombre == null) {
             $data['cargos'] = Cargos::get();
@@ -41,6 +44,9 @@ class CargosController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }
         return view('cargos.crearCargos');
     }
 
@@ -56,6 +62,9 @@ class CargosController extends Controller
         //
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
         }
         $nombre = $request->get('car_nombre');
         if (trim($nombre) != null && trim($nombre) != "") {
@@ -133,6 +142,9 @@ class CargosController extends Controller
     {
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
         }
         $nombre = $request->get('car_nombre');
         $nombreBase = $request->get('car');
