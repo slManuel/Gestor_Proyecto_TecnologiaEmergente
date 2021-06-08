@@ -52,5 +52,19 @@ class User extends Authenticatable
             }
         }        
     }
+    public function scopeBuscar($query, $nombres,$correo) {        
+        if(($nombres) || ($correo) ){
+            if ($correo == "") {
+                return $query->where('name', 'like', "%$nombres%");    
+            }else{
+                if ($nombres==null) {
+                    return $query->where('email', 'like', "%$correo%");
+                }else{
+                    return $query->where('name', 'like', "%$nombres%")
+                                 ->where('email', 'like', "%$correo%");
+                }               
+            }
+        }        
+    }
 
 }

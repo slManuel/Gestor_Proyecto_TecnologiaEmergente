@@ -14,13 +14,13 @@
     </div>
     <form>
       <div class="row">
-        <div class="col-4">
+        <div class="col-sm">
           <input class="inp" name="nombre" type="text" placeholder="Nombre del empleado">
         </div>
-        <div class="col-4">
+        <div class="col-sm">
           <input class="inp" name="correo" type="text" placeholder="Correo electrónico">
         </div>
-        <div class="col-3">
+        <div class="col-sm">
           <input type="submit" id="btn_buscarpr" value="BUSCAR">
         </div>
       </div>
@@ -33,7 +33,7 @@
 </div>
 
 <div class="row">
-  <table class="table table-striped">
+  <table class="table-responsive-md table-striped">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -95,7 +95,9 @@
               </div>
             </div>
           </div>
-          <button id="cambiarcontrasena" class="cambiarcontrasena" data-bs-toggle="modal" data-bs-target="#modal-cambio{{$usr->_id}}">Cambiar contraseña</button>
+        </td>
+        <td>
+        <button id="cambiarcontrasena" class="cambiarcontrasena" data-bs-toggle="modal" data-bs-target="#modal-cambio{{$usr->_id}}">Cambiar contraseña</button>
           <div class="modal fade" id="modal-cambio{{$usr->_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -107,7 +109,7 @@
                   @csrf
                   <div class="modal-body">
                   <label for="password">Escriba la nueva contraseña: </label>
-                    <input type="password" class="form-control" name="password">
+                    <input type="password" class="form-control" name="password"pattern="(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,15}" title="La contraseña debe tener entre 8 y 16 caracteres, al menos un número, al menos una minúscula y al menos una mayúscula. NO puede tener otros símbolos" require>
                     <br>
                     <p>¿Está seguro que desea cambiar esta contraseña?</p>
                   </div>

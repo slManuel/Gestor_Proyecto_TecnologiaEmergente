@@ -8,7 +8,7 @@ use Illuminate\Contracts\Encryption\EncryptException;
 
 class UsuariosController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
@@ -18,7 +18,13 @@ class UsuariosController extends Controller
         }
         $rol = $_SESSION["rol"];
         if ($rol == "Administrador") {
-            $data['usuarios'] = User::get();
+            $nombre = trim($request->nombre);
+            $correo = trim($request->correo);
+            if ($nombre == "" && $correo == "") {
+                $data['usuarios'] = User::get();
+            }else{
+                $data['usuarios'] = User::buscar($nombre,$correo)->get();
+            }
             return view('Usuarios.usuarios', $data);
         } else {
             echo '<script language="javascript">alert("No posees permisos de administración");</script>';

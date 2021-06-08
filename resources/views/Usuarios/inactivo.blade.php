@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <h1 id="titulo">Posees un usuario inactivo</h1>
+    <h1 id="titulo">Tu usuario está inactivo</h1>
 @stop
 
 @section('css')
@@ -19,7 +19,7 @@
             align-items: center;
             margin-top: 100px;
             font-family: Courier; 
-            font-size: 100px;
+            font-size: 10vw;
         }
     </style>
 @stop

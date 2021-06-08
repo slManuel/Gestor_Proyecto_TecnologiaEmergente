@@ -260,7 +260,7 @@ return [
         [
             'text' => 'Usuarios',
             'url'  => 'personal',
-            'icon' => 'fas fa-user',
+            'icon' => 'fas fa-fingerprint',
         ],
        
     ],
