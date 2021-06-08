@@ -19,6 +19,9 @@ class DetallesController extends Controller
     {
         //  $data['facturas']=Ingre_Egre::where("proy_id","=",$id)->get();    
         //$data['detalles']=Detalles::paginate(15);  
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $data['detalles'] = Detalles::where("ie_id", "=", $idfactura)->get();
         $total = 0;
         foreach ($data['detalles'] as $detalle) {
@@ -41,6 +44,9 @@ class DetallesController extends Controller
      */
     public function create($idfactura)
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $factura = Ingre_Egre::findOrFail($idfactura);
         $data['categorias'] = Categorias::where("cat_tipo", "=", $factura->ie_tipo)->get();
         $data2['unidades'] = UnidadesMedidas::all();
@@ -56,6 +62,9 @@ class DetallesController extends Controller
     public function store(Request $request)
     {
         //validacion de campos
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $descripcion = $request->det_descripcion;
         $cantidad = $request->det_cantidad;
         $precioUnitario = $request->det_preciounitario;
@@ -144,6 +153,9 @@ class DetallesController extends Controller
     {
         //echo json_encode($request);
         //busco y actualizo el detalle
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $dataProducts = $request->except('_token', 'saveitem');
         $detalle = Detalles::findOrFail($request->_id);
         $detalle['det_subtotal'] = $request->det_cantidad * $request->det_preciounitario;
@@ -174,6 +186,9 @@ class DetallesController extends Controller
     public function destroy($id_detalle, $idfactura)
     {
         //buscamos el detalle y lo eliminamos
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $detalle = Detalles::find($id_detalle);
         $detalle->delete();
 

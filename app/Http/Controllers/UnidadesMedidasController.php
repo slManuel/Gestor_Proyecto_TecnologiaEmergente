@@ -14,6 +14,9 @@ class UnidadesMedidasController extends Controller
      */
     public function index(Request $request)
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $nombre= $request->get('contenido__busquedaUnidadesMedida');
         if ($nombre==null) {
             $data['unidadesmeds']=UnidadesMedidas::get();
@@ -30,6 +33,9 @@ class UnidadesMedidasController extends Controller
      */
     public function create()
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         return view('unidadesmedidas.createumed');
     }
 
@@ -41,6 +47,9 @@ class UnidadesMedidasController extends Controller
      */
     public function store(Request $request)
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $dataProducts = $request->except('_token','saveitem');
         $nomb = trim($request->um_nombre);
         
@@ -94,6 +103,9 @@ class UnidadesMedidasController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $nomb = trim($request->um_nombre);
         $original = $request->original;
         if ($nomb != "") {

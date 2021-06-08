@@ -10,6 +10,9 @@ class UsuariosController extends Controller
 {
     public function index()
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $rol = $_SESSION["rol"];
         if ($rol == "Administrador") {
             $data['usuarios'] = User::get();
@@ -22,11 +25,17 @@ class UsuariosController extends Controller
 
     public function create()
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         return view('usuarios.createUsuarios');
     }
 
     public function update(Request $request, $id)
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $nombre = trim($request->name);
         $correo = trim($request->email);
         $original = $request->original;
@@ -57,6 +66,9 @@ class UsuariosController extends Controller
 
     public function store(Request $request)
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $contra = trim($request->password);
         $contra2 = trim($request->confirmar);
         $nombre = trim($request->name);

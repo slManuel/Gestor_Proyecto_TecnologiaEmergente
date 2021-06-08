@@ -17,6 +17,9 @@ class IngreEgreController extends Controller
      */
     public function index($id, Request $request)
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $nombre = $request->get('nombreBusqueda');
         if ($nombre == "Todos") {
             $data['facturas'] = Ingre_Egre::where("proy_id", "=", $id)->get();
@@ -33,6 +36,9 @@ class IngreEgreController extends Controller
      */
     public function create($id)
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         return view('ingegr.createIngrEgre')->with('id', $id);
     }
     /**
@@ -43,6 +49,9 @@ class IngreEgreController extends Controller
      */
     public function store(Request $request, $id)
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $descripcion = $request->ie_descripcion;
         if (trim($descripcion) != "") {
             $dataProducts = $request->except('_token', 'saveitem');
@@ -87,6 +96,9 @@ class IngreEgreController extends Controller
      */
     public function update(Request $request)
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $dataProducts = $request->except('_token', 'saveitem', 'method');
         $factura = Ingre_Egre::findOrFail($request->_id);
         $factura->update($request->all());
@@ -102,6 +114,9 @@ class IngreEgreController extends Controller
      */
     public function destroy($idfactura)
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         //buscamos la factura y lo eliminamos
         $factura = Ingre_Egre::find($idfactura);
         $idproyecto = $factura->proy_id;

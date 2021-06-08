@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         return view('home');
     }
 }

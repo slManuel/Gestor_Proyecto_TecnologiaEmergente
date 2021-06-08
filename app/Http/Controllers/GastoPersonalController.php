@@ -20,13 +20,19 @@ class GastoPersonalController extends Controller
     public function index($proy)
     {
         //
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $data['empleados'] = Empleados::where('emp_estado', 'like', 'Activo')->get();
         $data2['cargos'] = Cargos::all();
         return view('gastospersonal.gastospersonal', $data, $data2)->with('proy', $proy);
     }
     public function indexHP($proy, Request $request)
     {
-        //dd($request);        
+        //dd($request); 
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }       
         $gastos = Gasto_personal::where('proyecto', '=', $proy)->get();
         $data['gps'] = $gastos;
         $data['cargos'] = Cargos::all();
@@ -50,6 +56,9 @@ class GastoPersonalController extends Controller
      */
     public function create($empleado, $proyecto)
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         return view('gastospersonal.crearPago')->with('empleado', $empleado)->with('proyecto', $proyecto);
     }
     /**
@@ -61,6 +70,9 @@ class GastoPersonalController extends Controller
     
     public function store(Request $request)
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $fecha = $request->get('gp_fecha');
         $comentario = $request->get('gp_comentario');
         $pago = $request->get('gp_pago');
@@ -114,6 +126,9 @@ class GastoPersonalController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $dataGastos = $request->except('_token');
         $gasto = Gasto_personal::findOrFail($id);
         $gasto->update($request->all());
@@ -133,6 +148,9 @@ class GastoPersonalController extends Controller
     public function destroy($id)
     {
         //
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $pago = Gasto_personal::find($id);
         $proy = $pago->proyecto;
         $pago->delete();

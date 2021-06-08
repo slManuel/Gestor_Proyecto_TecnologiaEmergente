@@ -17,24 +17,31 @@ class CargosController extends Controller
         //$sesion = $request->vsesion()->get('idCarrito');
         //session_start();
         //echo $_SESSION["correo"];
-        $nombre= $request->get('contenido__busquedaUnidadesMedida');
-        if ($nombre==null) {
-            $data['cargos']=Cargos::get();
-        }else{
-            $data['cargos']=Cargos::car($nombre)->get();
+        //$_SESSION["rol"] = null;
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
         }
-        return view('Cargos.cargos', $data); 
+        $nombre = $request->get('contenido__busquedaUnidadesMedida');
+        if ($nombre == null) {
+            $data['cargos'] = Cargos::get();
+        } else {
+            $data['cargos'] = Cargos::car($nombre)->get();
+        }
+        return view('Cargos.cargos', $data);
     }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */    
+     */
     public function create()
     {
         //
-        return view('cargos.crearCargos');    
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
+        return view('cargos.crearCargos');
     }
 
     /**
@@ -47,28 +54,30 @@ class CargosController extends Controller
     public function store(Request $request)
     {
         //
-        $nombre= $request->get('car_nombre');
-        if (trim($nombre)!=null && trim($nombre)!="") {
-            $data['cargos']=Cargos::CarNombre($nombre)->get();
-        }else{
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
+        $nombre = $request->get('car_nombre');
+        if (trim($nombre) != null && trim($nombre) != "") {
+            $data['cargos'] = Cargos::CarNombre($nombre)->get();
+        } else {
             echo '<script language="javascript">alert("No se admiten espacios en blanco. Intentelo de nuevo");</script>';
-            $nombre= $request->get('contenido__busquedaUnidadesMedida');
-            if ($nombre==null) {
-                $data['cargos']=Cargos::get();
-            }else{
-                $data['cargos']=Cargos::car($nombre)->get();
+            $nombre = $request->get('contenido__busquedaUnidadesMedida');
+            if ($nombre == null) {
+                $data['cargos'] = Cargos::get();
+            } else {
+                $data['cargos'] = Cargos::car($nombre)->get();
             }
-            return view('Cargos.cargos', $data); 
+            return view('Cargos.cargos', $data);
         }
-        if ($data['cargos']=="[]"){
-            $dataProducts = $request->except('_token','saveitem','C_guardar');        
+        if ($data['cargos'] == "[]") {
+            $dataProducts = $request->except('_token', 'saveitem', 'C_guardar');
             Cargos::insert($dataProducts);
-            $data['cargos']=Cargos::paginate(15);
+            $data['cargos'] = Cargos::paginate(15);
             return view('cargos.cargos', $data);
-        }
-        else{
+        } else {
             echo '<script language="javascript">alert("No puedes agregar cargos con el mismo nombre");</script>';
-            $data['cargos']=Cargos::get();
+            $data['cargos'] = Cargos::get();
             return view('cargos.cargos', $data);
         }
 
@@ -122,30 +131,31 @@ class CargosController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $nombre = $request->get('car_nombre');
         $nombreBase = $request->get('car');
 
-        if ($nombre == $nombreBase){
-            $dataProducts = $request->except('_token','saveitem');
+        if ($nombre == $nombreBase) {
+            $dataProducts = $request->except('_token', 'saveitem');
             $cargos = Cargos::findOrFail($id);
             $cargos->update($request->all());
-            $data['cargos']=Cargos::paginate(15);
+            $data['cargos'] = Cargos::paginate(15);
             return view('cargos.cargos', $data);
-        }
-        else{
-            if ($nombre!=null){
-                $data['cargos']=Cargos::CarNombre($nombre)->get();
+        } else {
+            if ($nombre != null) {
+                $data['cargos'] = Cargos::CarNombre($nombre)->get();
             }
-            if ($data['cargos']=="[]"){
-                $dataProducts = $request->except('_token','saveitem');
+            if ($data['cargos'] == "[]") {
+                $dataProducts = $request->except('_token', 'saveitem');
                 $cargos = Cargos::findOrFail($id);
                 $cargos->update($request->all());
-                $data['cargos']=Cargos::paginate(15);
+                $data['cargos'] = Cargos::paginate(15);
                 return view('cargos.cargos', $data);
-            }
-            else{
+            } else {
                 echo '<script language="javascript">alert("No puedes agregar cargos con el mismo nombre");</script>';
-                $data['cargos']=Cargos::get();
+                $data['cargos'] = Cargos::get();
                 return view('cargos.cargos', $data);
             }
         }

@@ -15,6 +15,9 @@ class EmpleadosController extends Controller
      */
     public function index(Request $request)
     {           
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $nombre= $request->get('nombre');
         $cargo= $request->get('cargo');
         if ($nombre==null && $cargo=="Todos") {
@@ -35,6 +38,9 @@ class EmpleadosController extends Controller
     public function create()
     {
         //
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $data['cargos']=Cargos::all();
         return view('empleados.crearEmpleados',$data);
     }
@@ -47,7 +53,10 @@ class EmpleadosController extends Controller
      */
     public function store(Request $request)
     {
-        //                
+        //
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }                
         $dataProducts = $request->except('_token','saveitem','C_guardar');
         $nomb = trim($request->emp_nombre);
         $cel = trim($request->emp_tel);
@@ -96,7 +105,10 @@ class EmpleadosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {        
+    {  
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }      
         $dataProducts = $request->except('_token','saveitem');
         $nomb = trim($request->emp_nombre);
         $cel = trim($request->emp_tel);

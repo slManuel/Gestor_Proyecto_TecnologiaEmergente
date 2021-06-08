@@ -14,6 +14,9 @@ class CategoriasController extends Controller
      */
     public function index(Request $request)
     {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $nombre= $request->get('contenido__busquedaUnidadesMedida');
         $estado= $request->get('estadoBusqueda');
         if ($nombre==null && $estado=="Todos") {
@@ -32,6 +35,9 @@ class CategoriasController extends Controller
     public function create()
     {
         //
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         return view('categorias.crearCategorias');
     }
 
@@ -44,6 +50,9 @@ class CategoriasController extends Controller
     public function store(Request $request)
     {
         //
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $nombre= trim($request->cat_nombre);
         if ($nombre != ""){
             if ($nombre!=null) {
@@ -62,7 +71,7 @@ class CategoriasController extends Controller
             }
         }else{
             echo '<script language="javascript">alert("No se admiten espacios en blanco. Intentelo de nuevo");</script>';
-            $data['categorias']=UnidadesMedidas::all();
+            $data['categorias']=Categorias::all();
             return view('categorias.categorias',$data);
         }
         
@@ -105,6 +114,9 @@ class CategoriasController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
         $nombre = trim($request->cat_nombre);
         $nombreBase = $request->get('cat');
         if ($nombre != ""){
