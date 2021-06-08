@@ -18,6 +18,9 @@ class EmpleadosController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }
         $nombre= $request->get('nombre');
         $cargo= $request->get('cargo');
         if ($nombre==null && $cargo=="Todos") {
@@ -41,6 +44,9 @@ class EmpleadosController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }
         $data['cargos']=Cargos::all();
         return view('empleados.crearEmpleados',$data);
     }
@@ -56,6 +62,9 @@ class EmpleadosController extends Controller
         //
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
         }                
         $dataProducts = $request->except('_token','saveitem','C_guardar');
         $nomb = trim($request->emp_nombre);
@@ -108,6 +117,9 @@ class EmpleadosController extends Controller
     {  
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
         }      
         $dataProducts = $request->except('_token','saveitem');
         $nomb = trim($request->emp_nombre);

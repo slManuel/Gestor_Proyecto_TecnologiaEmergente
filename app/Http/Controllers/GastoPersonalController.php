@@ -23,6 +23,9 @@ class GastoPersonalController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }
         $data['empleados'] = Empleados::where('emp_estado', 'like', 'Activo')->get();
         $data2['cargos'] = Cargos::all();
         return view('gastospersonal.gastospersonal', $data, $data2)->with('proy', $proy);
@@ -32,7 +35,10 @@ class GastoPersonalController extends Controller
         //dd($request); 
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
-        }       
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }      
         $gastos = Gasto_personal::where('proyecto', '=', $proy)->get();
         $data['gps'] = $gastos;
         $data['cargos'] = Cargos::all();
@@ -59,6 +65,9 @@ class GastoPersonalController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }
         return view('gastospersonal.crearPago')->with('empleado', $empleado)->with('proyecto', $proyecto);
     }
     /**
@@ -72,6 +81,9 @@ class GastoPersonalController extends Controller
     {
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
         }
         $fecha = $request->get('gp_fecha');
         $comentario = $request->get('gp_comentario');
@@ -129,6 +141,9 @@ class GastoPersonalController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }
         $dataGastos = $request->except('_token');
         $gasto = Gasto_personal::findOrFail($id);
         $gasto->update($request->all());
@@ -150,6 +165,9 @@ class GastoPersonalController extends Controller
         //
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
         }
         $pago = Gasto_personal::find($id);
         $proy = $pago->proyecto;

@@ -26,6 +26,10 @@ class HomeController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            
+            return view('usuarios.inactivo');
+        }
         return view('home');
     }
 }

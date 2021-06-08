@@ -17,6 +17,9 @@ class ProyectosController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }
         $nombre = $request->get('nombreBusqueda');
         $estado = $request->get('estadoBusqueda');
         if ($nombre == null && $estado == "Todos") {
@@ -37,6 +40,9 @@ class ProyectosController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }
         return view('proyectos.createProyectos');
     }
 
@@ -50,6 +56,9 @@ class ProyectosController extends Controller
     {
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
         }
         $dataProducts = $request->except('_token', 'saveitem', 'C_guardar');
         $nomb = trim($request->proy_nombre);
@@ -128,6 +137,9 @@ class ProyectosController extends Controller
     {
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
         }
         $final = strtotime($request->proy_fechaF);
         $inicio = strtotime($request->proy_fechaI);

@@ -17,6 +17,9 @@ class CategoriasController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }
         $nombre= $request->get('contenido__busquedaUnidadesMedida');
         $estado= $request->get('estadoBusqueda');
         if ($nombre==null && $estado=="Todos") {
@@ -38,6 +41,9 @@ class CategoriasController extends Controller
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
         }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
+        }
         return view('categorias.crearCategorias');
     }
 
@@ -52,6 +58,9 @@ class CategoriasController extends Controller
         //
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
         }
         $nombre= trim($request->cat_nombre);
         if ($nombre != ""){
@@ -116,6 +125,9 @@ class CategoriasController extends Controller
         //
         if ($_SESSION["rol"] == null) {
             return view('auth.login');
+        }
+        if ($_SESSION["estado"] == "Inactivo") {
+            return view('usuarios.inactivo');
         }
         $nombre = trim($request->cat_nombre);
         $nombreBase = $request->get('cat');
