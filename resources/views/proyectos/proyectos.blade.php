@@ -7,6 +7,7 @@
 @stop
 
 @section('content')
+<div class="container">
     <div class="row">
         <div class="col" id="filtro-proy">
             <div class="row">
@@ -14,66 +15,30 @@
             </div>
             <form action="{{url('/proyectos')}}">
                 <div class="row" >
-                    <div class="col-4">
-                        Estado: 
+                    <div class="col-sm" >
                         <select id="fp-estado" name="estadoBusqueda">
                             <option>Todos</option>
                             <option value="Activo">Activo</option>
                             <option value="Inactivo">Inactivo</option>
                         </select>
                     </div>
-                    <div class="col-4">
+                    <div class="col-sm">
                         <input type="text" id="fp-proyecto" name="nombreBusqueda" placeholder="Proyecto">
-                        <input type="submit" id="btn_buscarpr" value="BUSCAR">
                     </div>
-                    <div>
+                    <div class="col-sm">
+                        <input type="submit" id="btn_buscarpr" value="BUSCAR" >
+                    </div>
+                    <div class="col-sm">
+                        <a href="{{route('proyectos.create')}}" id="btn_nuevoCargo" class="btn btn-default">NUEVO PROYECTO</a>
+                    </div>
                 </div>
             </form>
-        
-    </div>              
-    </div>
-    <div class="row">
-        <div class="col-9"></div>
-        <div class="col-3">                
-        <a href="{{route('proyectos.create')}}" id="btn_nuevoCargo">NUEVO PROYECTO</a>
-        
-        <!--<div class="modal fade" id="modal-nuevoP" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Crear proyecto</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                <form>
-                    <div class="mb-3">                          
-                    <input type="text" id="n-nombreP" placeholder="Nombre del proyecto" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                    <select id="n-estadoP">
-                        <option>Estado</option>
-                        <option>Activo</option>
-                        <option>Inactivo</option>
-                    </select>
-                    </div>
-                    <div class="mb-3">
-                    <input type="date" id="n-fechaP">
-                    </div>
-                </form>
-                </div>
-                <div class="modal-footer">
-                <button type="button" data-bs-dismiss="modal" class="mod-cancelar">CANCELAR</button>
-                <button type="button" id="btn-n-guardarP" class="mod-guardar">GUARDAR</button>
-                </div>
-            </div>
-            </div-->
-            
-        </div>
         </div>
     </div>
-    <br/>
+</div>
+      
     <div class="row">
-    <table class="table table-striped">
+    <table class="table-responsive-md table-striped">
         <thead>
             <tr>
             <th scope="col">#</th>
@@ -169,8 +134,8 @@ select, input{
      
 }
 #btn_buscarpr{
-    width: 75px;
-    height: 30px;
+    /* width: 75px;
+    height: 30px; */
     font: bold;
     color: white;
     background: #3b3c54;
@@ -179,18 +144,17 @@ select, input{
 }
 #btn_nuevoCargo{
     position: relative;
-    width: 250px;
-    height: 90px;
+    /* width: 250px;
+    height: 90px; */
     font: bold;
     color: white;
     background: #3b3c54;
-    border-radius: 4px;  
-    border-radius: 4px;    
-    margin-left: 3PX;
-    margin-right: 3PX;
+    border-radius: 4px;     
+    /* margin-left: 3PX;
+    margin-right: 3PX; */
     text-align: center;
     text-decoration: none;
-    padding: 5px;
+    /* padding: 5px; */
     
 }
 #detalles{

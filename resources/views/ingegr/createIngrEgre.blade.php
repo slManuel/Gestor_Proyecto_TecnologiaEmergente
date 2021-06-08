@@ -3,131 +3,59 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<h1>NUEVA FACTURA</h1>
+    <h1>Nueva Factura</h1>
 @stop
 
 @section('content')
-<div class="modal-body">
-    <form method="POST" action="{{url('/factura/store/'.$id)}}">
-        @csrf
-        <div class="col-6">
-            <label for="n-nombref">Descripción:</label>
-            <br>
-            <input type="text" id="n-nombref" name="ie_descripcion" placeholder="Descripción" class="form-control" required>
-        </div>
-        <div class="col-7">
-            <label for="n-estadoF">Tipo:</label>
-            <br>
-            <select id="n-estadoF" name="ie_tipo">                
-                <option>Egreso</option>
-                <option>Ingreso</option>
-            </select>
-        </div>
-        <div class="col-6">
-            <label for="N-fechaF">Fecha:</label>
-            <br>
-            <input type="date" name="ie_fecha" id="N-fechaF"required>
-        </div>
-        <div class="modal-footer">            
-            <a href="{{url('facturas/'.$id)}}" class="mod-cancelar">CANCELAR</a>
-            <input type="submit" id="btn-n-guardarP" value="GUARDAR" class="mod-guardar" />
-        </div>
-    </form>
-</div>
+<form id="crearProyecto" method="POST" enctype="multipart/form-data" action="{{url('/factura/store/'.$id)}}">
+    @csrf
+    <div class="form-group">
+        <label for="n-nombref">Descripción:</label>
+        <input type="text" id="n-nombref" name="ie_descripcion" placeholder="Descripción" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="n-estadoF">Tipo:</label>
+        <select id="n-estadoF" name="ie_tipo" class="form-control">                
+            <option>Egreso</option>
+            <option>Ingreso</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="N-fechaF">Fecha:</label>
+        <input type="date" name="ie_fecha" id="N-fechaF" class="form-control" required>
+    </div>
+    <div class="modal-footer">            
+        <a href="{{url('facturas/'.$id)}}" class="mod-cancelar">CANCELAR</a>
+        <input type="submit" id="btn-n-guardarP" value="GUARDAR" class="mod-guardar" />
+    </div>
+</form>
 
 @stop
 
 @section('css')
 <style>
+    .mod-cancelar{
+    width: 100px;
+    height: 30px;
+    font: bold;
+    text-align:center;
+    background: #c2d4bb;
+    border-radius: 3px;  
+    border: none;
+    color:black;
+    text-decoration: none;
+    }
+    .mod-guardar{
+        width: 100px;
+        height: 30px;
+        font: bold;
+        color: white;
+        background: #3b3c54;
+        border-radius: 3px;  
+        border: none;    
+    }
     form{
-        width: 50%;
-    }
-    #filtro-proy {
-        border: lightgray 1px solid;
-        border-radius: 2px;
-        margin-top: 10px;
-        padding: 10px;
-        margin-bottom: 10px;
-    }
-
-    select,
-    input {
-        width: 200px;
-        height: 30px;
-        border: lightgray 1px solid;
-        border-radius: 4px;
-    }
-
-    #btn-buscar {
-        width: 100px;
-        font: bold;
-        color: white;
-        background: #3b3c54;
-        border: none;
-    }
-
-    #btn-rep-facturas {
-        font: bold;
-        background: #9cbbac;
-        border: none;
-    }
-
-    #balance {
-        color: green;
-    }
-
-    .botones {
-        margin-bottom: 10px;
-        width: 400px;
-        font: bold;
-        border: none;
-        background: #c2d4bb;
-        border-radius: 3px;
-    }
-
-    #btn-btn-nuevoPago {
-        margin-bottom: 0px;
-    }
-
-    .boton {
-        width: 75px;
-        font: bold;
-        border: none;
-    }
-
-    #editar {
-        background: #9cbbac;
-    }
-
-    #detalles {
-        color: white;
-        background: #fa743d;
-    }
-
-    .mod-cancelar {
-        width: 100px;
-        height: 30px;
-        font: bold;
-        background: #c2d4bb;
-        border-radius: 3px;
-        border: none;
-        color: black;
-        text-align: center;
-        text-decoration: none;
-    }
-
-    .mod-guardar {
-        width: 100px;
-        height: 30px;
-        font: bold;
-        color: white;
-        background: #3b3c54;
-        border-radius: 3px;
-        border: none;
-    }
-
-    i {
-        margin-left: 10px;
+        width: 75%;
     }
 </style>
 

@@ -36,7 +36,7 @@
     <?php
     echo '<input type="hidden" value="' . htmlspecialchars($proy) . '" />' . "\n";
     ?>
-    <table class="table table-striped">
+    <table class="table-responsive-md table-striped">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -55,8 +55,8 @@
                 <th scope="row">{{$countrow++}}</th>
                 <td>{{$empleado->emp_nombre}}</td>
                 <td>{{$empleado->cargo->car_nombre}}</td>
-                <td>{{$empleado->emp_estado}}</td>
                 <td>{{$empleado->emp_salario}}</td>
+                <td>{{$empleado->emp_estado}}</td>
                 <td>{{$empleado->emp_tel}}</td>
                 <td>
                     <a href="{{url('/gastospersonal/'.$empleado->_id,$proy)}}" id="pagos">Pagar</a>

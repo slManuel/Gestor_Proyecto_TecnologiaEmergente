@@ -8,22 +8,21 @@
 
 @section('content')
 <div class="row">
-    <div class="col-2">
-        <h4>Balance:</h4>
-    </div>
-    <div class="col-2" id="balance">
+    <h3 class="col-sm-3" id="balance">
+        Balance:
         @php
         $total=0;
         foreach($detalles as $detalle){$total=$total + $detalle->det_subtotal;}
         @endphp
         $ {{$total}}
+    </h3>
+    <div class="col-sm-9">
+        <a id="nuevo-reg-detF" class="nuevoregistro btn btn-lg" href="{{url('/detalles/create/'.$idfactura)}}">NUEVO REGISTRO</a>
     </div>
-    <div class="col">
-        <a id="nuevo-reg-detF" class="nuevoregistro" href="{{url('/detalles/create/'.$idfactura)}}">NUEVO REGISTRO</a>
-    </div>
+    
 </div>
 <div class="row">
-    <table class="table table-striped">
+    <table class="table-responsive-md table-striped">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -146,7 +145,7 @@
     .nuevoregistro {
         background-color: gainsboro;
         padding: 5px;
-        width: 180px;
+        /* width: 180px */;
         margin-left: 0px;
         border-radius: 3px;
         text-decoration: none;

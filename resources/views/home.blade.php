@@ -19,7 +19,7 @@
             align-items: center;
             margin-top: 100px;
             font-family: Courier; 
-            font-size: 100px;
+            font-size: 10vw;
         }
     </style>
 @stop
