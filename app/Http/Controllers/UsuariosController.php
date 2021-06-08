@@ -64,6 +64,24 @@ class UsuariosController extends Controller
         }
     }
 
+    public function cambiarcontrasena(Request $request, $id)
+    {
+        if ($_SESSION["rol"] == null) {
+            return view('auth.login');
+        }
+        if (trim($request->password) != "") {
+            $usuario = User::findOrFail($id);
+            $usuario->password = password_hash($request->password, PASSWORD_DEFAULT);
+            $usuario->save();
+            $data['usuarios'] = User::get();
+            return view('Usuarios.usuarios', $data);
+        } else {
+            echo '<script language="javascript">alert("La contraseña no puede quedar en blanco. Intentelo de nuevo");</script>';
+            $data['usuarios'] = User::get();
+            return view('Usuarios.usuarios', $data);
+        }
+    }
+
     public function store(Request $request)
     {
         if ($_SESSION["rol"] == null) {
@@ -86,12 +104,12 @@ class UsuariosController extends Controller
                     ]);
                     $data['usuarios'] = User::get();
                     return view('Usuarios.usuarios', $data);
-                }else{
+                } else {
                     echo '<script language="javascript">alert("Al parecer este correo ya ha sido registrado anteriormente, intente nuevamente");</script>';
                     $data['usuarios'] = User::get();
                     return view('Usuarios.usuarios', $data);
                 }
-            }else{
+            } else {
                 echo '<script language="javascript">alert("La contraseña no coincide, intente de nuevo");</script>';
                 $data['usuarios'] = User::get();
                 return view('Usuarios.usuarios', $data);
